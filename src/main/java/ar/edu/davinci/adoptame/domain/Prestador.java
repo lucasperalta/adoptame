@@ -9,15 +9,10 @@ import java.util.Date;
 
 public class Prestador extends Persona implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 7042244211641519912L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_persona")
-	private Integer idPersona;
-
-	@Column(name="tipo_servicio")
+    @Column(name="tipo_servicio")
 	private String tipoServicio;
 
 	@Column(name = "vigencia")
@@ -26,7 +21,7 @@ public class Prestador extends Persona implements Serializable {
     @Column(name="url_pago")
     private String urlPago;
 
-    @Column(name="url_pago")
+    @Column(name="fechaVinculacion")
     private Date fechaVinculacion;
 
 
@@ -34,13 +29,6 @@ public class Prestador extends Persona implements Serializable {
 
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
-    }
 
     public String getTipoServicio() {
         return tipoServicio;

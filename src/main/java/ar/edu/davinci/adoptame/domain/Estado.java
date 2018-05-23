@@ -8,12 +8,11 @@ import java.io.Serializable;
 
 public class Estado implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
-
-	@Id
+    private static final long serialVersionUID = 2851308311173264136L;
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id_estado")
 	private Integer id;
 
 	@Column(name = "estado")

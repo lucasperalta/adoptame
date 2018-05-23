@@ -1,56 +1,42 @@
 package ar.edu.davinci.adoptame.domain;
 
+
+import javax.persistence.*;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="tipo_persona")
 @Table(name="personas")
-@NamedQueries({
-	@NamedQuery(name = "persona.findAll",
-			    query = "select p from Persona p"),
-	@NamedQuery(name = "Persona.findByEmail",
-		        query = "select p from Persona p where p.email = :email"),
-	@NamedQuery(name = "Persona.findByApellido",
-    query = "select p from Persona p where p.apePaterno = :apellido or p.apeMaterno = :apellido")
-	})
-public class Persona implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+public abstract class Persona implements Serializable {
 
-//	public static final String PERSONA_FIND_ALL = "Persona.findAll";
-//	public static final String PERSONA_FIND_BY_EMAIL = "Persona.findByEmail";
-//	public static final String PERSONA_FIND_BY_APELLIDO = "Persona.findByApellido";
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_persona")
-	private Integer id;
-	
-	@Column(name="nombre", nullable = false, length = 45)
-	private String nombre;
-	
-	@Column(name = "apellido", nullable = false, length = 45)
-	private String apellido;
-	
+    private static final long serialVersionUID = 2719272463483141301L;
 
-	@Column(name="email", nullable = false, length = 45)
-	private String email;
-	
-	@Column(name="telefono", length = 45)
-	private String telefono;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name="nombre", nullable = false, length = 45)
+    private String nombre;
+
+    @Column(name = "apellido", nullable = false, length = 45)
+    private String apellido;
+
+
+    @Column(name="email", nullable = false, length = 45)
+    private String email;
+
+    @Column(name="telefono", length = 45)
+    private String telefono;
 
 
 
     public Persona() {
-	}
+    }
 
     public Persona(String nombre, String apellido, String email, String telefono) {
         this.nombre = nombre;
