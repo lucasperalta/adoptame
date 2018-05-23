@@ -5,16 +5,16 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="estados")
+@Table(name="permisos")
 
 public class Permiso implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = -556314904137288225L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id_permiso")
 	private Integer id;
 
 	@Column(name = "nombre_permiso")

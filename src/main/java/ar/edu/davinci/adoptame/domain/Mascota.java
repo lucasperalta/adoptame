@@ -8,15 +8,12 @@ import java.io.Serializable;
 
 public class Mascota implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
-//	public static final String PERSONA_FIND_ALL = "Persona.findAll";
-//	public static final String PERSONA_FIND_BY_EMAIL = "Persona.findByEmail";
-//	public static final String PERSONA_FIND_BY_APELLIDO = "Persona.findByApellido";
+    private static final long serialVersionUID = 4293421164107278076L;
 
-	@Id
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_persona")
+	@Column(name = "id_mascota")
 	private Integer id;
 
 	@Column(name="nombre", nullable = false, length = 45)
@@ -46,10 +43,12 @@ public class Mascota implements Serializable {
     @Column(name="tamanio")
     private String tamanio;
 
-//TODO many to one
+    @ManyToOne
+    @JoinColumn(name="id")
     private Usuario rescatista;
 
-    //TODO many to one
+    @ManyToOne
+    @JoinColumn(name="id_coordenada")
     private Coordenada coordenadas;
 
 

@@ -5,48 +5,49 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="usuarios")
-
+@PrimaryKeyJoinColumn(name = "id")
+@DiscriminatorValue("USUARIO")
 public class Usuario extends Persona implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1548205958242267599L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_persona")
-	private Integer idPersona;
+    @OneToOne
+    @JoinColumn(name = "id_estado")
+    private Estado estado;
 
-	@Column(name="estado", length = 45)
-	private String estado;
+    @Column(name="password")
+    private String password;
 
-	//TODO many to one
-	private Coordenada coordenada;
+    @ManyToOne
+    @JoinColumn(name="id_rol")
+    private  Rol rol;
 
     public Usuario() {
 
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
+    public String getPassword() {
+        return password;
     }
 
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEstado() {
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public Coordenada getCoordenada() {
-        return coordenada;
-    }
-
-    public void setCoordenada(Coordenada coordenada) {
-        this.coordenada = coordenada;
     }
 }

@@ -8,12 +8,11 @@ import java.io.Serializable;
 
 public class Coordenada implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
-
-	@Id
+    private static final long serialVersionUID = 3004996156743910088L;
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id_coordenada")
 	private Integer id;
 
 	@Column(name = "latitud")
