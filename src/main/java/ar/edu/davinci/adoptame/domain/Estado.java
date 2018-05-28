@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="estados")
-
+@NamedQuery(name = "Estado.findEstadoByDescripcion",query = "select p from Estado p where p.estado = :descripcion")
 public class Estado implements Serializable {
 
 
@@ -22,6 +22,11 @@ public class Estado implements Serializable {
 
     public Estado() {
 
+    }
+
+
+    public Estado(String estado) {
+        this.estado = estado;
     }
 
     public Integer getId() {

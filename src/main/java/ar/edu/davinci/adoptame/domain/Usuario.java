@@ -27,6 +27,13 @@ public class Usuario extends Persona implements Serializable {
 
     }
 
+    public Usuario(String nombre, String apellido, String email, Estado estado, String password, Rol rol) {
+        super(nombre, apellido, email);
+        this.estado = estado;
+        this.password = password;
+        this.rol = rol;
+    }
+
     public String getPassword() {
         return password;
     }
