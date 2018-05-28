@@ -30,19 +30,18 @@ public abstract class Persona implements Serializable {
     @Column(name="email", nullable = false, length = 45)
     private String email;
 
-    @Column(name="telefono", length = 45)
-    private String telefono;
+
 
 
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, String email, String telefono) {
+    public Persona(String nombre, String apellido, String email) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.telefono = telefono;
+
     }
 
     public Integer getId() {
@@ -77,11 +76,5 @@ public abstract class Persona implements Serializable {
         this.email = email;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 }

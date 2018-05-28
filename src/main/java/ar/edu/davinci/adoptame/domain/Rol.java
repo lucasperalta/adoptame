@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="roles")
+@NamedQuery(name = "Rol.findRolByNombreRol",query = "select p from Rol p where p.nombreRol = :nombreRol")
 
 public class Rol implements Serializable {
 
@@ -17,7 +18,7 @@ public class Rol implements Serializable {
 	private Integer id;
 
 	@Column(name = "nombre_rol")
-	private String nombre_rol;
+	private String nombreRol;
 
     @ManyToMany
     @JoinTable(name="rol_permiso",
@@ -29,5 +30,27 @@ public class Rol implements Serializable {
 
     }
 
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNombreRol() {
+		return nombreRol;
+	}
+
+	public void setNombreRol(String nombreRol) {
+		this.nombreRol = nombreRol;
+	}
+
+	public List<Permiso> getPermisos() {
+		return permisos;
+	}
+
+	public void setPermisos(List<Permiso> permisos) {
+		this.permisos = permisos;
+	}
 }

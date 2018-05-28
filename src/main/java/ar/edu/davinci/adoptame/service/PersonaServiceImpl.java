@@ -63,8 +63,7 @@ public class PersonaServiceImpl implements PersonaService{
 		personaModificada.setNombre(persona.getNombre());
 
 		personaModificada.setEmail(persona.getEmail());
-		personaModificada.setTelefono(persona.getTelefono());
-		
+
 		return personaModificada;
 	}
 

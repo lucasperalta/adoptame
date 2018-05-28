@@ -1,8 +1,9 @@
 package ar.edu.davinci.adoptame.repository;
 
-import ar.edu.davinci.adoptame.domain.Prestador;
+import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 
 //import org.springframework.data.repository.CrudRepository;
 
@@ -11,5 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RolRepository extends JpaRepository<Rol, Long> {
 
+    public Rol findRolByNombreRol(@Param("nombreRol")String nombreRol) ;
 
 }
