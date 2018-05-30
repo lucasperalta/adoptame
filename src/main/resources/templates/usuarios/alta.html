@@ -3,12 +3,11 @@
 <head>
     <title>Spring Boot Thymeleaf Hello World Example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
 
-    <link rel="stylesheet" th:href="@{/css/main.css}"
-          href="../../css/main.css" />
 
 </head>
 <body>
@@ -29,7 +28,7 @@
 
 <div class="container">
 
-    <h1>Form</h1>
+    <h2 class="tit_item">Form</h2>
     <form action="#" th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
         <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
         <p>apellido: <input type="text" th:field="*{apellido}" /></p>
