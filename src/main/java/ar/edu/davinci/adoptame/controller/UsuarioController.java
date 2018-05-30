@@ -45,6 +45,12 @@ public class UsuarioController {
         return "usuarios/alta";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("usuarioDTO", new UsuarioDTO());
+        return "usuarios/login";
+    }
+
     @PostMapping("/guardarUsuario")
 	public String nuevoUsuario(@ModelAttribute UsuarioDTO usuarioDTO  ) {
 
