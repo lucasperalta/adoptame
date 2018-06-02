@@ -24,15 +24,15 @@ public class RolServiceImpl implements RolService{
 
 	@Override
     @Transactional
-	public Rol findRolById(Rol rol) {
-		return rolRepository.findOne(rol.getId().longValue());
+	public Rol findRolById(Integer id) {
+		return rolRepository.findOne(id.longValue());
 	}
 
 
 
-	@Override
+    @Override
     @Transactional
-	public Rol findRolByNombreRol(String nombreRol) {
+	public Rol findRolByNombre(String nombreRol) {
 		return rolRepository.findRolByNombreRol(nombreRol);
 	}
 }

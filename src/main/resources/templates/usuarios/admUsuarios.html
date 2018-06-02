@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+
 
 </head>
 
@@ -30,15 +32,15 @@
 <ul class="list-group">
   <li class="list-group-item list-group-item-dark disable">Administrar</li>
   <a href="admUsuarios.html" class="list-group-item list-group-item-action active">Usuarios</a>
-  <a href="admServicio.html" class="list-group-item list-group-item-action">Servicios</a>
-  <a href="admEvento.html"   class="list-group-item list-group-item-action">Eventos</a>
+  <a href="../admin/admServicio.html" class="list-group-item list-group-item-action">Servicios</a>
+  <a href="../admin/admEvento.html" class="list-group-item list-group-item-action">Eventos</a>
 </ul>
 </div>
 <!-- FIN MENU ADMINISTRAR-->
 
 <!--AGREGAR USUARIO-->
     <div class="col-sm-9">
-            <form action="">
+
              <h6>Crear Usuario</h6>
                 <div class="card">
                     <div class="card-body">
@@ -68,24 +70,26 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="usuario">Usuario:</label>
-                                    <input type="text" class="form-control" id="usuario" /><!--th:field="*{}"-->
-                                </div>
+
 
                                 <div class="form-group">
                                     <label for="rol">Rol:</label>
-                                    <select class="form-control" id="rol">
-                                        <option th:value="null" th:text="Admin"></option>
-                                        <option th:value="null" th:text="Usuario"></option>
+                                     <select class="form-control" id="rol" name="rol">
+                                        <option value="">Seleccionar rol</option>
+                                        <option th:each="rol : ${roles}"
+                                                th:value="${rol.id}"
+                                                th:text="${rol.nombreRol}"></option>
                                     </select>
+
+
                                 </div>
-                                 <button type="submit" class="btn btn-secondary float-right">Crear</button>
+                                 <button type="button"  id="crearUsuario" class="btn btn-secondary float-right">Crear</button>
                             </div>
                         </div>
+
                     </div>
                 </div>
-            </form>
+
     </div>
 
 </div>
@@ -100,7 +104,7 @@
             <ul class="list-group">
               <li class="list-group-item list-group-item-dark disable">Estaditicas</li>
               <a href="admUsuarios.html" class="list-group-item list-group-item-action">Usuarios</a>
-              <a href="admServicio.html" class="list-group-item list-group-item-action">Servicios</a>
+              <a href="../admin/admServicio.html" class="list-group-item list-group-item-action">Servicios</a>
               <a hhref="admEvento.html" class="list-group-item list-group-item-action">Eventos</a>
             </ul>
         </div>
@@ -160,5 +164,37 @@
     </div>
 <!-- FIN TABLA DE SERVICIOS INGRESADOS-->
 </div>
+
+<script>
+
+    $('#crearUsuario').click(function() {
+        var data = {
+
+            nombre : document.getElementById('nombre').value,
+            apellido	: document.getElementById('apellido').value,
+            email	: document.getElementById('email').value,
+            password	: document.getElementById('password').value,
+            rol: document.getElementById('rol').value
+
+        };
+        $.ajax({
+            type: 'POST',
+            url: '../usuarios/guardarUsuario',
+            data:JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log(response)
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
+</script>
+
+
 </body>
 </html>
