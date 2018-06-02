@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+<header>
+	<div class="wrapper col-xs-12 col-sm-12">
+		<img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
+		<div class="logo">Adopta.Me</div>
+		<nav>
+			<a th:href="@{/}">Inicio</a>
+			<a th:href="@{/eventos}">Eventos</a>
+			<a th:href="@{/login/login}">Admin</a>
+		</nav>
+	</div>
+</header>
+
+		<div class="container-fluid" id="banner">
+			<div class="row">
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<h1 class="titulo">Titulo</h1>
+
+					<h3 class="subTit">Fecha: 16 de Abril de 2018</h2>
+
+
+					<p class="descripcion">Mambru se fue a la guerra que dolo que dolo que peina.Mambru se fue a la guerra que dolo que dolo que peina.Mambru se fue a la guerra que dolo que dolo que peina.
+					GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU GUAU</p>
+				</div>
+
+				<div class="offset-sm-1 col-sm-7">
+					<h2>Ubicacion, 123</h2>
+
+					<!--<img class="img-rounded" src="map.png" alt="map" id="mapa_ubicacion">-->
+					<div class="embed-responsive embed-responsive-4by3">
+					<iframe class="embed-responsive-item"
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105073.44367055676!2d-58.50333833627786!3d-34.61566245798726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3b4ef90cbd%3A0xa0b3812e88e88e87!2sBuenos+Aires%2C+CABA!5e0!3m2!1ses-419!2sar!4v1511641950429" allowfullscreen></iframe>
+                    </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="divisor"></div>
+	<footer>
+	<div class="container-fluid">
+        <div class="row">
+                      <div class="col-sm-4">
+               <img class="img_contact" src="images/contact.png" alt="">
+                <h4 >Contacto</h4>
+           </div>
+            <div class="col-sm-4">
+                  <h4>Encontranos en:</h4>
+	              <a href=""><img class="img_red" src="images/facebook.png" alt=""></a>
+	              <a href=""><img class="img_red" src="images/instagram.png" alt=""></a>
+           </div>
+                <div class="col-sm-4">
+                <a href=""><img class="img_red" src="images/playstore.png" alt=""></a>
+                <h4 >Descargar APP</h4>                   
+           </div>
+            </div>
+        </div>
+	</footer>     
+	</body>
+</html>

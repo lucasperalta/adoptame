@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+<header>
+	<div class="wrapper col-xs-12 col-sm-12">
+		<img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
+		<div class="logo">Adopta.Me</div>
+		<nav>
+			<a th:href="@{/}">Inicio</a>
+			<a th:href="@{/eventos}">Eventos</a>
+			<a th:href="@{/login/login}">Admin</a>
+		</nav>
+	</div>
+</header>
+
+		<div class="divisor"></div>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<!--Mascotas adoptadas-->
+				<div class="col-xs-8 col-sm-3">
+					<div class="card ">
+						<div class="card-body">
+							<img class="logo_masc_adop float-right" th:src="@{/img/iconPet.png}" alt="Logo"/>
+							<h2>Mascotas Adoptadas</h2>
+						</div>
+						<!-- Items Mascotas adoptadas-->
+						<div class=" col-sm-12">
+							<div class="card item_card off-border">
+								<div class="card-body item_body">
+									<div class="offset-sm-2 col-sm-3">
+										<img class="img_masc_adop float-top" th:src="@{/img/iconPet.png}" alt="Logo"/>
+									</div>
+									<h2>Nombre</h2>
+								</div>
+							</div>
+						</div>
+						<!-- Items Mascotas adoptadas-->
+					</div>
+				</div>
+				<!--FIN Mascotas adoptadas-->
+
+				<!--Lista de Mascotas por Adoptar-->
+				<div class="col-sm-5">
+					<h2 class="titulo" >Mascotas En Adopcion</h2>
+					
+					<div class="card">
+						<div class="card-body">
+							<div class="col-sm-3">
+								<img class="img_list float-left" th:src="@{/img/iconPet.png}" alt="Logo"/>
+							</div>
+							<div class="offset-sm-3 col-sm-9">
+								<h2 class="tit_item">Nombre <span class="edad">,2 anos</span></h2>
+								<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur adipisicing elit.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--FIN Lista de Mascotas por Adoptar-->
+
+            <!--Descarga-->
+				<div class="col-sm-4">
+					<div class="card descarga">
+						<div class="card-body">
+							<div class="col-sm-3">
+							<img class="img_desc float-left" th:src="@{/img/iconPet.png}" alt="Logo"/>
+							</div>
+							<h2 class="tit_item">Descargate la App</h2>
+							<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur adipisicing elit.</p>
+						</div>
+					</div>
+				<!-- FIN Descarga-->	
+                    <!--Eventos Proximos-->
+						<div class="card">
+						<div class="card-body">
+							<img class="logo_masc_adop float-right"  th:src="@{/img/iconPet.png}" alt="Logo"/>
+							<h2>Eventos Proximos</h2>
+						</div>
+						
+						<div class="col-sm-12">
+							<div class="card off-border">
+								<div class="card-body">
+									<div class="col-sm-3">
+									<img class="img_desc float-left"  th:src="@{/img/iconPet.png}" alt="Logo"/>
+								  </div>
+								  <div class="offset-sm-3 col-sm-9">
+									<h2 class="tit_item">Titulo  <span class="edad">16 abril</span></h2>
+									<h4 class="descripcion">Calle Falsa, 123 Springfield</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				    <!-- FIN Eventos Proximos-->
+			</div>
+		</div>
+	</div>
+	<div class="divisor"></div>
+<footer>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<img class="img_contact" th:src="@{/img/contact.png}" alt="contact" />
+				<h4>Contacto</h4>
+			</div>
+			<div class="col-sm-4">
+				<h4>Encontranos en:</h4>
+				<img class="img_red" th:src="@{/img/facebook.png}" alt="facebook"/>
+				<img class="img_red" th:src="@{/img/instagram.png}" alt="instagram" />
+			</div>
+			<div class="col-sm-4">
+				<img class="img_red" th:src="@{/img/playstore.png}" alt="playstore"/>
+				<h4 >Descargar APP</h4>
+			</div>
+		</div>
+	</div>
+</footer>
+
+</body>
+</html>

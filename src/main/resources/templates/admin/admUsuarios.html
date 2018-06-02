@@ -15,9 +15,9 @@
         <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
         <div class="logo">Adopta.Me</div>
         <nav>
-            <a th:href="index.html">Inicio</a>
-            <a th:href="eventos.html">Eventos</a>
-            <a th:href="login.html">Admin</a>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/eventos}">Eventos</a>
+            <a th:href="@{/login/login}">Admin</a>
         </nav>
     </div>
 </header>
@@ -30,8 +30,8 @@
 <ul class="list-group">
   <li class="list-group-item list-group-item-dark disable">Administrar</li>
   <a href="admUsuarios.html" class="list-group-item list-group-item-action active">Usuarios</a>
-  <a href="admServicio.html" class="list-group-item list-group-item-action">Servicios</a>
-  <a href="admEvento.html"   class="list-group-item list-group-item-action">Eventos</a>
+  <a href="admServicios.html" class="list-group-item list-group-item-action">Servicios</a>
+  <a href="admEventos.html" class="list-group-item list-group-item-action">Eventos</a>
 </ul>
 </div>
 <!-- FIN MENU ADMINISTRAR-->
@@ -100,7 +100,7 @@
             <ul class="list-group">
               <li class="list-group-item list-group-item-dark disable">Estaditicas</li>
               <a href="admUsuarios.html" class="list-group-item list-group-item-action">Usuarios</a>
-              <a href="admServicio.html" class="list-group-item list-group-item-action">Servicios</a>
+              <a href="admServicios.html" class="list-group-item list-group-item-action">Servicios</a>
               <a hhref="admEvento.html" class="list-group-item list-group-item-action">Eventos</a>
             </ul>
         </div>
