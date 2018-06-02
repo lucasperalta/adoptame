@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+</head>
+
+	<body>
+    <header>
+        <div class="wrapper col-xs-12 col-sm-12">
+            <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
+            <div class="logo">Adopta.Me</div>
+            <nav>
+                <a th:href="index.html">Inicio</a>
+                <a th:href="eventos.html">Eventos</a>
+                <a th:href="login.html">Admin</a>
+            </nav>
+        </div>
+    </header>
+
+	<div class="divisor"></div>
+	
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                  <li class="list-group-item list-group-item-dark disable">Administrar</li>
+                  <a th:href="adm_usr.html" class="list-group-item list-group-item-action">Usuarios</a>
+                  <a th:href="adm_serv.html" class="list-group-item list-group-item-action">Servicios</a>
+                  <a th:href="adm_evn.html" class="list-group-item list-group-item-action active">Eventos</a>
+            </ul>
+        </div>
+
+
+        <div class="col-sm-9">
+            <h6>Pendientes de Aprobación</h6>
+            <div class="row">
+                <table class="table table-sm table-hover table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th scope="col">Usuario</th>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Ubicación</th>
+                          <th scope="col">Decripción</th>
+                          <th scope="col">Título</th>
+                          <th scope="col">Acción</th>
+                        </tr>
+                      </thead>
+                    <tbody>
+                        <tr><!--th:each="evn : ${eventos}"-->
+                          <th>1</th> <!--th:text="${evn.usuario}"-->
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td>@mdo</td>
+                            <td>
+                                <a href=""><img class="options" th:src="@{/img/check.png}" alt="check"/></a>
+                                <a href=""><img class="options" th:src="@{/img/cancel.png}" alt="cancel"/></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+            <div class="divisor"></div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul class="list-group">
+                      <li class="list-group-item list-group-item-dark disable">Estaditicas</li>
+                      <a th:href="adm_usr.html" class="list-group-item list-group-item-action">Usuarios</a>
+                      <a th:href="adm_serv.html" class="list-group-item list-group-item-action">Servicios</a>
+                      <a th:hhref="adm_evn.html" class="list-group-item list-group-item-action">Eventos</a>
+                    </ul>
+                </div>
+
+
+<!-- TABLA DE SERVICIOS INGRESADOS-->
+    <div class="col-sm-9">
+        <h6>Activos</h6>
+            <form action="#" th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
+              <div class="row">
+                   <div class="col-sm-3">
+                       <label >Desde:</label>
+                       <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started" -->
+                   </div>
+                  <div class="col-sm-3">
+                       <label >Hasta:</label>
+                      <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started"-->
+                  </div>
+                   <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="filtrar_combo">Filtrar:</label>
+                                <select class="form-control" id="filtrar_combo">
+                                    <option th:value="null" th:text="Todos"></option>
+                                    <option th:value="null" th:text="Admin"></option>
+                                    <option th:value="null" th:text="Activos"></option>
+                                    <option th:value="null" th:text="Suspendidos"></option>
+                                    <option th:value="null" th:text="Usuario"></option>
+                                </select>
+                        </div>
+                   </div>
+                   <div class="col-sm-3">
+                       <label>Ing Filtro:</label>
+                       <input type="text" class="form-control" id="filtro" /> <!--th:field="*{}"-->
+                   </div>
+                  <div class="col-sm-1">
+                        <button type="submit" class="btn btn-secondary buscar">Buscar</button>
+                   </div>
+                </div>
+            </form>
+
+
+        <table class="table table-sm table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">Usuario</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Ubicación</th>
+          <th scope="col">Decripción</th>
+          <th scope="col">Título</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+             <td>
+            <a th:href="index.html"><img class="options" th:src="@{/img/check.png}" alt="check"/></a>
+            <a th:href="index.html"><img class="options" th:src="@{/img/block.png}" alt="block"/></a>
+            <a th:href="index.html"><img class="options" th:src="@{/img/cancel.png}" alt="cancel"/></a>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ </div>
+</div>
+<!--FIN TABLA DE SERVICIOS INGRESADOS-->
+
+</body>
+</html>
