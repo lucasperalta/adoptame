@@ -54,11 +54,25 @@ public class UsuarioController {
         usuario.setEmail(usuarioDTO.getEmail());
         Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
         usuario.setEstado(estado);
+
         usuario.setPassword(usuarioDTO.getPassword());
         Rol rol=rolService.findRolByNombreRol(usuarioDTO.getRol());
         usuario.setRol(rol);
         usuarioService.addUsuario(usuario);
 		return "usuarios/sucess";
 	}
+
+    /**
+     * Lista todos los usuarios segun los filtros pasados por parametros
+     * devuelve un json con todos los usuarios, se llama via ajax esta funcion
+     * @return
+     */
+    @GetMapping("/usuarios")
+    public @ResponseBody Iterable<Usuario> listarUsuarios( ) { //TODO hay filtros en la pantalla de busqueda?
+
+
+        return usuarioService.listarUsuarios();//TODO me deberia devolver un DTO donde no muestre el passw ???
+    }
+
 
 }
