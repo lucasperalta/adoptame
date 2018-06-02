@@ -30,4 +30,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario addUsuario(Usuario usuario) {
 		return usuarioRepository.save(usuario);
 	}
+
+    @Override
+    public void borrarUsuario(Usuario usuario) {
+        usuarioRepository.delete(usuario);
+    }
+
+    @Override
+    public Usuario buscarUsuarioByEmail(String email) {
+        return usuarioRepository.buscarUsuarioByEmail(email);
+    }
 }
