@@ -11,7 +11,7 @@ public interface EstadoService {
 
 
 
-	public Estado findEstadoById(Estado estado);
+	public Estado findEstadoById(int id);
 
 	public Estado findEstadoByDescripcion(String descripcion);
 
