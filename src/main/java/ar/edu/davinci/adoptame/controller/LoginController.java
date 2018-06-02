@@ -5,6 +5,7 @@ import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
+import ar.edu.davinci.adoptame.exception.NotFoundException;
 import ar.edu.davinci.adoptame.service.EstadoService;
 import ar.edu.davinci.adoptame.service.LoginService;
 import ar.edu.davinci.adoptame.service.RolService;
@@ -25,7 +26,7 @@ public class LoginController {
 
 
 	@Autowired
-    private EstadoService LoginService;
+    private LoginService loginService;
 
     @Autowired
     private RolService rolService;
@@ -41,18 +42,19 @@ public class LoginController {
     }
 
 
-    @PostMapping("/validoLogin")
-	public String findAdmin(@ModelAttribute UsuarioDTO usuarioDTO  ) {
+    @PostMapping("/ingresar")
+	public String findAdmin(@ModelAttribute UsuarioDTO usuarioDTO ,Model model ) {
+        Usuario usuario;
 
-        Usuario usuario= new Usuario();
+        try {
+            usuario = loginService.findAdmin(usuarioDTO.getEmail(),usuarioDTO.getPassword());
+        } catch (NotFoundException e) {
+            model.addAttribute("loginfail", "Usuario o password incorrectos");
 
-        usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setPassword(usuarioDTO.getPassword());
-        //usuario = LoginService.findAdmin(usuario);
-        usuario.setPassword(usuarioDTO.getPassword());
-        Rol rol=rolService.findRolByNombreRol(usuarioDTO.getRol());
-        usuario.setRol(rol);
-        usuarioService.addUsuario(usuario);
+            return "login/login";
+        }
+        //TODO guardar usuario en session
+
 		return "usuarios/sucess";
 	}
 

@@ -28,7 +28,7 @@
 					<img class="logo_login" th:src="@{/img/iconPet.png}" alt="logo"/>
 				</div>
 			</div>
-					<form action="#" th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
+					<form  th:action="@{/login/ingresar}" th:object="${usuarioDTO}" method="POST">
 					   <div class="row">
 							<div class="offset-sm-4 col-sm-4">
 								<div class="form-group">
