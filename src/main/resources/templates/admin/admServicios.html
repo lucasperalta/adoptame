@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+<header>
+    <div class="wrapper col-xs-12 col-sm-12">
+        <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
+        <div class="logo">Adopta.Me</div>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/eventos}">Eventos</a>
+            <a th:href="@{/login/login}">Admin</a>
+        </nav>
+    </div>
+</header>
+
+	<div class="divisor"></div>
+	
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-dark disable">Administrar</li>
+              <a href="admUsuarios.html" class="list-group-item list-group-item-action">Usuarios</a>
+              <a href="admServicios.html" class="list-group-item list-group-item-action active">Servicios</a>
+              <a href="admEventos.html" class="list-group-item list-group-item-action">Eventos</a>
+            </ul>
+        </div>
+
+<!-- formulario de Ing de servicio-->
+<div class="col-sm-9">
+    <form action="">
+        <h6>Ingresar Nuevo Servicio</h6>
+        <div class="card">
+            <div class="card-body">
+            <h6>Datos de Usuario</h6>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <div class="form-group">
+                                <label for="usuario">Usuario:</label>
+                                <input type="text" class="form-control" id="usuario"/>
+                    </div>
+                        <div class="form-group">
+                                <label for="direcion">Dirección:</label>
+                                <input type="text" class="form-control" id="direcion"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                    <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre"/>
+                    </div>
+                    <div class="form-group">
+                            <label for="linkPago">Link de Pago:</label>
+                            <input type="text" class="form-control" id="linkPago"/>
+                    </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="apellido">Apellido:</label>
+                            <input type="text" class="form-control" id="apellido"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" class="form-control" id="email"/>
+                        </div>
+                    </div>
+                </div>
+
+            <h6>Datos de Servicio</h6>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="titulo">Título:</label>
+                        <input type="text" class="form-control" id="titulo"/>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="costo">Costo:</label>
+                        <input type="text" class="form-control" id="costo"/>
+                    </div>
+                </div>
+            <div class="col-sm-2">
+            <div class="form-group">
+                <label for="rol">Rol:</label>
+                <select class="form-control" id="rol">
+                    <option>Admin</option>
+                    <option>Público</option>
+                </select>
+            </div>
+            </div>
+                <div class="col-sm-5">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label >Desde:</label>
+                            <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started" -->
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label >Hasta:</label>
+                            <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea class="form-control" rows="3" cols="50" id="descripcion" ></textarea>
+                </div>
+            </div>
+                <button type="submit" class="btn btn-secondary float-right">Agregar</button>
+            </div>
+        </div>
+    </form>
+</div>
+    <!-- FIN formulario de Ing de servicio-->
+
+	<div class="divisor"></div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark disable">Estaditicas</li>
+                    <a th:href="adm_usr.html" class="list-group-item list-group-item-action">Usuarios</a>
+                    <a th:href="adm_serv.html" class="list-group-item list-group-item-action">Servicios</a>
+                    <a th:hhref="adm_evn.html" class="list-group-item list-group-item-action">Eventos</a>
+                </ul>
+            </div>
+
+
+            <!-- TABLA DE SERVICIOS INGRESADOS-->
+            <div class="col-sm-9">
+                <h6>Activos</h6>
+                <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label >Desde:</label>
+                            <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started" -->
+                        </div>
+                        <div class="col-sm-3">
+                            <label >Hasta:</label>
+                            <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started"-->
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="filtrar_combo">Filtrar:</label>
+                                <select class="form-control" id="filtrar_combo">
+                                    <option th:value="null" th:text="Todos"></option>
+                                    <option th:value="null" th:text="Activos"></option>
+                                    <option th:value="null" th:text="Vencidos"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Ing Filtro:</label>
+                            <input type="text" class="form-control" id="filtro" /> <!--th:field="*{}"-->
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="submit" class="btn btn-secondary buscar">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+
+
+                <table class="table table-sm table-hover table-bordered text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Ubicación</th>
+                        <th scope="col">Decripción</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>
+                            <a th:href="index.html"><img class="options" th:src="@{/img/check.png}" alt="check"/></a>
+                            <a th:href="index.html"><img class="options" th:src="@{/img/block.png}" alt="block"/></a>
+                            <a th:href="index.html"><img class="options" th:src="@{/img/cancel.png}" alt="cancel"/></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="divisor"></div>
+</body>
+</html>
