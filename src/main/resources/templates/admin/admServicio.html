@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<link rel="stylesheet" href="../../../../../../../Desktop/Adopta.Me-Web/style-adop.css">
+		<link rel="stylesheet" href="docs.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<div class="wrapper col-xs-12 col-sm-12">
+				<img class="logo" src="../../../../../../../Desktop/Adopta.Me-Web/images/icon_pet.png" alt="Logo">
+				<div class="logo">Adopta.Me</div>
+
+				<nav>
+					<a href="../../../../../../../Desktop/Adopta.Me-Web/index.html">Inicio</a>
+					<a href="../../../../../../../Desktop/Adopta.Me-Web/eventos.html">Eventos</a>
+					<a href="../../../../../../../Desktop/Adopta.Me-Web/login.html">Admin</a>
+				</nav>
+			</div>
+		</header>
+	<div class="divisor"></div>
+	
+<div class="container">
+<div class="row">
+<div class="col-sm-3">
+<ul class="list-group">
+  <li class="list-group-item list-group-item-dark disable">Administrar</li>
+  <a href="admUsuarios.html" class="list-group-item list-group-item-action">Usuarios</a>
+  <a href="admServicio.html" class="list-group-item list-group-item-action active">Servicios</a>
+  <a href="admEvento.html" class="list-group-item list-group-item-action">Eventos</a>
+</ul>
+</div>
+
+<!-- formulario de Ing de servicio-->
+<div class="col-sm-9">
+<form action="">
+<h6>Ingresar Nuevo Servicio</h6>
+<div class="card">
+<div class="card-body">
+<h6>Datos de Usuario</h6>
+<div class="row">
+
+<div class="col-sm-4">
+<div class="form-group">
+            <label for="usr">Usuario:</label>
+            <input type="text" class="form-control" id="usuario">
+            </div><div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <input type="text" class="form-control" id="direcion">
+            </div>
+</div>
+
+<div class="col-sm-4">
+<div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre">
+            </div><div class="form-group">
+            <label for="linkPago">Link de Pago:</label>
+            <input type="text" class="form-control" id="linkPago">
+            </div>
+</div>
+
+<div class="col-sm-4">
+<div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" class="form-control" id="apellido">
+            </div><div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email">
+            </div>
+      </div>    
+
+</div>
+<h6>Datos de Servicio</h6>
+<div class="row">
+    <div class="col-sm-3">
+<div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" class="form-control" id="titulo">
+            </div>
+             
+</div>
+  <div class="col-sm-2">   
+            <div class="form-group">
+            <label for="costo">Costo:</label>
+            <input type="text" class="form-control" id="costo">
+            </div>
+             </div>
+<div class="col-sm-2">
+<div class="form-group">
+            <label for="rol">Rol:</label>
+            <select class="form-control" id="rol">
+                <option>Admin</option>
+                <option>Público</option>
+            </select>
+            </div>
+
+      </div>
+<div class="col-sm-5">
+<div class="row">
+<div class="col-sm-6">
+   <label for="desde">Desde:</label>
+    <input class="form-control" type="date" id="desde" name="desde" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"> 
+    </div> 
+    
+    <div class="col-sm-6">
+   <label for="hasta">Hasta:</label>
+    <input class="float-top form-control" type="date" id="hasta" name="hasta" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"> 
+    </div>
+    </div>    
+    </div> 
+ <div class="col-sm-6">
+   <label for="descripcion">Descripción:</label>
+    <textarea class="form-control" rows="3" cols="50" id="descripcion" ></textarea> 
+</div>
+</div>
+<button type="submit" class="btn btn-secondary float-right">Agregar</button>      
+</div>
+</div>
+</div>
+</form>
+</div>
+    <!-- FIN formulario de Ing de servicio-->
+
+	<div class="divisor"></div>
+
+<div class="row">
+<div class="col-sm-3">
+<ul class="list-group">
+  <li class="list-group-item list-group-item-dark disable">Estaditicas</li>
+  <a href="admUsuarios.html" class="list-group-item list-group-item-action">Usuarios</a>
+  <a href="admServicio.html" class="list-group-item list-group-item-action">Servicios</a>
+  <a hhref="adm_evn.html" class="list-group-item list-group-item-action">Eventos</a>
+</ul>
+</div>
+
+<!-- TABLA DE SERVICIOS INGRESADOS-->
+<div class="col-sm-9">
+   <form action="">
+  <div class="row">
+  <div class="col-sm-5">
+   <h6>Ingresados</h6>
+   </div>
+   <div class="col-sm-2">
+<div class="form-group">
+            <label for="filtrar">Filtrar:</label>
+            <select class="form-control" id="filtrar_combo">
+                <option>Usuario</option>
+                <option>Rubro</option>
+                <option>Estado</option>
+                <option>Título</option>
+                <option>Email</option>
+            </select>
+            </div>
+            </div>
+            <div class="col-sm-3">
+                <label for="filtro">Ingrese filtro:</label>
+            <input type="text" class="form-control" id="filtro">
+            </div>
+            <div class="col-sm-2">
+            <button type="submit" class="btn btn-secondary buscar">Buscar</button> 
+            </div>
+            </form>
+      </div>
+    <table class="table table-sm table-hover table-bordered text-center">
+  <thead>
+    <tr >
+      <th scope="col">Usuario</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Título</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Rubro</th>
+      <th scope="col">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>Mark</td>
+      <td>
+        <a href=""><img class="options" src="../../../../../../../Desktop/Adopta.Me-Web/images/ckeck.png" alt="check"></a>
+        <a href=""><img class="options" src="../../../../../../../Desktop/Adopta.Me-Web/images/block.png" alt="block"></a>
+        <a href=""><img class="options" src="../../../../../../../Desktop/Adopta.Me-Web/images/cancel.png" alt="cancel"></a>
+        </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- FIN TABLA DE SERVICIOS INGRESADOS-->
+</div>
+	<div class="divisor"></div>
+</div>	
+</body>
+</html>
