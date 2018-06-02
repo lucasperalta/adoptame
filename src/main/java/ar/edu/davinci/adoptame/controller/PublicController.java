@@ -12,39 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller    // This means that this class is a Controller
-@RequestMapping(path="/admin") // This means URL's start with /demo (after Application path)
-public class AdminController {
-	
+@RequestMapping(path="/") // This means URL's start with /demo (after Application path)
+public class PublicController {
 
+@RequestMapping("/")
+public String index(){
+    return "public/index";
 
-	@Autowired
-    private EstadoService estadoService;
-
-    @Autowired
-    private RolService rolService;
-
-    @Autowired
-    private UsuarioService usuarioService;
-
+    }
 
     @GetMapping("/eventos")
-    public String admEventos(Model model) {
+    public String listarEventos(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "admin/admEventos";
+        return "public/eventos";
     }
 
-    @GetMapping("/servicios")
-    public String admServicios(Model model) {
+    @GetMapping("/eventoDetalle")
+    public String detalleEventos(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "admin/admServicios";
+        return "public/evento_det";
     }
-
-    @GetMapping("/usuarios")
-    public String admUsuarios(Model model) {
-        model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "admin/admUsuarios";
-    }
-
-
 
 }
