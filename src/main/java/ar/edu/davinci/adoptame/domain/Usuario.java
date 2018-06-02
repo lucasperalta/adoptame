@@ -7,6 +7,8 @@ import java.io.Serializable;
 @Table(name="usuarios")
 @PrimaryKeyJoinColumn(name = "id")
 @DiscriminatorValue("USUARIO")
+@NamedQuery(name = "Usuario.buscarUsuarioByEmail",query = "select p from Usuario p where p.email = :email")
+
 public class Usuario extends Persona implements Serializable {
 
 
@@ -56,5 +58,13 @@ public class Usuario extends Persona implements Serializable {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "estado=" + estado +
+                ", rol=" + rol +
+                '}';
     }
 }
