@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
 import ar.edu.davinci.adoptame.repository.LoginRepository;
@@ -22,10 +23,10 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	@Transactional
-	public Usuario findAdmin(Usuario usuario) throws NotFoundException {
+	public Usuario findAdmin(String email,String password) throws NotFoundException {
 		Usuario usuarioEncontrado = null;
-//		}
-		//usuarioEncontrado = LoginRepository.findAdmin(usuario.getEmail());
+
+		usuarioEncontrado = loginRepository.findAdmin(email,password);
 		if (usuarioEncontrado == null) {
 			throw new NotFoundException();
 		}

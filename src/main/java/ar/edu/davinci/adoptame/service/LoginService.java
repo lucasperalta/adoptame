@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface LoginService {
 
-	public Usuario findAdmin(Usuario usuario) throws NotFoundException;
+	public Usuario findAdmin(String email,String password) throws NotFoundException;
 
 
 

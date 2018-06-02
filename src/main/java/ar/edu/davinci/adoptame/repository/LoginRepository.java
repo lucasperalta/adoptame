@@ -11,5 +11,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface LoginRepository extends JpaRepository<Usuario, Long> {
 
-    //static Usuario findAdmin(@Param("email") String email);
+    public Usuario findAdmin(@Param("email") String email,@Param("password") String password);
 }
