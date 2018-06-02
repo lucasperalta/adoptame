@@ -7,8 +7,10 @@ import java.io.Serializable;
 @Table(name="usuarios")
 @PrimaryKeyJoinColumn(name = "id")
 @DiscriminatorValue("USUARIO")
-@NamedQuery(name = "Usuario.buscarUsuarioByEmail",query = "select p from Usuario p where p.email = :email")
-
+@NamedQueries({
+        @NamedQuery(name = "Usuario.buscarUsuarioByEmail", query = "select p from Usuario p where p.email = :email"),
+        @NamedQuery(name = "Usuario.findAdmin", query = "select p from Usuario p where p.email = :email and p.password=:password and rol=1")
+})
 public class Usuario extends Persona implements Serializable {
 
 
