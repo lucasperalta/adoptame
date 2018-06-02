@@ -15,9 +15,9 @@
             <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
             <div class="logo">Adopta.Me</div>
             <nav>
-                <a th:href="index.html">Inicio</a>
-                <a th:href="eventos.html">Eventos</a>
-                <a th:href="login.html">Admin</a>
+                <a th:href="@{/}">Inicio</a>
+                <a th:href="@{/eventos}">Eventos</a>
+                <a th:href="@{/login/login}">Admin</a>
             </nav>
         </div>
     </header>
@@ -84,7 +84,7 @@
 <!-- TABLA DE SERVICIOS INGRESADOS-->
     <div class="col-sm-9">
         <h6>Activos</h6>
-            <form action="#" th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
+            <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
               <div class="row">
                    <div class="col-sm-3">
                        <label >Desde:</label>
