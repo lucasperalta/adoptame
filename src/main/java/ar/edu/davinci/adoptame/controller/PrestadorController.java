@@ -8,6 +8,7 @@ import ar.edu.davinci.adoptame.domain.Prestador;
 import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.service.EstadoService;
+import ar.edu.davinci.adoptame.service.PrestadorService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class PrestadorController {
 
 
     @Autowired
-    private UsuarioService usuarioService;
+    private PrestadorService prestadorService;
 
 
     @GetMapping("/nuevoPrestador")
@@ -43,7 +44,7 @@ public class PrestadorController {
 
 
     @PostMapping("/guardarPrestador")
-	public String nuevoUsuario(@ModelAttribute PrestadorDTO prestadorDTO  ) {
+	public String guardarPrestador(@ModelAttribute PrestadorDTO prestadorDTO  ) {
 
         Prestador prestador= new Prestador();
         prestador.setNombre(prestadorDTO.getNombre());
@@ -53,9 +54,8 @@ public class PrestadorController {
         prestador.setFechaVinculacion(new Date());
         prestador.setVigencia(30);
         prestador.setUrlPago(prestadorDTO.getUrlPago());
-
-        usuarioService.addUsuario(usuario);
-		return "usuarios/sucess";
+        prestadorService.addPrestador(prestador);
+		return "prestador/sucess";
 	}
 
     /**
@@ -64,22 +64,22 @@ public class PrestadorController {
      * @return
      */
     @GetMapping("/todos")
-    public @ResponseBody Iterable<Usuario> listarUsuarios( ) { //TODO hay filtros en la pantalla de busqueda?
-        return usuarioService.listarUsuarios();//TODO me deberia devolver un DTO donde no muestre el passw ???
+    public @ResponseBody Iterable<Prestador> listarPrestadores( ) { //TODO hay filtros en la pantalla de busqueda?
+        return prestadorService.listarPrestadores();
     }
 
     @GetMapping("/borrar")
-    public @ResponseBody String borrarUsuario( @RequestParam String email) {
+    public @ResponseBody String borrarPrestador( @RequestParam String email) {
 
-        Usuario usuario =usuarioService.buscarUsuarioByEmail(email);
-        logger.info("Usuario a borrar "+ usuario.toString());
-        if(usuario!=null){
-            usuarioService.borrarUsuario(usuario);
+        Prestador prestador =prestadorService.buscarPrestadorByEmail(email);
+        logger.info("prestador a borrar "+ prestador.toString());
+        if(prestador!=null){
+            prestadorService.borrarPrestador(prestador);
 
         }else{
-            return "Usuario no encontrado";
+            return "Prestador no encontrado";
         }
-        return "usuario borrado";
+        return "prestador borrado";
     }
 
 }

@@ -29,8 +29,8 @@ public class EstadoServiceImpl implements EstadoService{
 
 	@Override
     @Transactional
-	public Estado findEstadoById(Estado estado) {
-		return estadoRepository.findOne(estado.getId().longValue());
+	public Estado findEstadoById(int id) {
+		return estadoRepository.findOne(new Long(id));
 	}
 
 	@Override

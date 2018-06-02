@@ -50,7 +50,7 @@ public class UsuarioController {
 
 
     @PostMapping("/guardarUsuario")
-	public String nuevoUsuario(@ModelAttribute UsuarioDTO usuarioDTO  ) {
+	public  @ResponseBody  String nuevoUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
 
         Usuario usuario= new Usuario();
         usuario.setNombre(usuarioDTO.getNombre());
@@ -59,10 +59,10 @@ public class UsuarioController {
         Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
         usuario.setEstado(estado);
         usuario.setPassword(usuarioDTO.getPassword());
-        Rol rol=rolService.findRolByNombreRol(usuarioDTO.getRol());
+        Rol rol=rolService.findRolById(new Integer(usuarioDTO.getRol()));
         usuario.setRol(rol);
         usuarioService.addUsuario(usuario);
-		return "usuarios/sucess";
+		return "msg:Usuario dado de alta exitosamente";
 	}
 
     /**

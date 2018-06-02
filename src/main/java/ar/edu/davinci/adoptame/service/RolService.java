@@ -11,9 +11,9 @@ public interface RolService {
 
 
 
-	public Rol findRolById(Rol rol);
+	public Rol findRolById(Integer id);
 
-	public Rol findRolByNombreRol(String nombreRol);
+	public Rol findRolByNombre(String nombreRol);
 
 
 

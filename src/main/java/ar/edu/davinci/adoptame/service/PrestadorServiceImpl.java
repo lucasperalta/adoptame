@@ -1,6 +1,8 @@
 package ar.edu.davinci.adoptame.service;
 
+import ar.edu.davinci.adoptame.domain.Prestador;
 import ar.edu.davinci.adoptame.domain.Usuario;
+import ar.edu.davinci.adoptame.repository.PrestadorRepository;
 import ar.edu.davinci.adoptame.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,29 +12,29 @@ import java.util.List;
 
 
 @Service
-public class PrestadorServiceImpl implements UsuarioService{
+public class PrestadorServiceImpl implements PrestadorService{
 
 	@Resource
-	UsuarioRepository usuarioRepository;
+	PrestadorRepository prestadorRepository;
+
 
 	@Override
-	public List<Usuario> listarUsuarios() {
-		return usuarioRepository.findAll();
+	public List<Prestador> listarPrestadores() {
+		return prestadorRepository.findAll();
 	}
 
 	@Override
-	@Transactional
-	public Usuario addUsuario(Usuario usuario) {
-		return usuarioRepository.save(usuario);
+	public Prestador addPrestador(Prestador prestador) {
+		return prestadorRepository.save(prestador);
 	}
 
-    @Override
-    public void borrarUsuario(Usuario usuario) {
-        usuarioRepository.delete(usuario);
-    }
+	@Override
+	public void borrarPrestador(Prestador prestador) {
+		prestadorRepository.delete(prestador);
+	}
 
-    @Override
-    public Usuario buscarUsuarioByEmail(String email) {
-        return usuarioRepository.buscarUsuarioByEmail(email);
-    }
+	@Override
+	public Prestador buscarPrestadorByEmail(String email) {
+		return null;
+	}
 }
