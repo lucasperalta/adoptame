@@ -50,7 +50,6 @@ public class LoginController {
             usuario = loginService.findAdmin(usuarioDTO.getEmail(),usuarioDTO.getPassword());
         } catch (NotFoundException e) {
             model.addAttribute("loginfail", "Usuario o password incorrectos");
-
             return "login/login";
         }
         //TODO guardar usuario en session
