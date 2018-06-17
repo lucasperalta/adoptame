@@ -4,9 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
-    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-table.min.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap-table.min.js}"></script>
 
 
 </head>
@@ -84,7 +86,7 @@
 
 
                                 </div>
-                                 <button type="button"  id="crearUsuario" class="btn btn-secondary float-right">Crear</button>
+                                 <button type="button"  id="crearUsuario" class="btn btn-primary float-right">Crear</button>
                             </div>
                         </div>
 
@@ -140,35 +142,181 @@
                 </div>
           </div>
         </form>
-            <table class="table table-sm table-hover table-bordered text-center">
+            <table  id="tablaUsuarios"
+                    data-toggle="table"
+                    data-toolbar="#toolbar"
+                    >
               <thead>
                 <tr>
-                  <th scope="col">Usuario</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Estado</th>
-                  <th scope="col">Acción</th>
+                    <th data-field="id">Id usuario</th>
+                    <th data-field="nombre">Nombre</th>
+                    <th data-field="apellido">Apellido</th>
+                    <th data-field="email">email</th>
+                    <th data-field="estado">estado</th>
+                    <th data-field="rol">rol</th>
+                    <th data-formatter="TableActions">Action</th>
+
+
                 </tr>
               </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-                 <td>
-                     <a th:href="index.html"><img class="options" th:src="@{/img/check.png}" alt="check"/></a>
-                     <a th:href="index.html"><img class="options" th:src="@{/img/block.png}" alt="block"/></a>
-                     <a th:href="index.html"><img class="options" th:src="@{/img/cancel.png}" alt="cancel"/></a>
-                 </td>
-            </tr>
-          </tbody>
+
         </table>
     </div>
     </div>
 <!-- FIN TABLA DE SERVICIOS INGRESADOS-->
 </div>
 
+
+<div class="modal" tabindex="-1" role="dialog" id="modalEditarUsuario">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar usuario</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalEditarUsuario')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="formEditarUsuario" role="form">
+                    <input type="hidden" class="form-control" id="idUsuarioEditar" />
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreUsuarioEditar" />
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Apellido:</label>
+                        <input type="text" class="form-control" id="apellidoUsuarioEditar" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Email:</label>
+                        <input type="text" class="form-control" id="emailUsuarioEditar" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="rol">Estado:</label>
+                        <select class="form-control" id="estadoUsuarioEditar" name="rol">
+                            <option value="">Seleccionar Estado</option>
+                            <option th:each="estado : ${estados}"
+                                    th:value="${estado.id}"
+                                    th:text="${estado.estado}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rol">Rol:</label>
+                        <select class="form-control" id="rolUsuarioEditar" name="rol">
+                            <option value="">Seleccionar rol</option>
+                            <option th:each="rol : ${roles}"
+                                    th:value="${rol.id}"
+                                    th:text="${rol.nombreRol}"></option>
+                        </select>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary " id="confirmarEditarUsuarioBtn" onclick="confirmaEditarUsuario()">Grabar</button>
+
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalEditarUsuario')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="modalBorrarUsuario">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar usuario</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalBorrarUsuario')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="textoBorrarUsuario">Seguro que desea borrar este usuario?</p>
+                <form id="formBorrarUsuario" role="form">
+                    <input type="hidden" class="form-control" id="emailUsuarioBorrar" />
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary " id="confirmarBorrarUsuarioBtn" onclick="confirmaBorrarUsuario()">Borrar</button>
+
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalBorrarUsuario')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalAltaUsuario">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alta de usuario</h5>
+                <button type="button" class="close" onclick="cerrarModalUsuario()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="textoAltaUsuario">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModalUsuario()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalRespuestaEditarUsuario">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar de usuario</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalRespuestaEditarUsuario')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="textoEditarUsuario">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalRespuestaEditarUsuario')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 
+    $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
+        cargarTablaUsuarios();
+    });
+
+    function cargarTablaUsuarios() {
+        $.ajax({
+            type: 'GET',
+            url: '../usuarios/todos',
+            contentType: 'application/json; charset=utf-8',
+
+            success: function(response) {
+                console.log(response)
+                $('#tablaUsuarios').bootstrapTable('load', response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+    
     $('#crearUsuario').click(function() {
         var data = {
 
@@ -187,6 +335,8 @@
             contentType: 'application/json; charset=utf-8',
             success: function(response) {
                 console.log(response)
+              $('#textoAltaUsuario').text(response);
+              $('#modalAltaUsuario').show();
 
             },
             error: function(error) {
@@ -195,8 +345,132 @@
         });
     });
 
+    function TableActions (value, row, index) {
+        return [
+
+
+            '<a class="like"  onclick="editarUsuario( \''+row.id+'\',  \''+row.nombre+'\',   \''+row.apellido+'\',   \''+row.email+'\' ,   \''+row.estado+'\' ,\''+row.rol+'\');" title="Editar usuario">',
+            '<img class="options" th:src="@{/img/check.png}" alt="check"/>',
+            '</a> ',
+            '<a class="danger remove" onclick="borrarUsuario(\''+row.email+ '\')" title="Borrar Usuario">',
+            '<img class="options" th:src="@{/img/cancel.png}" alt="cancel"/>',
+            '</a>'
+        ].join('');
+    }
+    function cerrarModal(nombre){
+        $('#'+nombre+'').hide();
+    }
+
+    function cerrarModalBorrarUsuario(){
+        $('#modalBorrarUsuario').hide();
+    }
+
+    function cerrarModalEditarUsuario(){
+        $('#modalEditarUsuario').hide();
+    }
+
+
+    function editarUsuario(id,nombre,apellido,email,estado,rol) {
+        $('#idUsuarioEditar').val(id);
+       $('#nombreUsuarioEditar').val(nombre);
+        $('#apellidoUsuarioEditar').val(apellido);
+        $('#emailUsuarioEditar').val(email);
+        $("#estadoUsuarioEditar option").each(function() {
+            if($(this).text() === estado) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $("#rolUsuarioEditar option").each(function() {
+            if($(this).text() === rol) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $('#modalEditarUsuario').show();
+
+    }
+
+    function borrarUsuario(email) {
+       $('#emailUsuarioBorrar').val(email); //cargamos el mail del usuario a borrar en un campo oculto
+        //lo vamos a necesitar despues cuando confirme la accion
+        $('#confirmarBorrarUsuarioBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
+        $('#textoBorrarUsuario').text("Seguro que desea borrar este usuario?"); //ponemos el texto
+        $('#modalBorrarUsuario').show();//mostramos el popup de confirmacion
+    }
+
+   function confirmaBorrarUsuario(){
+       $('#modalBorrarUsuario').hide();
+       var data = {
+           email	: $('#emailUsuarioBorrar').val()
+       };
+
+        $.ajax({
+           type: 'POST',
+           url: '../usuarios/borrar',
+           data:JSON.stringify(data),
+
+           contentType: 'application/json; charset=utf-8',
+           success: function(response) {
+               console.log(response)
+               $('#textoBorrarUsuario').text(response);//cargamos el texto de respuesta del servidor
+               $('#confirmarBorrarUsuarioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mismo usuario
+               cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
+               $('#modalBorrarUsuario').show();//mostramos popup con respuesta
+
+
+
+           },
+           error: function(error) {
+               console.log(error);
+           }
+       });
+   }
+
+    function confirmaEditarUsuario(){
+        $('#modalEditarUsuario').hide();
+
+
+        var data = {
+            id:$('#idUsuarioEditar').val(),
+            nombre:$('#nombreUsuarioEditar').val(),
+            apellido:$('#apellidoUsuarioEditar').val(),
+            email	: $('#emailUsuarioEditar').val(),
+            estado:$('#estadoUsuarioEditar').val(),
+            rol:$('#rolUsuarioEditar').val()
+
+
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '../usuarios/editarUsuario',
+            data:JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log(response)
+                $('#textoEditarUsuario').text(response);//cargamos el texto de respuesta del servidor
+                $('#modalRespuestaEditarUsuario').show();//mostramos popup con respuesta
+
+                cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
+
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+
+
 </script>
 
 
+
 </body>
+
+
+
 </html>
