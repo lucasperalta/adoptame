@@ -22,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -62,8 +64,29 @@ public class UsuarioController {
         Rol rol=rolService.findRolById(new Integer(usuarioDTO.getRol()));
         usuario.setRol(rol);
         usuarioService.addUsuario(usuario);
-		return "msg:Usuario dado de alta exitosamente";
+		return "Usuario dado de alta exitosamente";
 	}
+
+    @PostMapping("/editarUsuario")
+    public  @ResponseBody  String editarUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
+
+
+        Usuario usuario= usuarioService.buscarUsuarioByID(usuarioDTO.getId());
+       if(usuario!= null){
+           usuario.setNombre(usuarioDTO.getNombre());
+           usuario.setApellido(usuarioDTO.getApellido());
+           usuario.setEmail(usuarioDTO.getEmail());
+           Estado estado= estadoService.findEstadoById(new Integer(usuarioDTO.getEstado()));
+           usuario.setEstado(estado);
+           usuario.setPassword(usuarioDTO.getPassword());
+           Rol rol=rolService.findRolById(new Integer(usuarioDTO.getRol()));
+           usuario.setRol(rol);
+           usuarioService.addUsuario(usuario);
+           return "Usuario Modificado exitosamente";
+       }
+       return "Hubo un error al modificar el usuario";
+
+    }
 
     /**
      * Lista todos los usuarios segun los filtros pasados por parametros
@@ -71,14 +94,26 @@ public class UsuarioController {
      * @return
      */
     @GetMapping("/todos")
-    public @ResponseBody Iterable<Usuario> listarUsuarios( ) { //TODO hay filtros en la pantalla de busqueda?
-        return usuarioService.listarUsuarios();//TODO me deberia devolver un DTO donde no muestre el passw ???
+    public @ResponseBody Iterable<UsuarioDTO> listarUsuarios( ) { //TODO hay filtros en la pantalla de busqueda?
+       List<Usuario> usuarios=usuarioService.listarUsuarios();
+        List<UsuarioDTO> usuariosDTO= new ArrayList<>();
+        for (Usuario user:usuarios) {
+            UsuarioDTO usuarioDTO= new UsuarioDTO();
+            usuarioDTO.setId(user.getId());
+            usuarioDTO.setNombre(user.getNombre());
+            usuarioDTO.setApellido(user.getApellido());
+            usuarioDTO.setEmail(user.getEmail());
+            usuarioDTO.setEstado(user.getEstado().getEstado());
+            usuarioDTO.setRol(user.getRol().getNombreRol());
+            usuariosDTO.add(usuarioDTO);
+        }
+        return usuariosDTO;
     }
 
-    @GetMapping("/borrar")
-    public @ResponseBody String borrarUsuario( @RequestParam String email) {
+    @PostMapping("/borrar")
+    public @ResponseBody String borrarUsuario( @RequestBody UsuarioDTO usuarioDTO) {
 
-        Usuario usuario =usuarioService.buscarUsuarioByEmail(email);
+        Usuario usuario =usuarioService.buscarUsuarioByEmail(usuarioDTO.getEmail());
         logger.info("Usuario a borrar "+ usuario.toString());
         if(usuario!=null){
             usuarioService.borrarUsuario(usuario);

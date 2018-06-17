@@ -12,7 +12,7 @@ public class PersonaDTO {
 
 
 
-
+    private Integer id;
 
     private String nombre;
 
@@ -22,11 +22,18 @@ public class PersonaDTO {
     private String email;
 
 
+
     public PersonaDTO() {
     }
 
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
     public String getNombre() {

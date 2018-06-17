@@ -1,5 +1,6 @@
 package ar.edu.davinci.adoptame.controller;
 
+import ar.edu.davinci.adoptame.DTO.EstadoDTO;
 import ar.edu.davinci.adoptame.DTO.RolDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.constantes.Constantes;
@@ -38,6 +39,9 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private EstadoService estadoService;
+
 
     @GetMapping("/login")
     public String loginAdmin(Model model) {
@@ -67,7 +71,16 @@ public class LoginController {
             rolesDto.add(rolDTO);
         }
 
+        List<Estado> estados=estadoService.listarEstados();
+        List<EstadoDTO> estadosDto= new ArrayList<>();
+        for (Estado estado:estados ) {
+            EstadoDTO estadoDTO= new EstadoDTO();
+            estadoDTO.setId(estado.getId());
+            estadoDTO.setEstado(estado.getEstado());
+            estadosDto.add(estadoDTO);
+        }
 
+        model.addAttribute("estados", estadosDto);
         model.addAttribute("roles", rolesDto);
 
 		return "usuarios/admUsuarios";
