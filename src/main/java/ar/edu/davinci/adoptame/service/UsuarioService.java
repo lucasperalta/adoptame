@@ -17,5 +17,7 @@ public interface UsuarioService {
 
 	public Usuario buscarUsuarioByEmail(String email);
 
+	public Usuario buscarUsuarioByID(Integer id);
+
 
 }
