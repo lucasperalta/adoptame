@@ -78,7 +78,7 @@ public class UsuarioController {
            usuario.setEmail(usuarioDTO.getEmail());
            Estado estado= estadoService.findEstadoById(new Integer(usuarioDTO.getEstado()));
            usuario.setEstado(estado);
-           usuario.setPassword(usuarioDTO.getPassword());
+           //usuario.setPassword(usuarioDTO.getPassword());
            Rol rol=rolService.findRolById(new Integer(usuarioDTO.getRol()));
            usuario.setRol(rol);
            usuarioService.addUsuario(usuario);
