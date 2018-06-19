@@ -262,7 +262,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Alta de usuario</h5>
-                <button type="button" class="close" onclick="cerrarModalUsuario()" aria-label="Close">
+                <button type="button" class="close" onclick="cerrarModal('modalAltaUsuario')"  aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -270,7 +270,7 @@
                 <p id="textoAltaUsuario">.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="cerrarModalUsuario()">Cerrar</button>
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalAltaUsuario')" >Cerrar</button>
             </div>
         </div>
     </div>
@@ -337,6 +337,7 @@
                 console.log(response)
               $('#textoAltaUsuario').text(response);
               $('#modalAltaUsuario').show();
+              cargarTablaUsuarios();
 
             },
             error: function(error) {
