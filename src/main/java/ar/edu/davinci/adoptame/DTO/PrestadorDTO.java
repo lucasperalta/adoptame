@@ -9,36 +9,31 @@ public class PrestadorDTO extends PersonaDTO  {
     private Integer vigencia;
     private String urlPago;
     private Date fechaVinculacion;
+    private String descripcion;
+    private Float costo;
 
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
+    public Float getCosto() { return costo; }
 
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
-    }
+    public void setCosto(Float costo) { this.costo = costo; }
 
-    public Integer getVigencia() {
-        return vigencia;
-    }
+    public String getDescripcion() { return descripcion; }
 
-    public void setVigencia(Integer vigencia) {
-        this.vigencia = vigencia;
-    }
+    public void setDescripcion(String costo) { this.descripcion = costo; }
 
-    public String getUrlPago() {
-        return urlPago;
-    }
 
-    public void setUrlPago(String urlPago) {
-        this.urlPago = urlPago;
-    }
+    public String getTipoServicio() { return tipoServicio; }
 
-    public Date getFechaVinculacion() {
-        return fechaVinculacion;
-    }
+    public void setTipoServicio(String tipoServicio) { this.tipoServicio = tipoServicio; }
 
-    public void setFechaVinculacion(Date fechaVinculacion) {
-        this.fechaVinculacion = fechaVinculacion;
-    }
+    public Integer getVigencia() { return vigencia; }
+
+    public void setVigencia(Integer vigencia) { this.vigencia = vigencia; }
+
+    public String getUrlPago() {return urlPago;}
+
+    public void setUrlPago(String urlPago) { this.urlPago = urlPago; }
+
+    public Date getFechaVinculacion() {return fechaVinculacion; }
+
+    public void setFechaVinculacion(Date fechaVinculacion) { this.fechaVinculacion = fechaVinculacion; }
 }

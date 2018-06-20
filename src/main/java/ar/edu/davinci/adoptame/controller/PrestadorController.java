@@ -1,16 +1,9 @@
 package ar.edu.davinci.adoptame.controller;
 
 import ar.edu.davinci.adoptame.DTO.PrestadorDTO;
-import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
-import ar.edu.davinci.adoptame.constantes.Constantes;
-import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Prestador;
-import ar.edu.davinci.adoptame.domain.Rol;
-import ar.edu.davinci.adoptame.domain.Usuario;
-import ar.edu.davinci.adoptame.service.EstadoService;
-import ar.edu.davinci.adoptame.service.PrestadorService;
-import ar.edu.davinci.adoptame.service.RolService;
-import ar.edu.davinci.adoptame.service.UsuarioService;
+import ar.edu.davinci.adoptame.domain.Servicio;
+import ar.edu.davinci.adoptame.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +22,7 @@ public class PrestadorController {
 
 
     @Autowired
-    private EstadoService estadoService;
+    private ServicioService servicioService;
 
 
     @Autowired
@@ -39,23 +32,26 @@ public class PrestadorController {
     @GetMapping("/nuevoPrestador")
     public String nuevoPrestador(Model model) {
         model.addAttribute("prestadorDTO", new PrestadorDTO());
-        return "prestador/alta";
+        return "prestador/admServicios";
     }
 
 
     @PostMapping("/guardarPrestador")
-	public String guardarPrestador(@ModelAttribute PrestadorDTO prestadorDTO  ) {
+    public  @ResponseBody  String  guardarPrestador(@RequestBody PrestadorDTO prestadorDTO  ) {
 
         Prestador prestador= new Prestador();
+        //Prestador servicio= new Servicio();
         prestador.setNombre(prestadorDTO.getNombre());
         prestador.setApellido(prestadorDTO.getApellido());
         prestador.setEmail(prestadorDTO.getEmail());
-        prestador.setTipoServicio(prestadorDTO.getTipoServicio());
+        //servicio.setTipoServicio(prestadorDTO.getTipoServicio());
         prestador.setFechaVinculacion(new Date());
-        prestador.setVigencia(30);
+       // prestador.setVigencia(prestadorDTO.getVigencia());
         prestador.setUrlPago(prestadorDTO.getUrlPago());
+        prestador.setUrlPago(prestadorDTO.getDescripcion());
+        prestador.setUrlPago(prestadorDTO.getCosto().toString());
         prestadorService.addPrestador(prestador);
-		return "prestador/sucess";
+		return "msg:prestador dado de alta OK";
 	}
 
     /**

@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+
 
 </head>
 
@@ -31,7 +33,7 @@
               <li class="list-group-item list-group-item-dark disable">Administrar</li>
               <a href="admUsuarios.html" class="list-group-item list-group-item-action">Usuarios</a>
               <a href="admServicios.html" class="list-group-item list-group-item-action active">Servicios</a>
-              <a href="admEventos.html" class="list-group-item list-group-item-action">Eventos</a>
+              <a href="../admin/admEventos.html" class="list-group-item list-group-item-action">Eventos</a>
             </ul>
         </div>
 
@@ -44,25 +46,14 @@
             <h6>Datos de Usuario</h6>
                 <div class="row">
                     <div class="col-sm-4">
-                    <div class="form-group">
-                                <label for="usuario">Usuario:</label>
-                                <input type="text" class="form-control" id="usuario"/>
-                    </div>
                         <div class="form-group">
-                                <label for="direcion">Dirección:</label>
-                                <input type="text" class="form-control" id="direcion"/>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                    <div class="form-group">
                             <label for="nombre">Nombre:</label>
                             <input type="text" class="form-control" id="nombre"/>
-                    </div>
-                    <div class="form-group">
-                            <label for="linkPago">Link de Pago:</label>
-                            <input type="text" class="form-control" id="linkPago"/>
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" class="form-control" id="email"/>
+                        </div>
                     </div>
 
                     <div class="col-sm-4">
@@ -70,9 +61,16 @@
                             <label for="apellido">Apellido:</label>
                             <input type="text" class="form-control" id="apellido"/>
                         </div>
+                    <div class="form-group">
+                            <label for="urlPago">Link de Pago:</label>
+                            <input type="text" class="form-control" id="urlPago"/>
+                    </div>
+                    </div>
+
+                    <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="text" class="form-control" id="email"/>
+                            <label for="direccion">Direccion:</label>
+                            <input type="text" class="form-control" id="direccion"/>
                         </div>
                     </div>
                 </div>
@@ -92,34 +90,31 @@
                         <input type="text" class="form-control" id="costo"/>
                     </div>
                 </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="vigencia">Vigencia:</label>
+                        <input type="text" class="form-control" id="vigencia"/>
+                    </div>
+                </div>
             <div class="col-sm-2">
             <div class="form-group">
-                <label for="rol">Rol:</label>
-                <select class="form-control" id="rol">
-                    <option>Admin</option>
-                    <option>Público</option>
+                <label for="tipoServicio">Rol:</label>
+                <select class="form-control" id="tipoServicio">
+                   <!-- <option value="">Seleccionar rubro</option>
+                    <option th:each="rub : ${rubro}"
+                            th:value="${rub.id}"
+                            th:text="${rub.nombreRol}"></option>-->
+                    <option th:value="null" th:text="Guarderia"></option>
+                    <option th:value="null" th:text="Veterinaria"></option>
                 </select>
             </div>
             </div>
-                <div class="col-sm-5">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label >Desde:</label>
-                            <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started" -->
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label >Hasta:</label>
-                            <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started" -->
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-6">
                     <label for="descripcion">Descripción:</label>
                     <textarea class="form-control" rows="3" cols="50" id="descripcion" ></textarea>
                 </div>
             </div>
-                <button type="submit" class="btn btn-secondary float-right">Agregar</button>
+                <button type="button"  id="crearPrestador" class="btn btn-secondary float-right">Agregar</button>
             </div>
         </div>
     </form>
@@ -142,7 +137,7 @@
             <!-- TABLA DE SERVICIOS INGRESADOS-->
             <div class="col-sm-9">
                 <h6>Activos</h6>
-                <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
+                <form th:action="@{/usuarios/guardarUsuario}" th:object="${prestadorDTO}" method="POST">
                     <div class="row">
                         <div class="col-sm-3">
                             <label >Desde:</label>
@@ -204,5 +199,43 @@
     </div>
 </div>
     <div class="divisor"></div>
+
+<script>
+
+    $('#crearPrestador').click(function() {
+        var data = {
+
+            nombre    : document.getElementById('nombre').value,
+            apellido  : document.getElementById('apellido').value,
+            direccion : document.getElementById('direccion').value,
+            email     : document.getElementById('email').value,
+            urlPago   : document.getElementById('urlPago').value,
+            titulo    : document.getElementById('titulo').value,
+            costo     : document.getElementById('costo').value,
+            tipoServicio : document.getElementById('tipoServicio').value,
+            fechaVinculacion    : document.getElementById('fechaVinculacion').value,
+            descripcion : document.getElementById('descripcion').value,
+            vigencia : document.getElementById('vigencia').value
+
+        };
+        $.ajax({
+            type: 'POST',
+            url: '../prestador/guardarPrestador',
+            data:JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log(response);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
+</script>
 </body>
 </html>
+
+
