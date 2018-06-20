@@ -116,9 +116,9 @@ CREATE TABLE `personas` (
 LOCK TABLES `personas` WRITE;
 /*!40000 ALTER TABLE `personas` DISABLE KEYS */;
 
-INSERT INTO `personas` (`tipo_persona`, `id`, `apellido`, `email`, `nombre`, `telefono`)
+INSERT INTO `personas` (`tipo_persona`, `id`, `apellido`, `email`, `nombre`)
 VALUES
-	('USUARIO',1,'peralta','lucas.peralta@gmail.com','lucas',NULL);
+	('USUARIO',1,'peralta','lucas.peralta@gmail.com','lucas');
 
 /*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -203,7 +203,7 @@ LOCK TABLES `usuarios` WRITE;
 
 INSERT INTO `usuarios` (`password`, `id`, `id_estado`, `id_rol`)
 VALUES
-	('',1,1,NULL);
+	('',1,1,1);
 
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
