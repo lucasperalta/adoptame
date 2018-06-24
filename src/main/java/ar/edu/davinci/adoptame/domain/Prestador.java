@@ -6,44 +6,31 @@ import java.util.Date;
 
 @Entity
 @Table(name="prestadores")
+@PrimaryKeyJoinColumn(name = "id")
+@DiscriminatorValue("USUARIO")
+//@NamedQueries({
+//        @NamedQuery(name = "Usuario.buscarUsuarioByEmail", query = "select p from Usuario p where p.email = :email"),
+//        @NamedQuery(name = "Usuario.findAdmin", query = "select p from Usuario p where p.email = :email and p.password=:password and rol=1")
+//})
 
 public class Prestador extends Persona implements Serializable {
 
 
     private static final long serialVersionUID = 7042244211641519912L;
 
-    @Column(name="tipo_servicio")
-	private String tipoServicio;
-
-	@Column(name = "vigencia")
-	private Integer vigencia;
 
     @Column(name="url_pago")
     private String urlPago;
 
-    @Column(name="fechaVinculacion")
+    @Column(name="fecha_vinculacion")
     private Date fechaVinculacion;
+
+    @Column(name="tipo_servicio")
+    private String tipoServicio;
 
 
     public Prestador(){
 
-    }
-
-
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
-    }
-
-    public Integer getVigencia() {
-        return vigencia;
-    }
-
-    public void setVigencia(Integer vigencia) {
-        this.vigencia = vigencia;
     }
 
     public String getUrlPago() {
@@ -60,5 +47,13 @@ public class Prestador extends Persona implements Serializable {
 
     public void setFechaVinculacion(Date fechaVinculacion) {
         this.fechaVinculacion = fechaVinculacion;
+    }
+
+    public String getTipoServicio() {
+        return tipoServicio;
+    }
+
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
     }
 }
