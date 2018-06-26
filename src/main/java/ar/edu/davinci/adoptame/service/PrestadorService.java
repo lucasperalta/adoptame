@@ -12,9 +12,5 @@ public interface PrestadorService {
 
 	public Prestador addPrestador(Prestador prestador);
 
-	public void borrarPrestador(Prestador prestador);
-
-	public Prestador buscarPrestadorByEmail(String email);
-
 
 }

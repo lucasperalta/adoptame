@@ -6,10 +6,6 @@ import java.util.Date;
 
 @Entity
 @Table(name="servicios")
-//@NamedQueries({
-//        @NamedQuery(name = "Usuario.buscarUsuarioByEmail", query = "select p from Usuario p where p.email = :email"),
-//        @NamedQuery(name = "Usuario.findAdmin", query = "select p from Usuario p where p.email = :email and p.password=:password and rol=1")
-//})
 
 public class Servicio implements Serializable {
 
@@ -29,7 +25,7 @@ public class Servicio implements Serializable {
     private String titulo;
 
     @Column(name="tipo_servicio")
-    private String tipo_servicio;
+    private String tipoServicio;
 
     @Column(name="fechaInicio")
     private Date fechaInicio;
@@ -47,7 +43,6 @@ public class Servicio implements Serializable {
     private String descripcion;
 
     public Servicio() {
-
     }
 
     public Prestador getPrestador() {
@@ -74,12 +69,12 @@ public class Servicio implements Serializable {
         this.titulo = titulo;
     }
 
-    public String getTipo_servicio() {
-        return tipo_servicio;
+    public String getTipoServicio() {
+        return tipoServicio;
     }
 
-    public void setTipo_servicio(String tipo_servicio) {
-        this.tipo_servicio = tipo_servicio;
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
     }
 
     public Date getFechaInicio() {

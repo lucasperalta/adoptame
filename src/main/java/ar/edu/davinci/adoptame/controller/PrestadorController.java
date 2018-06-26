@@ -1,6 +1,8 @@
 package ar.edu.davinci.adoptame.controller;
 
+import ar.edu.davinci.adoptame.DTO.PersonaDTO;
 import ar.edu.davinci.adoptame.DTO.PrestadorDTO;
+import ar.edu.davinci.adoptame.domain.Persona;
 import ar.edu.davinci.adoptame.domain.Prestador;
 import ar.edu.davinci.adoptame.domain.Servicio;
 import ar.edu.davinci.adoptame.service.*;
@@ -11,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 @Controller    // This means that this class is a Controller
@@ -24,6 +29,8 @@ public class PrestadorController {
     @Autowired
     private ServicioService servicioService;
 
+    @Autowired
+    private PersonaService personaService;
 
     @Autowired
     private PrestadorService prestadorService;
@@ -32,7 +39,15 @@ public class PrestadorController {
     @GetMapping("/nuevoPrestador")
     public String nuevoPrestador(Model model) {
         model.addAttribute("prestadorDTO", new PrestadorDTO());
+        model.addAttribute("personaDTO", new PersonaDTO());
         return "prestador/admServicios";
+    }
+
+
+    @PostMapping("/buscarEmail")
+    public @ResponseBody String buscarEmail( @RequestBody PersonaDTO personaDTO) {
+     //   Persona persona = personaService.econtrarPersonaPorEmail(personaDTO.getEmail());
+        return "persona.toString()";
     }
 
 
@@ -40,42 +55,54 @@ public class PrestadorController {
     public  @ResponseBody  String  guardarPrestador(@RequestBody PrestadorDTO prestadorDTO  ) {
 
         Prestador prestador= new Prestador();
-        //Prestador servicio= new Servicio();
         prestador.setNombre(prestadorDTO.getNombre());
         prestador.setApellido(prestadorDTO.getApellido());
         prestador.setEmail(prestadorDTO.getEmail());
-        //servicio.setTipoServicio(prestadorDTO.getTipoServicio());
         prestador.setFechaVinculacion(new Date());
-       // prestador.setVigencia(prestadorDTO.getVigencia());
         prestador.setUrlPago(prestadorDTO.getUrlPago());
-        prestador.setUrlPago(prestadorDTO.getDescripcion());
-        prestador.setUrlPago(prestadorDTO.getCosto().toString());
+        prestador.setTipoServicio(prestadorDTO.getTipoServicio());
         prestadorService.addPrestador(prestador);
-		return "msg:prestador dado de alta OK";
+
+
+
+        Servicio servicio= new Servicio();
+        servicio.setPrestador(prestador);
+        servicio.setTitulo(prestadorDTO.getTitulo());
+        servicio.setTipoServicio(prestadorDTO.getTipoServicio());
+        servicio.setFechaInicio(new Date());
+        servicio.setVigencia(prestadorDTO.getVigencia().toString());
+        servicio.setDescripcion(prestadorDTO.getDescripcion());
+        servicio.setCosto(prestadorDTO.getCosto());
+        servicio.setFechaFin(AddFecha(prestadorDTO.getVigencia()));
+        servicioService.addServicio(servicio);
+
+		return "Prestador dado de alta exitosamente";
 	}
 
-    /**
-     * Lista todos los usuarios segun los filtros pasados por parametros
-     * devuelve un json con todos los usuarios, se llama via ajax esta funcion
-     * @return
-     */
+	public Date AddFecha (int dias){
+     Calendar calendar = Calendar.getInstance();
+     calendar.setTime(new Date());
+     calendar.add(Calendar.DAY_OF_YEAR,dias);
+     return calendar.getTime();
+    }
+
     @GetMapping("/todos")
-    public @ResponseBody Iterable<Prestador> listarPrestadores( ) { //TODO hay filtros en la pantalla de busqueda?
-        return prestadorService.listarPrestadores();
+    public @ResponseBody Iterable<PrestadorDTO> listarServicios( ) { //TODO hay filtros en la pantalla de busqueda?
+        List<Servicio> servicios =servicioService.listarServicios();
+        List<PrestadorDTO> prestadoresDTO= new ArrayList<>();
+        for (Servicio serv:servicios) {
+            PrestadorDTO prestadorDTO = new PrestadorDTO();
+            prestadorDTO.setId(serv.getPrestador().getId());
+            prestadorDTO.setNombre(serv.getPrestador().getNombre());
+            prestadorDTO.setApellido(serv.getPrestador().getApellido());
+            prestadorDTO.setEmail(serv.getPrestador().getEmail());
+            prestadorDTO.setFechaVinculacion(serv.getFechaInicio());
+            prestadorDTO.setFechaFin(serv.getFechaFin());
+            prestadorDTO.setTitulo(serv.getTitulo());
+            prestadoresDTO.add(prestadorDTO);
+            }
+        return prestadoresDTO;
     }
 
-    @GetMapping("/borrar")
-    public @ResponseBody String borrarPrestador( @RequestParam String email) {
-
-        Prestador prestador =prestadorService.buscarPrestadorByEmail(email);
-        logger.info("prestador a borrar "+ prestador.toString());
-        if(prestador!=null){
-            prestadorService.borrarPrestador(prestador);
-
-        }else{
-            return "Prestador no encontrado";
-        }
-        return "prestador borrado";
-    }
 
 }
