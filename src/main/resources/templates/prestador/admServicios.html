@@ -17,7 +17,7 @@
 
 <body>
 <header>
-    <div class="wrapper col-xs-12 col-sm-12">
+    <div class="wrapper col-xs-12 col-md-12">
         <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
         <div class="logo">Adopta.Me</div>
         <nav>
@@ -52,37 +52,39 @@
 </header>
 
 	<div class="divisor"></div>
-	
+<div class="wrapper">
+
+    <div id="content">
 <div class="container">
     <div class="row">
 
 <!-- formulario de Ing de servicio-->
-<div class="offset-sm-1 col-sm-11">
+<div class="col-md-11">
     <form action="">
         <h6>Ingresar Nuevo Servicio</h6>
         <div class="card">
             <div class="card-body">
             <h6>Datos de Usuario</h6>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                             <label for="nombre">Nombre:</label>
                             <input type="text" class="form-control" id="nombre"/>
                         </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                             <label for="email">Email:</label>
                             <input type="text" class="form-control" id="email" onblur="buscoEmail()"/>
                      </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                             <label for="apellido">Apellido:</label>
                             <input type="text" class="form-control" id="apellido"/>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                             <label for="urlPago">Link de Pago:</label>
                             <input type="text" class="form-control" id="urlPago"/>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                             <label for="direccion">Direccion:</label>
                             <input type="text" class="form-control" id="direccion"/>
                     </div>
@@ -92,20 +94,20 @@
 
             <h6>Datos de Servicio</h6>
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3">
                         <label for="titulo">Título:</label>
                         <input type="text" class="form-control" id="titulo"/>
                 </div>
 
-                <div class="col-sm-2">
+                <div class="col-md-2">
                         <label for="costo">Costo:</label>
                         <input type="text" class="form-control" id="costo"/>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-md-2">
                         <label for="vigencia">Vigencia:</label>
                         <input type="text" class="form-control" id="vigencia"/>
                 </div>
-            <div class="col-sm-2">
+            <div class="col-md-2">
                 <label for="tipoServicio">Tipo Servicio:</label>
                 <select class="form-control" id="tipoServicio">
                    <!-- <option value="">Seleccionar rubro</option>
@@ -116,7 +118,7 @@
                     <option th:value="Veterinaria" th:text="Veterinaria"></option>
                 </select>
             </div>
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <label for="descripcion">Descripción:</label>
                     <textarea class="form-control" rows="3" cols="50" id="descripcion" ></textarea>
                 </div>
@@ -131,7 +133,7 @@
         <div class="row">
 
             <!-- TABLA DE SERVICIOS INGRESADOS-->
-            <div class="offset-sm-1 col-sm-12">
+            <div class="offset-md-1 col-md-12">
                 <div class="divisor"></div>
                 <h6>Activos</h6>
 
@@ -155,6 +157,8 @@
                 </table>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </div>
     <div class="divisor"></div>
@@ -317,7 +321,7 @@
             success: function(response) {
                 console.log(response)
                 $('#textoBorrarServicio').text(response);//cargamos el texto de respuesta del servidor
-                $('#confirmarBorrarServicioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mismo usuario
+                $('#confirmarBorrarServicioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mimdo usuario
                 cargarTablaServicio();//recargamos la tabla de usuarios actualizada
                 $('#modalBorrarServicio').show();//mostramos popup con respuesta
 

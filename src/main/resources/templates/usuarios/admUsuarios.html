@@ -15,7 +15,7 @@
 
 <body>
 <header>
-    <div class="wrapper col-xs-12 col-sm-12">
+    <div class="wrapper col-xs-12 col-md-12">
         <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
         <div class="logo">Adopta.Me</div>
         <nav>
@@ -48,8 +48,11 @@
     </div>
 </header>
 	<div class="divisor"></div>
-	
-<div class="container">
+
+<div class="wrapper">
+
+<div id="content">
+    <div class="container">
 <div class="row">
 
 
@@ -57,34 +60,35 @@
 <!-- FIN MENU ADMINISTRAR-->
 
 <!--AGREGAR USUARIO-->
-    <div class="offset-sm-1 col-sm-11">
+
+    <div class="col-md-11">
 
              <h6>Crear Usuario</h6>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col-sm-4">
+                            <div class="col-md-4">
                                     <label for="nombre">Nombre:</label>
                                     <input type="text" class="form-control" id="nombre" /> <!--th:field="*{}"-->
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-md-4">
                                 <label for="apellido">Apellido:</label>
                                 <input type="text" class="form-control" id="apellido" /> <!--th:field="*{}"-->
 
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-md-4">
                                 <label for="email">Email:</label>
                                 <input type="text" class="form-control" id="email" /> <!--th:field="*{}"-->
                                 </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-md-4">
                                     <label for="password">Password:</label>
                                     <input type="password" class="form-control" id="password" /> <!--th:field="*{}"-->
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-md-4">
                                     <label for="rol">Rol:</label>
                                      <select class="form-control" id="rol" name="rol">
                                         <option value="">Seleccionar rol</option>
@@ -111,13 +115,13 @@
 <!-- FIN MENU ESTADISTICAS-->
 
 <!-- TABLA DE SERVICIOS INGRESADOS-->
-    <div class="offset-sm-1 col-sm-11">
+    <div class="col-md-11">
         <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
           <div class="row">
-              <div class="col-sm-5">
+              <div class="col-md-5">
                <h6>Ingresados</h6>
                </div>
-               <div class="col-sm-2">
+               <div class="col-md-2">
                     <div class="form-group">
                         <label for="filtrar_combo">Filtrar:</label>
                         <select class="form-control" id="filtrar_combo">
@@ -129,11 +133,11 @@
                         </select>
                     </div>
                </div>
-              <div class="col-sm-3">
+              <div class="col-md-3">
                 <label for="filtro">Ingrese filtro:</label>
                 <input type="text" class="form-control" id="filtro" />
               </div>
-                <div class="col-sm-2">
+                <div class="col-md-2">
                     <button type="submit" class="btn btn-secondary buscar">Buscar</button>
                 </div>
           </div>
@@ -160,6 +164,8 @@
     </div>
     </div>
 <!-- FIN TABLA DE SERVICIOS INGRESADOS-->
+</div>
+</div>
 </div>
 
 
@@ -222,6 +228,7 @@
                 </form>
 
             </div>
+
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary " id="confirmarEditarUsuarioBtn" onclick="confirmaEditarUsuario()">Grabar</button>
@@ -418,7 +425,7 @@
            success: function(response) {
                console.log(response)
                $('#textoBorrarUsuario').text(response);//cargamos el texto de respuesta del servidor
-               $('#confirmarBorrarUsuarioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mismo usuario
+               $('#confirmarBorrarUsuarioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mimdo usuario
                cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
                $('#modalBorrarUsuario').show();//mostramos popup con respuesta
 
