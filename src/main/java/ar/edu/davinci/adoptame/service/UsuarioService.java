@@ -10,7 +10,6 @@ public interface UsuarioService {
 
 	public List<Usuario> listarUsuarios();
 
-
 	public Usuario addUsuario(Usuario usuario);
 
 	public void borrarUsuario(Usuario usuario);
