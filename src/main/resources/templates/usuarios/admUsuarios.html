@@ -23,6 +23,28 @@
             <a th:href="@{/eventos}">Eventos</a>
             <a th:href="@{/login/login}">Admin</a>
         </nav>
+
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
+                <div class="logo">Adopta.Me</div>
+            </div>
+
+            <div class="divisor_bar"></div>
+
+
+            <h3>Administrar</h3>
+                        <a th:href="@{/usuarios/nuevoUsuario}" class="list-group-item list-group-item-action">Usuarios</a>
+                        <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
+                        <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Eventos</a>
+
+            <div class="divisor"></div>
+
+            <h3>Estadisticas</h3>
+                        <a th:href="@{/usuarios/nuevoUsuario}" class="list-group-item list-group-item-action">Usuarios</a>
+                        <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
+                        <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Eventos</a>
+        </nav>
     </div>
 </header>
 	<div class="divisor"></div>
@@ -30,19 +52,12 @@
 <div class="container">
 <div class="row">
 
-<div class="col-sm-3">
-<ul class="list-group">
-  <li class="list-group-item list-group-item-dark disable">Administrar</li>
-  <a th:href="@{/usuarios/nuevoUsuario}" class="list-group-item list-group-item-action active">Usuarios</a>
 
-  <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
-  <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Eventos</a>
-</ul>
-</div>
+
 <!-- FIN MENU ADMINISTRAR-->
 
 <!--AGREGAR USUARIO-->
-    <div class="col-sm-9">
+    <div class="offset-sm-1 col-sm-11">
 
              <h6>Crear Usuario</h6>
                 <div class="card">
@@ -50,32 +65,26 @@
                         <div class="row">
 
                             <div class="col-sm-4">
-                                <div class="form-group">
                                     <label for="nombre">Nombre:</label>
                                     <input type="text" class="form-control" id="nombre" /> <!--th:field="*{}"-->
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="apellido">Apellido:</label>
+                                <input type="text" class="form-control" id="apellido" /> <!--th:field="*{}"-->
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email:</label>
-                                    <input type="text" class="form-control" id="email" /> <!--th:field="*{}"-->
-                                </div>
                             </div>
 
                             <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="apellido">Apellido:</label>
-                                    <input type="text" class="form-control" id="apellido" /> <!--th:field="*{}"-->
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control" id="email" /> <!--th:field="*{}"-->
                                 </div>
-                                <div class="form-group">
+
+                            <div class="col-sm-4">
                                     <label for="password">Password:</label>
-                                    <input type="text" class="form-control" id="password" /> <!--th:field="*{}"-->
-                                </div>
+                                    <input type="password" class="form-control" id="password" /> <!--th:field="*{}"-->
                             </div>
 
                             <div class="col-sm-4">
-
-
-                                <div class="form-group">
                                     <label for="rol">Rol:</label>
                                      <select class="form-control" id="rol" name="rol">
                                         <option value="">Seleccionar rol</option>
@@ -83,16 +92,12 @@
                                                 th:value="${rol.id}"
                                                 th:text="${rol.nombreRol}"></option>
                                     </select>
-
-
-                                </div>
-                                 <button type="button"  id="crearUsuario" class="btn btn-primary float-right">Crear</button>
                             </div>
                         </div>
+                        <button type="button"  id="crearUsuario" class="btn btn-primary float-right">Crear</button>
 
                     </div>
                 </div>
-
     </div>
 
 </div>
@@ -103,19 +108,10 @@
 	<div class="divisor"></div>
 
     <div class="row">
-        <div class="col-sm-3">
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-dark disable">Estaditicas</li>
-              <a th:href="@{/nuevoUsuario}" class="list-group-item list-group-item-action">Usuarios</a>
-
-              <a th:href="@{/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
-              <a th:hhref="@{/nuevoPrestador}" class="list-group-item list-group-item-action">Eventos</a>
-            </ul>
-        </div>
 <!-- FIN MENU ESTADISTICAS-->
 
 <!-- TABLA DE SERVICIOS INGRESADOS-->
-    <div class="col-sm-9">
+    <div class="offset-sm-1 col-sm-11">
         <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
           <div class="row">
               <div class="col-sm-5">
@@ -167,7 +163,7 @@
 </div>
 
 
-<div class="modal" tabindex="-1" role="dialog" id="modalEditarUsuario">
+<div class="modal editar" tabindex="-1" role="dialog" id="modalEditarUsuario">
 
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -179,33 +175,38 @@
             </div>
             <div class="modal-body">
 
-                <form id="formEditarUsuario" role="form">
+                    <form id="formEditarUsuario" role="form">
                     <input type="hidden" class="form-control" id="idUsuarioEditar" />
-                    <div class="form-group">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreUsuarioEditar" />
+                     <div class="container-fluid">
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <label for="nombre">Nombre:</label>
+                                 <input type="text" class="form-control" id="nombreUsuarioEditar" />
+                             </div>
+                             <div class="col-md-6">
+                                 <label for="nombre">Apellido:</label>
+                                 <input type="text" class="form-control" id="apellidoUsuarioEditar" />
+                             </div>
+                         </div>
 
-                    </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <label for="nombre">Email:</label>
+                                 <input type="text" class="form-control" id="emailUsuarioEditar" />
+                             </div>
+                             <div class="col-md-6">
+                                 <label for="rol">Estado:</label>
+                                 <select class="form-control" id="estadoUsuarioEditar" name="rol">
+                                     <option value="">Seleccionar Estado</option>
+                                     <option th:each="estado : ${estados}"
+                                             th:value="${estado.id}"
+                                             th:text="${estado.estado}"></option>
+                                 </select>
+                             </div>
+                         </div>
 
-                    <div class="form-group">
-                        <label for="nombre">Apellido:</label>
-                        <input type="text" class="form-control" id="apellidoUsuarioEditar" />
-
-                    </div>
-                    <div class="form-group">
-                        <label for="nombre">Email:</label>
-                        <input type="text" class="form-control" id="emailUsuarioEditar" />
-
-                    </div>
-                    <div class="form-group">
-                        <label for="rol">Estado:</label>
-                        <select class="form-control" id="estadoUsuarioEditar" name="rol">
-                            <option value="">Seleccionar Estado</option>
-                            <option th:each="estado : ${estados}"
-                                    th:value="${estado.id}"
-                                    th:text="${estado.estado}"></option>
-                        </select>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
                     <div class="form-group">
                         <label for="rol">Rol:</label>
                         <select class="form-control" id="rolUsuarioEditar" name="rol">
@@ -215,7 +216,9 @@
                                     th:text="${rol.nombreRol}"></option>
                         </select>
                     </div>
-
+                            </div>
+                        </div>
+                     </div>
                 </form>
 
             </div>
@@ -230,7 +233,7 @@
 </div>
 
 
-<div class="modal" tabindex="-1" role="dialog" id="modalBorrarUsuario">
+<div class="modal borrar" tabindex="-1" role="dialog" id="modalBorrarUsuario">
 
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -257,7 +260,7 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="modalAltaUsuario">
+<div class="modal alta" tabindex="-1" role="dialog" id="modalAltaUsuario">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -276,7 +279,7 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="modalRespuestaEditarUsuario">
+<div class="modal alta" tabindex="-1" role="dialog" id="modalRespuestaEditarUsuario">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -351,10 +354,10 @@
 
 
             '<a class="like"  onclick="editarUsuario( \''+row.id+'\',  \''+row.nombre+'\',   \''+row.apellido+'\',   \''+row.email+'\' ,   \''+row.estado+'\' ,\''+row.rol+'\');" title="Editar usuario">',
-            '<img class="options" th:src="@{/img/check.png}" alt="check"/>',
+            '<img class="options" th:src="@{/img/edit.png}" alt="check"/>',
             '</a> ',
             '<a class="danger remove" onclick="borrarUsuario(\''+row.email+ '\')" title="Borrar Usuario">',
-            '<img class="options" th:src="@{/img/cancel.png}" alt="cancel"/>',
+            '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
             '</a>'
         ].join('');
     }

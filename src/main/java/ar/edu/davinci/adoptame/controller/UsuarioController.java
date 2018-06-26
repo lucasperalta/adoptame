@@ -47,7 +47,7 @@ public class UsuarioController {
     @GetMapping("/nuevoUsuario")
     public String nuevoUsuario(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "usuarios/alta";
+        return "usuarios/admUsuarios";
     }
 
 
