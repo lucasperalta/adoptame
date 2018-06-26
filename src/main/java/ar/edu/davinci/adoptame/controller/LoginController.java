@@ -15,10 +15,7 @@ import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,5 +82,26 @@ public class LoginController {
 
 		return "usuarios/admUsuarios";
 	}
+
+    @GetMapping("/ingresarMobile")
+    public @ResponseBody UsuarioDTO findUser( @RequestParam(value="usuario")String usuario,@RequestParam(value="password")String password  ) {
+        Usuario usuarioExiste=null;
+
+        try {
+            usuarioExiste = loginService.findAdmin(usuario,password);
+        } catch (NotFoundException e) {
+
+            return new UsuarioDTO();
+        }
+
+       UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setEmail(usuarioExiste.getEmail());
+        usuarioDTO.setPassword(usuarioExiste.getPassword());
+        usuarioDTO.setNombre(usuarioExiste.getNombre());
+        usuarioDTO.setApellido(usuarioExiste.getApellido());
+        usuarioDTO.setEstado(usuarioExiste.getEstado().getEstado());
+
+        return usuarioDTO;
+    }
 
 }
