@@ -5,7 +5,10 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="mascotas")
+@NamedQueries({
+        @NamedQuery(name = "Mascota.findAllByEstado", query = "select p from Mascota p where p.estado = :estado"),
 
+})
 public class Mascota implements Serializable {
 
 

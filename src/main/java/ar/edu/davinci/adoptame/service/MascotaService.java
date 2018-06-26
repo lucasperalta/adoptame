@@ -2,6 +2,7 @@ package ar.edu.davinci.adoptame.service;
 
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -10,10 +11,10 @@ public interface MascotaService {
 	public List<Mascota> listarMascotas();
 
 
-	public Mascota addMascotas(Mascota usuario);
+	public Mascota addMascotas(Mascota mascota);
 
-	public void borrarUsuario(Mascota usuario);
 
+	public List<Mascota> findAllByEstado(String estado);
 
 
 }
