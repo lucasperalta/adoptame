@@ -8,10 +8,6 @@ import java.util.Date;
 @Table(name="prestadores")
 @PrimaryKeyJoinColumn(name = "id")
 @DiscriminatorValue("USUARIO")
-//@NamedQueries({
-//        @NamedQuery(name = "Usuario.buscarUsuarioByEmail", query = "select p from Usuario p where p.email = :email"),
-//        @NamedQuery(name = "Usuario.findAdmin", query = "select p from Usuario p where p.email = :email and p.password=:password and rol=1")
-//})
 
 public class Prestador extends Persona implements Serializable {
 
