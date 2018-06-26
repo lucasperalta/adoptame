@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface ServcioRepository extends JpaRepository<Servicio, Integer> {
 
-    public Servicio findEstadoById(@Param("id") Integer integer) ;
+  //  public Servicio findEstadoById(@Param("id") Integer integer) ;
 
 
 }
