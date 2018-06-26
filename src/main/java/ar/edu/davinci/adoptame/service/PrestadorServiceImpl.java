@@ -28,13 +28,4 @@ public class PrestadorServiceImpl implements PrestadorService{
 		return prestadorRepository.save(prestador);
 	}
 
-	@Override
-	public void borrarPrestador(Prestador prestador) {
-		prestadorRepository.delete(prestador);
-	}
-
-	@Override
-	public Prestador buscarPrestadorByEmail(String email) {
-		return null;
-	}
 }
