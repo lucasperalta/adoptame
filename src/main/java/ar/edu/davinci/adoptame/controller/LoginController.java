@@ -88,19 +88,21 @@ public class LoginController {
         Usuario usuarioExiste=null;
 
         try {
-            usuarioExiste = loginService.findAdmin(usuario,password);
+            usuarioExiste = loginService.buscarUsuarioByEmail(usuario);
         } catch (NotFoundException e) {
 
             return new UsuarioDTO();
         }
 
-       UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setEmail(usuarioExiste.getEmail());
-        usuarioDTO.setPassword(usuarioExiste.getPassword());
-        usuarioDTO.setNombre(usuarioExiste.getNombre());
-        usuarioDTO.setApellido(usuarioExiste.getApellido());
-        usuarioDTO.setEstado(usuarioExiste.getEstado().getEstado());
 
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        if(usuarioExiste.getPassword().equals(password)){
+            usuarioDTO.setEmail(usuarioExiste.getEmail());
+            usuarioDTO.setPassword(usuarioExiste.getPassword());
+            usuarioDTO.setNombre(usuarioExiste.getNombre());
+            usuarioDTO.setApellido(usuarioExiste.getApellido());
+            usuarioDTO.setEstado(usuarioExiste.getEstado().getEstado());
+        }
         return usuarioDTO;
     }
 
