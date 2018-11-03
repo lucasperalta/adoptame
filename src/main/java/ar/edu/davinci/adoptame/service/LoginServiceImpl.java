@@ -32,6 +32,19 @@ public class LoginServiceImpl implements LoginService{
 		}
 		return usuarioEncontrado;
 	}
+
+
+	@Override
+	@Transactional
+	public Usuario buscarUsuarioByEmail(String email) throws NotFoundException {
+		Usuario usuarioEncontrado = null;
+
+		usuarioEncontrado = loginRepository.buscarUsuarioByEmail(email);
+		if (usuarioEncontrado == null) {
+			throw new NotFoundException();
+		}
+		return usuarioEncontrado;
 	}
+}
 
 

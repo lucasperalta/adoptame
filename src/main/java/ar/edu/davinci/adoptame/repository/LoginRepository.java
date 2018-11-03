@@ -12,4 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface LoginRepository extends JpaRepository<Usuario, Long> {
 
     public Usuario findAdmin(@Param("email") String email,@Param("password") String password);
+    public Usuario buscarUsuarioByEmail(@Param("email") String email);
+
+
 }
