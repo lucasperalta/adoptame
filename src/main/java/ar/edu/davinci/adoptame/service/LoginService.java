@@ -9,6 +9,7 @@ public interface LoginService {
 
 	public Usuario findAdmin(String email,String password) throws NotFoundException;
 
+	public Usuario buscarUsuarioByEmail(String email) throws NotFoundException ;
 
 
 }
