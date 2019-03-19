@@ -37,7 +37,7 @@ public class MascotaController {
      */
     @GetMapping("/mascotasEnAdopcion")
     public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion( ) {
-       List<Mascota> mascotas=mascotaService.findAllByEstadoOrderByIdDesc("DISPONIBLE");
+       List<Mascota> mascotas=mascotaService.findTop3ByEstadoRandom("DISPONIBLE");
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
             MascotaDTO mascotaDTO= new MascotaDTO(mascota);
