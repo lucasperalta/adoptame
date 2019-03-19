@@ -14,7 +14,7 @@ public interface MascotaService {
 	public Mascota addMascotas(Mascota mascota);
 
 
-	public List<Mascota> findAllByEstado(String estado);
+	public List<Mascota> findAllByEstadoOrderByIdDesc(String estado);
 
 
 }

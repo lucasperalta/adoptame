@@ -13,6 +13,6 @@ import java.util.List;
 
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
-    public List<Mascota> findAllByEstado(@Param("estado")String estado);
+    public List<Mascota> findAllByEstadoOrderByIdDesc(@Param("estado")String estado);
 
 }

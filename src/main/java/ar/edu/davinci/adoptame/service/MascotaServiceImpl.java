@@ -29,8 +29,8 @@ public class MascotaServiceImpl implements MascotaService{
 	}
 
 	@Override
-	public List<Mascota> findAllByEstado(String estado) {
-		return mascotaRepository.findAllByEstado(estado);
+	public List<Mascota> findAllByEstadoOrderByIdDesc(String estado) {
+		return mascotaRepository.findAllByEstadoOrderByIdDesc(estado);
 	}
 
 }
