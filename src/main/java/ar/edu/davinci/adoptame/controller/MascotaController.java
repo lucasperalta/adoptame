@@ -31,31 +31,16 @@ public class MascotaController {
     private MascotaService mascotaService;
 
 
-
-
-
     /**
-     * Lista todos los usuarios segun los filtros pasados por parametros
-     * devuelve un json con todos los usuarios, se llama via ajax esta funcion
+     * Lista el top 5 de mascotas
      * @return
      */
-    @GetMapping("/todos")
-    public @ResponseBody Iterable<MascotaDTO> listarUsuarios( ) { //TODO hay filtros en la pantalla de busqueda?
+    @GetMapping("/mascotasEnAdopcion")
+    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion( ) {
        List<Mascota> mascotas=mascotaService.findAllByEstado("DISPONIBLE");
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
-            MascotaDTO mascotaDTO= new MascotaDTO();
-            mascotaDTO.setId(mascota.getId());
-            mascotaDTO.setDescripcion(mascota.getDescripcion());
-            mascotaDTO.setEdad(mascota.getEdad());
-            mascotaDTO.setEstado(mascota.getEstado());
-            mascotaDTO.setFoto_url(mascota.getFoto_url());
-            mascotaDTO.setNombre(mascota.getNombre());
-            mascotaDTO.setRaza(mascota.getRaza());
-            mascotaDTO.setRescatista(mascota.getRescatista().getEmail());
-            mascotaDTO.setSexo(mascota.getSexo());
-            mascotaDTO.setTamanio(mascota.getTamanio());
-            mascotaDTO.setTipoMascota(mascota.getTipoMascota());
+            MascotaDTO mascotaDTO= new MascotaDTO(mascota);
             mascotaDTOS.add(mascotaDTO);
         }
         return mascotaDTOS;
