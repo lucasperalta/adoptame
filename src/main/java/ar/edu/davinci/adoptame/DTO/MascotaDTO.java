@@ -1,9 +1,26 @@
 package ar.edu.davinci.adoptame.DTO;
 
 
-
+import ar.edu.davinci.adoptame.domain.Mascota;
 
 public class MascotaDTO {
+
+    public MascotaDTO() {
+    }
+
+    public MascotaDTO(Mascota mascota) {
+        this.id = mascota.getId();
+        this.nombre = mascota.getNombre();
+        this.sexo = mascota.getSexo();
+        this.tipoMascota = mascota.getTipoMascota();
+        this.raza = mascota.getRaza();
+        this.edad = mascota.getEdad();
+        this.foto_url = mascota.getFoto_url();
+        this.estado = mascota.getEstado();
+        this.descripcion = mascota.getDescripcion();
+        this.tamanio = mascota.getTamanio();
+        this.rescatista = mascota.getRescatista().getNombre();
+    }
 
 
     private Integer id;
@@ -11,6 +28,8 @@ public class MascotaDTO {
     private String nombre;
 
     private String sexo;
+
+
 
     private String tipoMascota;
 
