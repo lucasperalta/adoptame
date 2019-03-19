@@ -4,6 +4,8 @@ import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.repository.MascotaRepository;
 import ar.edu.davinci.adoptame.repository.UsuarioRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,9 +30,13 @@ public class MascotaServiceImpl implements MascotaService{
 		return mascotaRepository.save(mascota);
 	}
 
-	@Override
+
 	public List<Mascota> findAllByEstadoOrderByIdDesc(String estado) {
 		return mascotaRepository.findAllByEstadoOrderByIdDesc(estado);
 	}
+	@Override
+	public List<Mascota> findTop3ByEstadoRandom(String estado) {
 
+		return mascotaRepository.findTop3ByEstadoOrderByRandom(estado);
+	}
 }
