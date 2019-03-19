@@ -15,6 +15,7 @@ public interface MascotaService {
 
 
 	public List<Mascota> findAllByEstadoOrderByIdDesc(String estado);
+	public List<Mascota> findTop3ByEstadoRandom(String estado) ;
 
 
 }
