@@ -165,9 +165,9 @@ h2 {
 	padding:4em;
 }
 
-.edad{
-	font-size: 0.6em;
-	text-align:left;
+.tituloChico{
+	font-size: 0.9em;
+
 }
 
 .descripcion{
@@ -448,7 +448,10 @@ a.article, a.article:hover {
 	color: #fff !important;
 }
 
-
+.scroll-box {
+	height:447px;
+	overflow-y: scroll;
+}
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -485,4 +488,6 @@ a.article, a.article:hover {
 	#sidebarCollapse span {
 		display: none;
 	}
+
+
 }

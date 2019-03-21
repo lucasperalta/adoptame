@@ -33,16 +33,8 @@ public String index(Model model){
 
     }
 
-    @GetMapping("/eventos")
-    public String listarEventos(Model model) {
-        model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "public/eventos";
-    }
 
-    @GetMapping("/eventoDetalle")
-    public String detalleEventos(Model model) {
-        model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "public/evento_det";
-    }
+
+
 
 }
