@@ -53,47 +53,27 @@
 
 				<!--Lista de Mascotas por Adoptar-->
 				<div class="col-sm-5">
-					<h2 class="titulo" >Mascotas En Adopción</h2>
-					
+
 					<div class="card" id="mascotaDiv">
+                        <h2 class="card-header " >Mascotas En Adopción</h2>
 
 					</div>
 				</div>
 				<!--FIN Lista de Mascotas por Adoptar-->
 
-            <!--Descarga-->
-				<div class="col-sm-4">
-					<div class="card descarga">
-						<div class="card-body">
-							<div class="col-sm-3">
-							<img class="img_desc float-left" th:src="@{/img/iconPet.png}" alt="Logo"/>
-							</div>
-							<h2 class="tit_item">Descargate la App</h2>
-							<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur adipisicing elit.</p>
-						</div>
-					</div>
-				<!-- FIN Descarga-->	
+
                     <!--Eventos Proximos-->
-						<div class="card">
-						<div class="card-body">
-							<img class="logo_masc_adop float-right"  th:src="@{/img/iconPet.png}" alt="Logo"/>
-							<h2>Eventos Proximos</h2>
+                <div class="card scroll-box ">
+						<div class="card-header ">
+							<h2>Eventos Próximos</h2>
 						</div>
 						
-						<div class="col-sm-12">
-							<div class="card off-border">
-								<div class="card-body">
-									<div class="col-sm-3">
-									<img class="img_desc float-left"  th:src="@{/img/iconPet.png}" alt="Logo"/>
-								  </div>
-								  <div class="offset-sm-3 col-sm-9">
-									<h2 class="tit_item">Titulo  <span class="edad">16 abril</span></h2>
-									<h4 class="descripcion">Calle Falsa, 123 Springfield</h4>
-								</div>
-							</div>
+						<div class="col-sm-12  ">
+							<div class="card-body off-border " id="eventosDiv" >
+
 						</div>
 					</div>
-				</div>
+
 				    <!-- FIN Eventos Proximos-->
 			</div>
 		</div>
@@ -122,7 +102,42 @@
 <script>
 $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
 cargarMascotasEnAdopcion();
+cargarProximosEventos();
 });
+
+function cargarProximosEventos() {
+    $.ajax({
+        type: 'GET',
+        url: '../eventos/listarProximos',
+        contentType: 'application/json; charset=utf-8',
+        cache:'false',
+        success: function(eventos) {
+            console.log(eventos);
+
+            var eventosDiv=  $('#eventosDiv');//Div que contiene el listado de eventos
+            $.each( eventos, function( index, evento ) {
+
+               //creo un elemento mascota
+
+
+                var eventoElem= $('<div class="card-body " > '
+                    +'<h3 class="tituloChico">'+evento.dias+' '+evento.horarios+' </h3>'
+                    +'<h3 class="tituloChico">'+evento.barrio+' '+evento.comuna+'<br/> <span >'+evento.lugar+'</span></h3>'
+                    +'<h4 class="descripcion">'+evento.direccion+'</h4>'
+                    +'<h4 class="descripcion">'+evento.consultas+'</h4></div>'
+                );
+
+                eventosDiv.append(eventoElem);//lo agrego al div del listado de eventos
+            });
+
+
+ },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
 
 function cargarMascotasEnAdopcion() {
     $.ajax({
@@ -136,7 +151,7 @@ function cargarMascotasEnAdopcion() {
             var mascotaDiv=  $('#mascotaDiv');//Div que contiene el listado de mascotas
             $.each( mascotas, function( index, mascota ) {
 
-               //creo un elemento mascota
+                //creo un elemento mascota
 
 
                 var mascotaElem= $('<div class="card-body"> <div class="col-sm-3"> <img src="'+mascota.foto_url+'" class=" rounded-circle img_list float-left "/>   </div>'
@@ -149,12 +164,13 @@ function cargarMascotasEnAdopcion() {
             });
 
 
- },
+        },
         error: function(error) {
             console.log(error);
         }
     });
 }
+
 
 </script>
 </body>
