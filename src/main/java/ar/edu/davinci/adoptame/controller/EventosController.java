@@ -3,8 +3,8 @@ package ar.edu.davinci.adoptame.controller;
 import ar.edu.davinci.adoptame.DTO.EventosDTO;
 import ar.edu.davinci.adoptame.DTO.MascotaDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
-import ar.edu.davinci.adoptame.domain.Eventos;
-import ar.edu.davinci.adoptame.domain.Mascota;
+import ar.edu.davinci.adoptame.constantes.Constantes;
+import ar.edu.davinci.adoptame.domain.*;
 import ar.edu.davinci.adoptame.service.EventosService;
 import ar.edu.davinci.adoptame.service.MascotaService;
 import org.slf4j.Logger;
@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import sun.misc.Cleaner;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -55,7 +55,17 @@ public class EventosController {
         logger.info("eventos"+eventosDTOS);
         return eventosDTOS;
     }
+    @PostMapping("/guardarEvento")
+    public  @ResponseBody  String guardarEvento(@RequestBody @Valid EventosDTO eventosDTO , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("BINDING RESULT ERROR");
+            return "errores";
+        }
 
- 
+        Eventos evento = new Eventos(eventosDTO);
+        eventosService.addEvento(evento);
+        return "Evento dado de alta exitosamente";
+    }
+
 
 }

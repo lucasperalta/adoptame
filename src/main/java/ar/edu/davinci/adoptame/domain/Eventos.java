@@ -1,7 +1,14 @@
 package ar.edu.davinci.adoptame.domain;
 
+import ar.edu.davinci.adoptame.DTO.EventosDTO;
+import ar.edu.davinci.adoptame.controller.EventosController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -10,21 +17,34 @@ public class Eventos implements Serializable {
 
 
     private static final long serialVersionUID = 2851308311173264136L;
+
+    @Transient
+    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    @Transient
+    private static final Logger logger = LoggerFactory.getLogger(EventosController.class);
+
+    public Eventos(EventosDTO eventosDTO) {
+        this.direccion = eventosDTO.getDireccion();
+        try {
+            this.dias = format.parse(eventosDTO.getDias()) ;
+        } catch (ParseException e) {
+            logger.info("hubo un error al parsear la fecha se asigna la fecha actual");
+            this.dias= new Date();
+        }
+        this.horarios = eventosDTO.getHorarios();
+        this.lugar = eventosDTO.getLugar();
+        this.barrio = eventosDTO.getBarrio();
+        this.consultas = eventosDTO.getConsultas();
+    }
+
+    public Eventos() {
+
+    }
+
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-
-	@Column(name = "lat")
-	private double latitud;
-
-    @Column(name = "long")
-    private double longitud;
-
-
-
-    @Column(name = "tipo_atencion")
-    private String tipoAtencion;
 
     @Column(name = "direccion")
     private String direccion;
@@ -43,8 +63,7 @@ public class Eventos implements Serializable {
     @Column(name = "barrio")
     private String barrio;
 
-    @Column(name = "comuna")
-    private String comuna;
+
 
     @Column(name = "consultas")
     private String consultas;
@@ -58,21 +77,10 @@ public class Eventos implements Serializable {
         this.id = id;
     }
 
-    public double getLatitud() {
-        return latitud;
-    }
 
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
 
-    public String getTipoAtencion() {
-        return tipoAtencion;
-    }
 
-    public void setTipoAtencion(String tipoAtencion) {
-        this.tipoAtencion = tipoAtencion;
-    }
+
 
     public String getDireccion() {
         return direccion;
@@ -114,13 +122,6 @@ public class Eventos implements Serializable {
         this.barrio = barrio;
     }
 
-    public String getComuna() {
-        return comuna;
-    }
-
-    public void setComuna(String comuna) {
-        this.comuna = comuna;
-    }
 
     public String getConsultas() {
         return consultas;
@@ -132,13 +133,5 @@ public class Eventos implements Serializable {
 
 
 
-
-    public double getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
-    }
 
 }

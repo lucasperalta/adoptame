@@ -1,337 +1,185 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-table.min.css}"/>
-    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
-    <script type="text/javascript" th:src="@{/js/bootstrap-table.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
 
 
+<head th:include="admin/admHeader :: head"></head>
 
-</head>
 
 <body>
-<header>
-    <div class="wrapper col-xs-12 col-md-12">
-        <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
-        <div class="logo">Adopta.Me</div>
-        <nav>
-            <a th:href="@{/}">Inicio</a>
-            <a th:href="@{/eventos}">Eventos</a>
-            <a th:href="@{/login/login}">Admin</a>
-        </nav>
 
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
-                <div class="logo">Adopta.Me</div>
-            </div>
+<header th:replace="admin/admHeader :: header"></header>
 
-            <div class="divisor_bar"></div>
+    <div class="divisor"></div>
+        <div class="wrapper">
 
-
-            <h3>Administrar</h3>
-            <a th:href="@{/usuarios/nuevoUsuario}" class="list-group-item list-group-item-action">Usuarios</a>
-            <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
-            <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Eventos</a>
-
-            <div class="divisor"></div>
-
-            <h3>Estadisticas</h3>
-            <a th:href="@{/usuarios/nuevoUsuario}" class="list-group-item list-group-item-action">Usuarios</a>
-            <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
-            <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Eventos</a>
-        </nav>
-
-    </div>
-</header>
-
-	<div class="divisor"></div>
-<div class="wrapper">
-
-    <div id="content">
-<div class="container">
-    <div class="row">
-
-<!-- formulario de Ing de servicio-->
-<div class="col-md-11">
-    <form action="">
-        <h6>Ingresar Nuevo Servicio</h6>
-        <div class="card">
-            <div class="card-body">
-            <h6>Datos de Usuario</h6>
+        <div id="content">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre"/>
+
+                    <!-- formulario de Ing de servicio-->
+                    <div class="col-md-11">
+                        <form action="">
+                            <h6>Ingresar Nuevo Servicio</h6>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6>Datos de Usuario</h6>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="nombre">Nombre:</label>
+                                            <input type="text" class="form-control" id="nombre"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="email">Email:</label>
+                                            <input type="text" class="form-control" id="email" onblur="buscoEmail()"/>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="apellido">Apellido:</label>
+                                            <input type="text" class="form-control" id="apellido"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="urlPago">Link de Pago:</label>
+                                            <input type="text" class="form-control" id="urlPago"/>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="direccion">Direccion:</label>
+                                            <input type="text" class="form-control" id="direccion"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="divisor"></div>
+
+                                    <h6>Datos de Servicio</h6>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="titulo">Título:</label>
+                                            <input type="text" class="form-control" id="titulo"/>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label for="costo">Costo:</label>
+                                            <input type="text" class="form-control" id="costo"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="vigencia">Vigencia:</label>
+                                            <input type="text" class="form-control" id="vigencia"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="tipoServicio">Tipo Servicio:</label>
+                                            <select class="form-control" id="tipoServicio">
+                                                <!-- <option value="">Seleccionar rubro</option>
+                                                 <option th:each="rub : ${rubro}"
+                                                         th:value="${rub.id}"
+                                                         th:text="${rub.nombreRol}"></option>-->
+                                                <option th:value="Guarderia" th:text="Guarderia"></option>
+                                                <option th:value="Veterinaria" th:text="Veterinaria"></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="descripcion">Descripción:</label>
+                                            <textarea class="form-control" rows="3" cols="50" id="descripcion" ></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="button"  id="crearPrestador" class="btn btn-secondary float-right">Agregar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- FIN formulario de Ing de servicio-->
+                    <div class="divisor"></div>
+                    <div class="row">
+
+                        <!-- TABLA DE SERVICIOS INGRESADOS-->
+                        <div class="offset-md-1 col-md-12">
+                            <div class="divisor"></div>
+                            <h6>Activos</h6>
+
+                            <table  id="tablaServicios"
+                                    data-toggle="table"
+                                    data-toolbar="#toolbar"
+                            >
+                                <thead>
+                                <tr>
+                                    <th data-field="id">Id Persona</th>
+                                    <th data-field="nombre">Nombre</th>
+                                    <th data-field="apellido">Apellido</th>
+                                    <th data-field="email">Email</th>
+                                    <th data-field="titulo">Titulo</th>
+                                    <th data-field="fechaVinculacion" data-formatter="dateFormat">Fecha Desde</th>
+                                    <th data-field="fechaFin" data-formatter="dateFormat">Fecha Hasta</th>
+                                    <th data-formatter="TableActions">Action</th>
+                                </tr>
+                                </thead>
+
+                            </table>
                         </div>
-                    <div class="col-md-4">
-                            <label for="email">Email:</label>
-                            <input type="text" class="form-control" id="email" onblur="buscoEmail()"/>
-                     </div>
-
-                    <div class="col-md-4">
-                            <label for="apellido">Apellido:</label>
-                            <input type="text" class="form-control" id="apellido"/>
-                    </div>
-                    <div class="col-md-4">
-                            <label for="urlPago">Link de Pago:</label>
-                            <input type="text" class="form-control" id="urlPago"/>
-                    </div>
-
-                    <div class="col-md-4">
-                            <label for="direccion">Direccion:</label>
-                            <input type="text" class="form-control" id="direccion"/>
                     </div>
                 </div>
-
-                <div class="divisor"></div>
-
-            <h6>Datos de Servicio</h6>
-            <div class="row">
-                <div class="col-md-3">
-                        <label for="titulo">Título:</label>
-                        <input type="text" class="form-control" id="titulo"/>
-                </div>
-
-                <div class="col-md-2">
-                        <label for="costo">Costo:</label>
-                        <input type="text" class="form-control" id="costo"/>
-                </div>
-                <div class="col-md-2">
-                        <label for="vigencia">Vigencia:</label>
-                        <input type="text" class="form-control" id="vigencia"/>
-                </div>
-            <div class="col-md-2">
-                <label for="tipoServicio">Tipo Servicio:</label>
-                <select class="form-control" id="tipoServicio">
-                   <!-- <option value="">Seleccionar rubro</option>
-                    <option th:each="rub : ${rubro}"
-                            th:value="${rub.id}"
-                            th:text="${rub.nombreRol}"></option>-->
-                    <option th:value="Guarderia" th:text="Guarderia"></option>
-                    <option th:value="Veterinaria" th:text="Veterinaria"></option>
-                </select>
-            </div>
-                <div class="col-md-6">
-                    <label for="descripcion">Descripción:</label>
-                    <textarea class="form-control" rows="3" cols="50" id="descripcion" ></textarea>
-                </div>
-            </div>
-                <button type="button"  id="crearPrestador" class="btn btn-secondary float-right">Agregar</button>
-            </div>
-        </div>
-    </form>
-</div>
-    <!-- FIN formulario de Ing de servicio-->
-        <div class="divisor"></div>
-        <div class="row">
-
-            <!-- TABLA DE SERVICIOS INGRESADOS-->
-            <div class="offset-md-1 col-md-12">
-                <div class="divisor"></div>
-                <h6>Activos</h6>
-
-                <table  id="tablaServicios"
-                        data-toggle="table"
-                        data-toolbar="#toolbar"
-                >
-                    <thead>
-                    <tr>
-                        <th data-field="id">Id Persona</th>
-                        <th data-field="nombre">Nombre</th>
-                        <th data-field="apellido">Apellido</th>
-                        <th data-field="email">Email</th>
-                        <th data-field="titulo">Titulo</th>
-                        <th data-field="fechaVinculacion" data-formatter="dateFormat">Fecha Desde</th>
-                        <th data-field="fechaFin" data-formatter="dateFormat">Fecha Hasta</th>
-                        <th data-formatter="TableActions">Action</th>
-                    </tr>
-                    </thead>
-
-                </table>
             </div>
         </div>
     </div>
-    </div>
-    </div>
-</div>
     <div class="divisor"></div>
 
 
-<div class="modal alta" tabindex="-1" role="dialog" id="modalAltaServicio">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Alta de Servicio</h5>
-                <button type="button" class="close" onclick="cerrarModal('modalAltaServicio')"  aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="textoAltaServicio">.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalAltaServicio')" >Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal borrar" tabindex="-1" role="dialog" id="modalBorrarServicio">
-
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Eliminar Servicio</h5>
-                <button type="button" class="close" onclick="cerrarModal('modalBorrarServicio')" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="textoBorrarUsuario">Seguro que desea borrar este Servicio?</p>
-                <form id="formBorrarServicio" role="form">
-                    <input type="hidden" class="form-control" id="emailServicioBorrar" />
-                </form>
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary " id="confirmarBorrarServicioBtn" onclick="confirmaBorrarServicio()">Borrar</button>
-
-                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalBorrarServicio')">Cerrar</button>
+    <div class="modal alta" tabindex="-1" role="dialog" id="modalAltaServicio">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alta de Servicio</h5>
+                    <button type="button" class="close" onclick="cerrarModal('modalAltaServicio')"  aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="textoAltaServicio">.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalAltaServicio')" >Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="modal borrar" tabindex="-1" role="dialog" id="modalBorrarServicio">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminar Servicio</h5>
+                    <button type="button" class="close" onclick="cerrarModal('modalBorrarServicio')" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="textoBorrarUsuario">Seguro que desea borrar este Servicio?</p>
+                    <form id="formBorrarServicio" role="form">
+                        <input type="hidden" class="form-control" id="emailServicioBorrar" />
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary " id="confirmarBorrarServicioBtn" onclick="confirmaBorrarServicio()">Borrar</button>
+
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalBorrarServicio')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" th:src="@{/js/admServicios.js}"></script>
 <script>
 
+function TableActions (value, row, index) {
+return [
 
-    $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
-        cargarTablaServicio();
-    });
+'<a class="danger remove" onclick="borrarServicio(\''+row.email+ '\')" title="Borrar Usuario">',
+    '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
+    '</a>'
+].join('');
+}
 
-    function cargarTablaServicio() {
-        $.ajax({
-            type: 'GET',
-            url: '../prestador/todos',
-            contentType: 'application/json; charset=utf-8',
-
-            success: function(response) {
-                console.log(response);
-                $('#tablaServicios').bootstrapTable('load', response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    }
-
-    function TableActions (value, row, index) {
-        return [
-
-            '<a class="danger remove" onclick="borrarServicio(\''+row.email+ '\')" title="Borrar Usuario">',
-            '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
-            '</a>'
-        ].join('');
-    }
-
-    $('#crearPrestador').click(function() {
-        var data = {
-
-            nombre    : document.getElementById('nombre').value,
-            apellido  : document.getElementById('apellido').value,
-            direccion : document.getElementById('direccion').value,
-            email     : document.getElementById('email').value,
-            urlPago   : document.getElementById('urlPago').value,
-            titulo    : document.getElementById('titulo').value,
-            costo     : document.getElementById('costo').value,
-            tipoServicio : document.getElementById('tipoServicio').value,
-            descripcion : document.getElementById('descripcion').value,
-            vigencia : document.getElementById('vigencia').value
-
-        };
-        $.ajax({
-            type: 'POST',
-            url: '../prestador/guardarPrestador',
-            data:JSON.stringify(data),
-
-            contentType: 'application/json; charset=utf-8',
-            success: function(response) {
-                console.log(response);
-                $('#textoAltaServicio').text(response);
-                $('#modalAltaServicio').show();
-                document.getElementById("nombre").value = "";
-                document.getElementById("email").value = "";
-                document.getElementById("apellido").value = "";
-                document.getElementById("direccion").value = "";
-                document.getElementById("titulo").value = "";
-                document.getElementById("costo").value = "";
-                document.getElementById("descripcion").value = "";
-                document.getElementById("vigencia").value = "";
-                document.getElementById("urlPago").value = "";
-                cargarTablaServicio();
-
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    });
-
-    function cerrarModal(nombre){
-        $('#'+nombre+'').hide();
-    }
-
-    function cerrarModalBorrarServicio(){
-        $('#modalBorrarServicio').hide();
-    }
-
-
-    function dateFormat(value, row, index) {
-        return moment(value).format('DD/MM/YYYY');
-    }
-
-
-    function borrarServicio(email) {
-        $('#emailServicioBorrar').val(email); //cargamos el mail del usuario a borrar en un campo oculto
-        //lo vamos a necesitar despues cuando confirme la accion
-        $('#confirmarBorrarServicioBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
-        $('#textoBorrarServicio').text("Seguro que desea borrar este servicio?"); //ponemos el texto
-        $('#modalBorrarServicio').show();//mostramos el popup de confirmacion
-    }
-
-    function confirmaBorrarServicio(){
-        $('#modalBorrarServicio').hide();
-        var data = {
-            email	: $('#emailServicioBorrar').val()
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: '../prestador/borrar',
-            data:JSON.stringify(data),
-
-            contentType: 'application/json; charset=utf-8',
-            success: function(response) {
-                console.log(response)
-                $('#textoBorrarServicio').text(response);//cargamos el texto de respuesta del servidor
-                $('#confirmarBorrarServicioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mimdo usuario
-                cargarTablaServicio();//recargamos la tabla de usuarios actualizada
-                $('#modalBorrarServicio').show();//mostramos popup con respuesta
-
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    }
 
 </script>
 </body>
