@@ -22,4 +22,9 @@ public class EventosServiceImpl implements EventosService{
 	public List<Eventos> findByDiasBetween(Date diasStart, Date diasEnd) {
 		return eventosRepository.findByDiasBetween(diasStart,diasEnd);
 	}
+
+	@Override
+	public Eventos addEvento(Eventos evento) {
+		return eventosRepository.save(evento);
+	}
 }
