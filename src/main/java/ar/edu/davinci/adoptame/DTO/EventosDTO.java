@@ -3,7 +3,10 @@ package ar.edu.davinci.adoptame.DTO;
 
 
 import ar.edu.davinci.adoptame.domain.Eventos;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,21 +19,19 @@ public class EventosDTO {
     }
 
     public EventosDTO(Eventos eventos) {
-       tipoAtencion=eventos.getTipoAtencion();
        direccion=eventos.getDireccion();
-       dias=eventos.getDias();
+       dias=format.format(eventos.getDias()) ;
        horarios=eventos.getHorarios();
        lugar=eventos.getLugar();
        barrio=eventos.getBarrio();
-       comuna=eventos.getComuna();
        consultas=eventos.getConsultas();
 
     }
-    private String tipoAtencion;
-
+    @NotNull
+    @Size(min=2, max=40)
     private String direccion;
 
-    private Date dias;
+    private String dias;
 
     private String horarios;
 
@@ -38,17 +39,10 @@ public class EventosDTO {
 
     private String barrio;
 
-    private String comuna;
 
     private String consultas;
 
-    public String getTipoAtencion() {
-        return tipoAtencion;
-    }
 
-    public void setTipoAtencion(String tipoAtencion) {
-        this.tipoAtencion = tipoAtencion;
-    }
 
     public String getDireccion() {
         return direccion;
@@ -59,11 +53,10 @@ public class EventosDTO {
     }
 
     public String getDias() {
-//lo retorno como un String formateado
-        return format.format(dias);
+        return dias;
     }
 
-    public void setDias(Date dias) {
+    public void setDias(String dias) {
         this.dias = dias;
     }
 
@@ -91,13 +84,7 @@ public class EventosDTO {
         this.barrio = barrio;
     }
 
-    public String getComuna() {
-        return comuna;
-    }
 
-    public void setComuna(String comuna) {
-        this.comuna = comuna;
-    }
 
     public String getConsultas() {
         return consultas;

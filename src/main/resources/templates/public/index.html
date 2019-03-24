@@ -5,8 +5,9 @@
 
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
-	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 
 
 </head>
@@ -18,7 +19,6 @@
 		<div class="logo">Adopta.Me</div>
 		<nav>
 			<a th:href="@{/}">Inicio</a>
-			<a th:href="@{/eventos}">Eventos</a>
 			<a th:href="@{/login/login}">Admin</a>
 		</nav>
 	</div>
@@ -122,7 +122,7 @@ function cargarProximosEventos() {
 
                 var eventoElem= $('<div class="card-body " > '
                     +'<h3 class="tituloChico">'+evento.dias+' '+evento.horarios+' </h3>'
-                    +'<h3 class="tituloChico">'+evento.barrio+' '+evento.comuna+'<br/> <span >'+evento.lugar+'</span></h3>'
+                    +'<h3 class="tituloChico">'+evento.barrio+'<br/> <span >'+evento.lugar+'</span></h3>'
                     +'<h4 class="descripcion">'+evento.direccion+'</h4>'
                     +'<h4 class="descripcion">'+evento.consultas+'</h4></div>'
                 );

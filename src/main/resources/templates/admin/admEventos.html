@@ -1,150 +1,329 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:include="admin/admHeader ::head">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
-    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
 
 </head>
 
-	<body>
-    <header>
-        <div class="wrapper col-xs-12 col-sm-12">
-            <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
-            <div class="logo">Adopta.Me</div>
-            <nav>
-                <a th:href="@{/}">Inicio</a>
-                <a th:href="@{/eventos}">Eventos</a>
-                <a th:href="@{/login/login}">Admin</a>
-            </nav>
-        </div>
-    </header>
+<body>
+<header th:replace="admin/admHeader :: header"></header>
 
-	<div class="divisor"></div>
-	
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-            <ul class="list-group">
-                  <li class="list-group-item list-group-item-dark disable">Administrar</li>
-                  <a th:href="adm_usr.html" class="list-group-item list-group-item-action">Usuarios</a>
-                  <a th:href="adm_serv.html" class="list-group-item list-group-item-action">Servicios</a>
-                  <a th:href="adm_evn.html" class="list-group-item list-group-item-action active">Eventos</a>
-            </ul>
-        </div>
+<div class="divisor"></div>
 
+<div class="wrapper">
 
-        <div class="col-sm-9">
-            <h6>Pendientes de Aprobación</h6>
+    <div id="content">
+        <div class="container">
             <div class="row">
-                <table class="table table-sm table-hover table-bordered text-center">
-                      <thead>
-                        <tr>
-                          <th scope="col">Usuario</th>
-                          <th scope="col">Fecha</th>
-                          <th scope="col">Ubicación</th>
-                          <th scope="col">Decripción</th>
-                          <th scope="col">Título</th>
-                          <th scope="col">Acción</th>
-                        </tr>
-                      </thead>
-                    <tbody>
-                        <tr><!--th:each="evn : ${eventos}"-->
-                          <th>1</th> <!--th:text="${evn.usuario}"-->
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                            <td>
-                                <a href=""><img class="options" th:src="@{/img/check.png}" alt="check"/></a>
-                                <a href=""><img class="options" th:src="@{/img/cancel.png}" alt="cancel"/></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
+
+
+                <!-- FIN MENU ADMINISTRAR-->
+
+                <!--AGREGAR USUARIO-->
+
+                <div class="col-md-11">
+
+                    <h6>Crear Evento</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <label for="fecha">Dia:</label>
+                                    <input class="form-control" type="text" id="dias" />
+                                    <!--th:field="*{}"-->
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="horarios">Horario:</label>
+                                    <input type="text" class="form-control" id="horarios" /> <!--th:field="*{}"-->
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="direccion">Direccion:</label>
+                                    <input type="text" class="form-control" id="direccion" /> <!--th:field="*{}"-->
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="Lugar">Lugar:</label>
+                                    <input type="text" class="form-control" id="lugar" /> <!--th:field="*{}"-->
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="barrio">Barrio:</label>
+                                    <input type="text" class="form-control" id="barrio" /> <!--th:field="*{}"-->
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="consultas">Consultas:</label>
+                                    <input type="text" class="form-control" id="consultas" /> <!--th:field="*{}"-->
+
+                                </div>
+                            </div>
+
+                            <button type="button"  id="crearEvento" class="btn btn-primary float-right" style="margin-top: 20px;">Crear</button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FIN FORM AGREGAR USUARIO-->
+
+            <!-- MENU ESTADISTICAS-->
             <div class="divisor"></div>
 
             <div class="row">
-                <div class="col-sm-3">
-                    <ul class="list-group">
-                      <li class="list-group-item list-group-item-dark disable">Estaditicas</li>
-                      <a th:href="adm_usr.html" class="list-group-item list-group-item-action">Usuarios</a>
-                      <a th:href="adm_serv.html" class="list-group-item list-group-item-action">Servicios</a>
-                      <a th:hhref="adm_evn.html" class="list-group-item list-group-item-action">Eventos</a>
-                    </ul>
-                </div>
+                <!-- FIN MENU ESTADISTICAS-->
 
-
-<!-- TABLA DE SERVICIOS INGRESADOS-->
-    <div class="col-sm-9">
-        <h6>Activos</h6>
-            <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
-              <div class="row">
-                   <div class="col-sm-3">
-                       <label >Desde:</label>
-                       <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started" -->
-                   </div>
-                  <div class="col-sm-3">
-                       <label >Hasta:</label>
-                      <input type="date"  /> <!--th:value="${project.start}" th:field="${project.start}" id="date-started"-->
-                  </div>
-                   <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="filtrar_combo">Filtrar:</label>
-                                <select class="form-control" id="filtrar_combo">
-                                    <option th:value="null" th:text="Todos"></option>
-                                    <option th:value="null" th:text="Activos"></option>
-                                    <option th:value="null" th:text="Vencidos"></option>
-                                </select>
+                <!-- TABLA DE SERVICIOS INGRESADOS-->
+                <div class="col-md-11">
+                    <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h6>Ingresados</h6>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="filtrar_combo">Filtrar:</label>
+                                    <select class="form-control" id="filtrar_combo">
+                                        <option th:value="null" th:text="Todos"></option>
+                                        <option th:value="null" th:text="Admin"></option>
+                                        <option th:value="null" th:text="Activos"></option>
+                                        <option th:value="null" th:text="Suspendidos"></option>
+                                        <option th:value="null" th:text="Usuario"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filtro">Ingrese filtro:</label>
+                                <input type="text" class="form-control" id="filtro" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-secondary buscar">Buscar</button>
+                            </div>
                         </div>
-                   </div>
-                   <div class="col-sm-3">
-                       <label>Ing Filtro:</label>
-                       <input type="text" class="form-control" id="filtro" /> <!--th:field="*{}"-->
-                   </div>
-                  <div class="col-sm-1">
-                        <button type="submit" class="btn btn-secondary buscar">Buscar</button>
-                   </div>
+                    </form>
+                    <table  id="tablaUsuarios"
+                            data-toggle="table"
+                            data-toolbar="#toolbar"
+                    >
+                        <thead>
+                        <tr>
+                            <th data-field="id">Id usuario</th>
+                            <th data-field="nombre">Nombre</th>
+                            <th data-field="apellido">Apellido</th>
+                            <th data-field="email">email</th>
+                            <th data-field="estado">estado</th>
+                            <th data-field="rol">rol</th>
+                            <th data-formatter="TableActions">Action</th>
+
+
+                        </tr>
+                        </thead>
+
+                    </table>
                 </div>
-            </form>
-
-
-        <table class="table table-sm table-hover table-bordered text-center">
-      <thead>
-        <tr>
-          <th scope="col">Usuario</th>
-          <th scope="col">Fecha</th>
-          <th scope="col">Ubicación</th>
-          <th scope="col">Decripción</th>
-          <th scope="col">Título</th>
-          <th scope="col">Acción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-             <td>
-            <a th:href="index.html"><img class="options" th:src="@{/img/check.png}" alt="check"/></a>
-            <a th:href="index.html"><img class="options" th:src="@{/img/block.png}" alt="block"/></a>
-            <a th:href="index.html"><img class="options" th:src="@{/img/cancel.png}" alt="cancel"/></a>
-            </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
- </div>
+            </div>
+            <!-- FIN TABLA DE SERVICIOS INGRESADOS-->
+        </div>
+    </div>
 </div>
-<!--FIN TABLA DE SERVICIOS INGRESADOS-->
+
+
+<div class="modal editar" tabindex="-1" role="dialog" id="modalEditarUsuario">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar usuario</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalEditarUsuario')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="formEditarUsuario" role="form">
+                    <input type="hidden" class="form-control" id="idUsuarioEditar" />
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="nombreUsuarioEditar" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nombre">Apellido:</label>
+                                <input type="text" class="form-control" id="apellidoUsuarioEditar" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="nombre">Email:</label>
+                                <input type="text" class="form-control" id="emailUsuarioEditar" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="rol">Estado:</label>
+                                <select class="form-control" id="estadoUsuarioEditar" name="rol">
+                                    <option value="">Seleccionar Estado</option>
+                                    <option th:each="estado : ${estados}"
+                                            th:value="${estado.id}"
+                                            th:text="${estado.estado}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="rol">Rol:</label>
+                                    <select class="form-control" id="rolUsuarioEditar" name="rol">
+                                        <option value="">Seleccionar rol</option>
+                                        <option th:each="rol : ${roles}"
+                                                th:value="${rol.id}"
+                                                th:text="${rol.nombreRol}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary " id="confirmarEditarUsuarioBtn" onclick="confirmaEditarUsuario()">Grabar</button>
+
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalEditarUsuario')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal borrar" tabindex="-1" role="dialog" id="modalBorrarUsuario">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar usuario</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalBorrarUsuario')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="textoBorrarUsuario">Seguro que desea borrar este usuario?</p>
+                <form id="formBorrarUsuario" role="form">
+                    <input type="hidden" class="form-control" id="emailUsuarioBorrar" />
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary " id="confirmarBorrarUsuarioBtn" onclick="confirmaBorrarUsuario()">Borrar</button>
+
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalBorrarUsuario')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal alta" tabindex="-1" role="dialog" id="modalAltaEvento">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alta de evento</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalAltaEvento')"  aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="textoAltaEvento">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalAltaEvento')" >Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal alta" tabindex="-1" role="dialog" id="modalRespuestaEditarUsuario">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar de usuario</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalRespuestaEditarUsuario')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="textoEditarUsuario">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalRespuestaEditarUsuario')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 </body>
+
+<script type="text/javascript">
+    $('#dias').datepicker({
+        format:"dd-mm-yyyy",
+        weekStart:0,
+        startDate:"0d",
+        todayBtn:"linked",
+        locale:"es",
+        language:"es",
+        autoclose:true,
+        todayHighlight:true
+    });
+
+    $('#crearEvento').click(function() {
+        var data = {
+
+            dias : $('#dias').val(),
+            horarios	: $('#horarios').val(),
+            direccion	:$('#direccion').val(),
+            lugar	: $('#lugar').val(),
+            barrio: $('#barrio').val(),
+            consultas	: $('#consultas').val()
+
+
+        };
+        $.ajax({
+            type: 'POST',
+            url: '../eventos/guardarEvento',
+            data:JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log(response)
+                $('#textoAltaEvento').text(response);
+                $('#modalAltaEvento').show();
+                cargarTablaUsuarios();
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
+    function cerrarModal(nombre){
+        $('#'+nombre+'').hide();
+    }
+
+
+</script>
+
 </html>
