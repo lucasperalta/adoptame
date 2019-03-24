@@ -27,4 +27,9 @@ public class EventosServiceImpl implements EventosService{
 	public Eventos addEvento(Eventos evento) {
 		return eventosRepository.save(evento);
 	}
+
+	@Override
+	public List<Eventos> listarEventos() {
+		return eventosRepository.findAll();
+	}
 }

@@ -82,44 +82,30 @@
 
                 <!-- TABLA DE SERVICIOS INGRESADOS-->
                 <div class="col-md-11">
-                    <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuarioDTO}" method="POST">
                         <div class="row">
                             <div class="col-md-5">
                                 <h6>Ingresados</h6>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="filtrar_combo">Filtrar:</label>
-                                    <select class="form-control" id="filtrar_combo">
-                                        <option th:value="null" th:text="Todos"></option>
-                                        <option th:value="null" th:text="Admin"></option>
-                                        <option th:value="null" th:text="Activos"></option>
-                                        <option th:value="null" th:text="Suspendidos"></option>
-                                        <option th:value="null" th:text="Usuario"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="filtro">Ingrese filtro:</label>
-                                <input type="text" class="form-control" id="filtro" />
-                            </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-secondary buscar">Buscar</button>
-                            </div>
+
                         </div>
-                    </form>
-                    <table  id="tablaUsuarios"
+                    <table  id="tablaEventos"
                             data-toggle="table"
                             data-toolbar="#toolbar"
+                            class="table"
+                            data-search="true"
+                            data-pagination="true"
+                            data-page-size="10"
+                            style=" width: 1px; white-space: nowrap;"
+
                     >
                         <thead>
                         <tr>
-                            <th data-field="id">Id usuario</th>
-                            <th data-field="nombre">Nombre</th>
-                            <th data-field="apellido">Apellido</th>
-                            <th data-field="email">email</th>
-                            <th data-field="estado">estado</th>
-                            <th data-field="rol">rol</th>
+                            <th data-field="id" >Id Evento</th>
+                            <th data-field="dias" >Dia</th>
+                            <th data-field="horarios">Horario</th>
+                            <th data-field="lugar">Lugar</th>
+                            <th data-field="barrio">Barrio</th>
+                            <th data-field="consultas">Consultas</th>
                             <th data-formatter="TableActions">Action</th>
 
 
@@ -277,6 +263,22 @@
 </body>
 
 <script type="text/javascript">
+
+    /** ncomo estoy usando tags de ThymeLeaf si lo saco a un JS no me lo toma**/
+    function TableActions (value, row, index) {
+        return [
+
+
+            '<a class="like"  onclick="editarEvento( \''+row.id+'\',  \''+row.nombre+'\',   \''+row.apellido+'\',   \''+row.email+'\' ,   \''+row.estado+'\' ,\''+row.rol+'\');" title="Editar usuario">',
+            '<img class="options" th:src="@{/img/edit.png}" alt="check"/>',
+            '</a> ',
+            '<a class="danger remove" onclick="borrarUsuario(\''+row.email+ '\')" title="Borrar Usuario">',
+            '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
+            '</a>'
+        ].join('');
+    }
+
+
     $('#dias').datepicker({
         format:"dd-mm-yyyy",
         weekStart:0,
@@ -287,6 +289,35 @@
         autoclose:true,
         todayHighlight:true
     });
+
+
+    $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
+
+        $('#example').bootstrapTable( {
+            language: {
+                search: "Buscar:"
+            }
+        } );
+        cargarTablaEventos();
+
+
+    });
+
+    function cargarTablaEventos() {
+        $.ajax({
+            type: 'GET',
+            url: '../eventos/todos',
+            contentType: 'application/json; charset=utf-8',
+
+            success: function(response) {
+                console.log(response)
+                $('#tablaEventos').bootstrapTable('load', response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
 
     $('#crearEvento').click(function() {
         var data = {
@@ -323,7 +354,108 @@
         $('#'+nombre+'').hide();
     }
 
+    function cerrarModalBorrarUsuario(){
+        $('#modalBorrarUsuario').hide();
+    }
 
+    function cerrarModalEditarUsuario(){
+        $('#modalEditarUsuario').hide();
+    }
+
+
+    function editarEvento(id,nombre,apellido,email,estado,rol) {
+        $('#idUsuarioEditar').val(id);
+        $('#nombreUsuarioEditar').val(nombre);
+        $('#apellidoUsuarioEditar').val(apellido);
+        $('#emailUsuarioEditar').val(email);
+        $("#estadoUsuarioEditar option").each(function() {
+            if($(this).text() === estado) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $("#rolUsuarioEditar option").each(function() {
+            if($(this).text() === rol) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $('#modalEditarUsuario').show();
+
+    }
+
+
+    function borrarUsuario(email) {
+        $('#emailUsuarioBorrar').val(email); //cargamos el mail del usuario a borrar en un campo oculto
+        //lo vamos a necesitar despues cuando confirme la accion
+        $('#confirmarBorrarUsuarioBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
+        $('#textoBorrarUsuario').text("Seguro que desea borrar este usuario?"); //ponemos el texto
+        $('#modalBorrarUsuario').show();//mostramos el popup de confirmacion
+    }
+
+    function confirmaBorrarUsuario(){
+        $('#modalBorrarUsuario').hide();
+        var data = {
+            email	: $('#emailUsuarioBorrar').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '../usuarios/borrar',
+            data:JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log(response)
+                $('#textoBorrarUsuario').text(response);//cargamos el texto de respuesta del servidor
+                $('#confirmarBorrarUsuarioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mimdo usuario
+                cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
+                $('#modalBorrarUsuario').show();//mostramos popup con respuesta
+
+
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function confirmaEditarUsuario(){
+        $('#modalEditarUsuario').hide();
+
+
+        var data = {
+            id:$('#idUsuarioEditar').val(),
+            nombre:$('#nombreUsuarioEditar').val(),
+            apellido:$('#apellidoUsuarioEditar').val(),
+            email	: $('#emailUsuarioEditar').val(),
+            estado:$('#estadoUsuarioEditar').val(),
+            rol:$('#rolUsuarioEditar').val()
+
+
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '../usuarios/editarUsuario',
+            data:JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log(response)
+                $('#textoEditarUsuario').text(response);//cargamos el texto de respuesta del servidor
+                $('#modalRespuestaEditarUsuario').show();//mostramos popup con respuesta
+
+                cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
+
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
 </script>
 
 </html>
