@@ -13,4 +13,7 @@ public interface EventosService {
 
 	public Eventos addEvento(Eventos evento);
 
+	public List<Eventos> listarEventos();
+
+
 }

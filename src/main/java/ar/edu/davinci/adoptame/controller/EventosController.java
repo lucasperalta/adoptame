@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import sun.misc.Cleaner;
 
 import javax.validation.Valid;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,6 +66,30 @@ public class EventosController {
         Eventos evento = new Eventos(eventosDTO);
         eventosService.addEvento(evento);
         return "Evento dado de alta exitosamente";
+    }
+
+
+    /**
+     * Lista todos los eventos segun los filtros pasados por parametros
+     * devuelve un json con todos los usuarios, se llama via ajax esta funcion
+     * @return
+     */
+    @GetMapping("/todos")
+    public @ResponseBody Iterable<EventosDTO> listarEventos( ) { //TODO hay filtros en la pantalla de busqueda?
+        List<Eventos> eventos=eventosService.listarEventos();
+        List<EventosDTO> eventosDTOS= new ArrayList<>();
+        for (Eventos evento:eventos) {
+            EventosDTO eventosDTO= new EventosDTO();
+            eventosDTO.setId(evento.getId());
+            eventosDTO.setBarrio(evento.getBarrio());
+            eventosDTO.setConsultas(evento.getConsultas());
+            eventosDTO.setDireccion(evento.getDireccion());
+            eventosDTO.setHorarios(evento.getHorarios());
+            eventosDTO.setLugar(evento.getLugar());
+            eventosDTO.setDias(evento.getDias());
+            eventosDTOS.add(eventosDTO);
+        }
+        return eventosDTOS;
     }
 
 

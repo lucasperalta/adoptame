@@ -19,6 +19,7 @@ public class EventosDTO {
     }
 
     public EventosDTO(Eventos eventos) {
+        id=eventos.getId();
        direccion=eventos.getDireccion();
        dias=format.format(eventos.getDias()) ;
        horarios=eventos.getHorarios();
@@ -27,6 +28,9 @@ public class EventosDTO {
        consultas=eventos.getConsultas();
 
     }
+
+
+    private Long id;
     @NotNull
     @Size(min=2, max=40)
     private String direccion;
@@ -56,8 +60,8 @@ public class EventosDTO {
         return dias;
     }
 
-    public void setDias(String dias) {
-        this.dias = dias;
+    public void setDias(Date dias) {
+        this.dias = format.format(dias);
     }
 
     public String getHorarios() {
@@ -84,6 +88,13 @@ public class EventosDTO {
         this.barrio = barrio;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
     public String getConsultas() {
