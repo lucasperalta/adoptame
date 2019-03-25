@@ -4,6 +4,7 @@ import ar.edu.davinci.adoptame.domain.Eventos;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.repository.EventosRepository;
 import ar.edu.davinci.adoptame.repository.MascotaRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +31,20 @@ public class EventosServiceImpl implements EventosService{
 
 	@Override
 	public List<Eventos> listarEventos() {
-		return eventosRepository.findAll();
+		return eventosRepository.findAll(sortByIdDesc());
+	}
+
+	@Override
+	public Eventos findOne(Long id) {
+		return eventosRepository.findOne(id);
+	}
+
+	@Override
+	public void borrarEvento(Eventos evento) {
+		eventosRepository.delete(evento);
+	}
+
+	private Sort sortByIdDesc() {
+		return new Sort(Sort.Direction.DESC, "id");
 	}
 }
