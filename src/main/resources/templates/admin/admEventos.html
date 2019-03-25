@@ -28,6 +28,7 @@
                     <h6>Crear Evento</h6>
                     <div class="card">
                         <div class="card-body">
+                            <div id="error" class="error"></div>
                             <div class="row">
 
                                 <div class="col-md-4">
@@ -63,8 +64,10 @@
 
                                 </div>
                             </div>
-
                             <button type="button"  id="crearEvento" class="btn btn-primary float-right" style="margin-top: 20px;">Crear</button>
+
+                            <button type="button"  id="limpiar" class="btn btn-primary float-right" style="margin-top: 20px; margin-right: 30px" onclick="limpiarCampos()">Limpiar</button>
+
 
                         </div>
                     </div>
@@ -121,61 +124,65 @@
 </div>
 
 
-<div class="modal editar" tabindex="-1" role="dialog" id="modalEditarUsuario">
+<div class="modal editar" tabindex="-1" role="dialog" id="modalEditarEvento">
 
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar usuario</h5>
-                <button type="button" class="close" onclick="cerrarModal('modalEditarUsuario')" aria-label="Close">
+                <h5 class="modal-title">Editar Evento</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalEditarEvento')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form id="formEditarUsuario" role="form">
+                <form id="formEditarEvento" role="form">
                     <input type="hidden" class="form-control" id="idUsuarioEditar" />
                     <div class="container-fluid">
                         <div class="row">
+
+                            <input type="hidden" class="form-control" id="idEventoEditar" />
                             <div class="col-md-6">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombreUsuarioEditar" />
+                                <label for="dia">dia</label>
+                                <input type="text" class="form-control" id="diaEventoEditar" />
                             </div>
                             <div class="col-md-6">
-                                <label for="nombre">Apellido:</label>
-                                <input type="text" class="form-control" id="apellidoUsuarioEditar" />
+                                <label for="horario">Horario</label>
+                                <input type="text" class="form-control" id="horarioEventoEditar" />
                             </div>
+
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <label for="direccion">Dirección</label>
+                                <input type="text" class="form-control" id="direccionEventoEditar" />
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+
                             <div class="col-md-6">
-                                <label for="nombre">Email:</label>
-                                <input type="text" class="form-control" id="emailUsuarioEditar" />
+                                <label for="rol">Lugar</label>
+                                <input type="text" class="form-control" id="lugarEventoEditar" />
+
                             </div>
                             <div class="col-md-6">
-                                <label for="rol">Estado:</label>
-                                <select class="form-control" id="estadoUsuarioEditar" name="rol">
-                                    <option value="">Seleccionar Estado</option>
-                                    <option th:each="estado : ${estados}"
-                                            th:value="${estado.id}"
-                                            th:text="${estado.estado}"></option>
-                                </select>
+                                <label for="rol">Barrio</label>
+                                <input type="text" class="form-control" id="barrioEventoEditar" />
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="rol">Consultas</label>
+                                <input type="text" class="form-control" id="consultasEventoEditar" />
+
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="rol">Rol:</label>
-                                    <select class="form-control" id="rolUsuarioEditar" name="rol">
-                                        <option value="">Seleccionar rol</option>
-                                        <option th:each="rol : ${roles}"
-                                                th:value="${rol.id}"
-                                                th:text="${rol.nombreRol}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </form>
 
@@ -183,37 +190,37 @@
 
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary " id="confirmarEditarUsuarioBtn" onclick="confirmaEditarUsuario()">Grabar</button>
+                <button type="button" class="btn btn-primary " id="confirmarEditarEventoBtn" onclick="confirmaEditarEvento()">Grabar</button>
 
-                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalEditarUsuario')">Cerrar</button>
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalEditarEvento')">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="modal borrar" tabindex="-1" role="dialog" id="modalBorrarUsuario">
+<div class="modal borrar" tabindex="-1" role="dialog" id="modalBorrarEvento">
 
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Eliminar usuario</h5>
-                <button type="button" class="close" onclick="cerrarModal('modalBorrarUsuario')" aria-label="Close">
+                <h5 class="modal-title">Eliminar evento</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalBorrarEvento')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p id="textoBorrarUsuario">Seguro que desea borrar este usuario?</p>
-                <form id="formBorrarUsuario" role="form">
-                    <input type="hidden" class="form-control" id="emailUsuarioBorrar" />
+                <p id="textoBorrarEvento">Seguro que desea borrar este evento?</p>
+                <form id="formBorrarEvento" role="form">
+                    <input type="hidden" class="form-control" id="idEventoBorrar" />
                 </form>
 
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary " id="confirmarBorrarUsuarioBtn" onclick="confirmaBorrarUsuario()">Borrar</button>
+                <button type="button" class="btn btn-primary " id="confirmarBorrarEventoBtn" onclick="confirmaBorrarEvento()">Borrar</button>
 
-                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalBorrarUsuario')">Cerrar</button>
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalBorrarEvento')">Cerrar</button>
             </div>
         </div>
     </div>
@@ -238,20 +245,20 @@
     </div>
 </div>
 
-<div class="modal alta" tabindex="-1" role="dialog" id="modalRespuestaEditarUsuario">
+<div class="modal alta" tabindex="-1" role="dialog" id="modalRespuestaEditarEvento">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar de usuario</h5>
-                <button type="button" class="close" onclick="cerrarModal('modalRespuestaEditarUsuario')" aria-label="Close">
+                <h5 class="modal-title">Editar evento</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalRespuestaEditarEvento')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p id="textoEditarUsuario">.</p>
+                <p id="textoEditarEvento">.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalRespuestaEditarUsuario')">Cerrar</button>
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalRespuestaEditarEvento')">Cerrar</button>
             </div>
         </div>
     </div>
@@ -269,10 +276,10 @@
         return [
 
 
-            '<a class="like"  onclick="editarEvento( \''+row.id+'\',  \''+row.nombre+'\',   \''+row.apellido+'\',   \''+row.email+'\' ,   \''+row.estado+'\' ,\''+row.rol+'\');" title="Editar usuario">',
+            '<a class="like"  onclick="editarEvento( \''+row.id+'\',  \''+row.dias+'\',   \''+row.horarios+'\',   \''+row.direccion+'\' ,   \''+row.lugar+'\' ,\''+row.barrio+'\', \''+row.consultas+'\');" title="Editar evento">',
             '<img class="options" th:src="@{/img/edit.png}" alt="check"/>',
             '</a> ',
-            '<a class="danger remove" onclick="borrarUsuario(\''+row.email+ '\')" title="Borrar Usuario">',
+            '<a class="danger remove" onclick="borrarEvento(\''+row.id+ '\')" title="Borrar Evento">',
             '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
             '</a>'
         ].join('');
@@ -290,7 +297,16 @@
         todayHighlight:true
     });
 
-
+    $('#diaEventoEditar').datepicker({
+        format:"dd-mm-yyyy",
+        weekStart:0,
+        startDate:"0d",
+        todayBtn:"linked",
+        locale:"es",
+        language:"es",
+        autoclose:true,
+        todayHighlight:true
+    });
     $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
 
         $('#example').bootstrapTable( {
@@ -338,13 +354,30 @@
 
             contentType: 'application/json; charset=utf-8',
             success: function(response) {
-                console.log(response)
-                $('#textoAltaEvento').text(response);
-                $('#modalAltaEvento').show();
-                cargarTablaUsuarios();
+                console.log(response.status);
+                $("#error").hide();
+                if(response.status=="SUCESS"){
+                    $('#textoAltaEvento').text(response.result);
+                    $('#modalAltaEvento').show();
+                    cargarTablaEventos();
+                    limpiarCampos();
+                    $("#error").hide();
+                }else{
+                    var errorInfo="";
+                    $.each(response.result,function (index,elem) {
+                        errorInfo+="<br />"+(index+1)+". "+elem.field+" : "+elem.defaultMessage ;
+
+                    });
+                    $("#error").html("Efectue las siguientes correciones: "+errorInfo);
+                    $("#error").show();
+                    console.log(errorInfo);
+
+                }
+
 
             },
             error: function(error) {
+
                 console.log(error);
             }
         });
@@ -354,64 +387,97 @@
         $('#'+nombre+'').hide();
     }
 
-    function cerrarModalBorrarUsuario(){
-        $('#modalBorrarUsuario').hide();
+    function cerrarModalBorrarEvento(){
+        $('#modalBorrarEvento').hide();
     }
 
-    function cerrarModalEditarUsuario(){
-        $('#modalEditarUsuario').hide();
+    function cerrarModalEditarEvento(){
+        $('#modalEditarEvento').hide();
     }
 
 
-    function editarEvento(id,nombre,apellido,email,estado,rol) {
-        $('#idUsuarioEditar').val(id);
-        $('#nombreUsuarioEditar').val(nombre);
-        $('#apellidoUsuarioEditar').val(apellido);
-        $('#emailUsuarioEditar').val(email);
-        $("#estadoUsuarioEditar option").each(function() {
-            if($(this).text() === estado) {
-                $(this).attr('selected', 'selected');
-            }
-        });
+    function editarEvento(id,dia,horario,direccion,lugar,barrio,consultas) {
 
-        $("#rolUsuarioEditar option").each(function() {
-            if($(this).text() === rol) {
-                $(this).attr('selected', 'selected');
-            }
-        });
+        $('#idEventoEditar').val(id),
+        $('#diaEventoEditar').val(dia),
+        $('#horarioEventoEditar').val(horario),
+        $('#direccionEventoEditar').val(direccion),
+        $('#lugarEventoEditar').val(lugar),
+        $('#barrioEventoEditar').val(barrio),
+        $('#consultasEventoEditar').val(consultas)
 
-        $('#modalEditarUsuario').show();
+        $('#modalEditarEvento').show();
 
     }
 
 
-    function borrarUsuario(email) {
-        $('#emailUsuarioBorrar').val(email); //cargamos el mail del usuario a borrar en un campo oculto
+    function borrarEvento(idEvento) {
+        $('#idEventoBorrar').val(idEvento); //cargamos el mail del usuario a borrar en un campo oculto
         //lo vamos a necesitar despues cuando confirme la accion
-        $('#confirmarBorrarUsuarioBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
-        $('#textoBorrarUsuario').text("Seguro que desea borrar este usuario?"); //ponemos el texto
-        $('#modalBorrarUsuario').show();//mostramos el popup de confirmacion
+        $('#confirmarBorrarEventoBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
+        $('#textoBorrarEvento').text("Seguro que desea borrar este evento?"); //ponemos el texto
+        $('#modalBorrarEvento').show();//mostramos el popup de confirmacion
     }
 
-    function confirmaBorrarUsuario(){
-        $('#modalBorrarUsuario').hide();
+    function confirmaBorrarEvento(){
+        $('#modalBorrarEvento').hide();
         var data = {
-            email	: $('#emailUsuarioBorrar').val()
+            id	: $('#idEventoBorrar').val()
         };
 
         $.ajax({
             type: 'POST',
-            url: '../usuarios/borrar',
+            url: '../eventos/borrar',
             data:JSON.stringify(data),
 
             contentType: 'application/json; charset=utf-8',
             success: function(response) {
                 console.log(response)
-                $('#textoBorrarUsuario').text(response);//cargamos el texto de respuesta del servidor
-                $('#confirmarBorrarUsuarioBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mimdo usuario
-                cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
-                $('#modalBorrarUsuario').show();//mostramos popup con respuesta
+                $('#textoBorrarEvento').text(response);//cargamos el texto de respuesta del servidor
+                $('#confirmarBorrarEventoBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mimdo evento
+                cargarTablaEventos();//recargamos la tabla de usuarios actualizada
+                $('#modalBorrarEvento').show();//mostramos popup con respuesta
 
+
+
+            },
+            error: function(error) {
+                $('#textoBorrarEvento').text(error);//cargamos el texto de respuesta del servidor
+                $('#confirmarBorrarEventoBtn').hide(); //escondemos el boton borrar para que no borre de nuevo el mimdo evento
+                cargarTablaEventos();//recargamos la tabla de usuarios actualizada
+                $('#modalBorrarEvento').show();//mostramos popup con respuesta
+            }
+        });
+    }
+
+    function confirmaEditarEvento(){
+        $('#modalEditarEvento').hide();
+
+
+        var data = {
+            id:$('#idEventoEditar').val(),
+            dias:$('#diaEventoEditar').val(),
+            horarios:$('#horarioEventoEditar').val(),
+            direccion	: $('#direccionEventoEditar').val(),
+            lugar:$('#lugarEventoEditar').val(),
+            barrio:$('#barrioEventoEditar').val(),
+            consultas:$('#consultasEventoEditar').val()
+
+
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '../eventos/editarEvento',
+            data:JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log(response)
+                $('#textoEditarEvento').text(response);//cargamos el texto de respuesta del servidor
+                $('#modalRespuestaEditarEvento').show();//mostramos popup con respuesta
+
+                cargarTablaEventos();//recargamos la tabla de eventos actualizada
 
 
             },
@@ -421,40 +487,14 @@
         });
     }
 
-    function confirmaEditarUsuario(){
-        $('#modalEditarUsuario').hide();
+    function limpiarCampos() {
+       $('#dias').val("");
+       $('#horarios').val("");
+       $('#direccion').val("");
+       $('#lugar').val("");
+       $('#barrio').val("");
+       $('#consultas').val("");
 
-
-        var data = {
-            id:$('#idUsuarioEditar').val(),
-            nombre:$('#nombreUsuarioEditar').val(),
-            apellido:$('#apellidoUsuarioEditar').val(),
-            email	: $('#emailUsuarioEditar').val(),
-            estado:$('#estadoUsuarioEditar').val(),
-            rol:$('#rolUsuarioEditar').val()
-
-
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: '../usuarios/editarUsuario',
-            data:JSON.stringify(data),
-
-            contentType: 'application/json; charset=utf-8',
-            success: function(response) {
-                console.log(response)
-                $('#textoEditarUsuario').text(response);//cargamos el texto de respuesta del servidor
-                $('#modalRespuestaEditarUsuario').show();//mostramos popup con respuesta
-
-                cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
-
-
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
     }
 </script>
 

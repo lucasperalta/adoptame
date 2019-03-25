@@ -15,5 +15,7 @@ public interface EventosService {
 
 	public List<Eventos> listarEventos();
 
+	public Eventos findOne(Long id) ;
 
+	void borrarEvento(Eventos evento);
 }

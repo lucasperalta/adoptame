@@ -2,6 +2,7 @@ package ar.edu.davinci.adoptame.controller;
 
 import ar.edu.davinci.adoptame.DTO.EventosDTO;
 import ar.edu.davinci.adoptame.DTO.MascotaDTO;
+import ar.edu.davinci.adoptame.DTO.ResponseDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.*;
@@ -18,6 +19,8 @@ import sun.misc.Cleaner;
 
 import javax.validation.Valid;
 import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,6 +32,7 @@ import java.util.List;
 public class EventosController {
 
     private static final Logger logger = LoggerFactory.getLogger(EventosController.class);
+    private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     @Autowired
     EventosService eventosService;
@@ -43,8 +47,8 @@ public class EventosController {
     @GetMapping("/listarProximos")
     public @ResponseBody  List<EventosDTO> listarEventos(Model model) {
         Date start = Calendar.getInstance().getTime();
-       Calendar stopCalendar= Calendar.getInstance();
-       stopCalendar.add(Calendar.MONTH,1);
+        Calendar stopCalendar= Calendar.getInstance();
+        stopCalendar.add(Calendar.MONTH,1);
 
         Date stop =stopCalendar.getTime();
         List<Eventos> eventos=eventosService.findByDiasBetween(start,stop);
@@ -57,15 +61,20 @@ public class EventosController {
         return eventosDTOS;
     }
     @PostMapping("/guardarEvento")
-    public  @ResponseBody  String guardarEvento(@RequestBody @Valid EventosDTO eventosDTO , BindingResult bindingResult) {
+    public  @ResponseBody
+    ResponseDTO guardarEvento(@RequestBody @Valid EventosDTO eventosDTO , BindingResult bindingResult) {
+        ResponseDTO responseDTO= new ResponseDTO();
         if (bindingResult.hasErrors()) {
-            System.out.println("BINDING RESULT ERROR");
-            return "errores";
+            responseDTO.setStatus("ERROR");
+            responseDTO.setResult(bindingResult.getAllErrors());
+            return responseDTO;
         }
 
         Eventos evento = new Eventos(eventosDTO);
         eventosService.addEvento(evento);
-        return "Evento dado de alta exitosamente";
+        responseDTO.setStatus("SUCESS");
+        responseDTO.setResult("Evento dado de alta exitosamente");
+        return responseDTO;
     }
 
 
@@ -86,11 +95,55 @@ public class EventosController {
             eventosDTO.setDireccion(evento.getDireccion());
             eventosDTO.setHorarios(evento.getHorarios());
             eventosDTO.setLugar(evento.getLugar());
-            eventosDTO.setDias(evento.getDias());
+            eventosDTO.setDias(format.format(evento.getDias()));
             eventosDTOS.add(eventosDTO);
         }
         return eventosDTOS;
     }
 
+    @PostMapping("/borrar")
+    public @ResponseBody String borrarEvento( @RequestBody EventosDTO eventosDTO) {
+
+        Eventos evento =eventosService.findOne(eventosDTO.getId());
+        if(evento!=null){
+            logger.info("evento a borrar "+ evento.getId());
+
+            eventosService.borrarEvento(evento);
+
+        }else{
+            logger.info("Evento no encontrado");
+
+            return "Evento no encontrado";
+        }
+        return "Evento borrado";
+    }
+
+
+
+    @PostMapping("/editarEvento")
+    public  @ResponseBody  String editarEvento(@RequestBody EventosDTO eventosDTO  ) {
+
+
+        Eventos evento= eventosService.findOne(eventosDTO.getId());
+        if(evento!= null){
+
+            evento.setBarrio(eventosDTO.getBarrio());
+            evento.setConsultas(eventosDTO.getConsultas());
+            try {
+                evento.setDias(format.parse(eventosDTO.getDias()));
+            } catch (ParseException e) {
+               logger.error("hubo un error al parsear la fecha"+e.getMessage());
+
+            }
+            evento.setDireccion(eventosDTO.getDireccion());
+            evento.setLugar(eventosDTO.getLugar());
+            evento.setHorarios(eventosDTO.getHorarios());
+
+            eventosService.addEvento(evento);//si existe lo actualiza sino lo inserta
+            return "Evento Modificado exitosamente";
+        }
+        return "Hubo un error al modificar el evento";
+
+    }
 
 }

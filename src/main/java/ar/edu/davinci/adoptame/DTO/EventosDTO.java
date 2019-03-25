@@ -4,6 +4,8 @@ package ar.edu.davinci.adoptame.DTO;
 
 import ar.edu.davinci.adoptame.domain.Eventos;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,18 +34,26 @@ public class EventosDTO {
 
     private Long id;
     @NotNull
-    @Size(min=2, max=40)
+    @Size(min=1, max=100)
     private String direccion;
 
+    @NotNull
+    @NotBlank
     private String dias;
-
+    @NotNull
+    @Size(min=1, max=50)
     private String horarios;
 
+    @NotNull
+    @Size(min=1, max=100)
     private String lugar;
 
+    @NotNull
+    @Size(min=1, max=50)
     private String barrio;
 
-
+    @NotNull
+    @Size(min=1, max=100)
     private String consultas;
 
 
@@ -60,8 +70,9 @@ public class EventosDTO {
         return dias;
     }
 
-    public void setDias(Date dias) {
-        this.dias = format.format(dias);
+    public void setDias(String dias) {
+
+        this.dias = dias;
     }
 
     public String getHorarios() {
