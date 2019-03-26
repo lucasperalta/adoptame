@@ -19,48 +19,47 @@
 
 
 
-                <!-- FIN MENU ADMINISTRAR-->
 
                 <!--AGREGAR USUARIO-->
 
                 <div class="col-md-11">
 
                     <h6>Crear Evento</h6>
+                    <form id="altaUsuarioForm"  name="altaUsuarioForm" >
                     <div class="card">
                         <div class="card-body">
-                            <div id="error" class="error"></div>
                             <div class="row">
 
                                 <div class="col-md-4">
-                                    <label for="fecha">Dia:</label>
-                                    <input class="form-control" type="text" id="dias" />
+                                    <label for="fecha">* Dia:</label>
+                                    <input class="form-control" type="text" id="dias" name="dias" onchange="revalidarDias();" />
                                     <!--th:field="*{}"-->
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="horarios">Horario:</label>
-                                    <input type="text" class="form-control" id="horarios" /> <!--th:field="*{}"-->
+                                    <label for="horarios">* Horario:</label>
+                                    <input type="text" class="form-control"  id="horarios" name="horarios" required="true"   /> <!--th:field="*{}"-->
 
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="direccion">Direccion:</label>
-                                    <input type="text" class="form-control" id="direccion" /> <!--th:field="*{}"-->
+                                    <label for="direccion">* Direccion:</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" required="true"  /> <!--th:field="*{}"-->
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="Lugar">Lugar:</label>
-                                    <input type="text" class="form-control" id="lugar" /> <!--th:field="*{}"-->
+                                    <label for="Lugar">* Lugar:</label>
+                                    <input type="text" class="form-control" id="lugar" name="lugar" required="true" /> <!--th:field="*{}"-->
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="barrio">Barrio:</label>
-                                    <input type="text" class="form-control" id="barrio" /> <!--th:field="*{}"-->
+                                    <label for="barrio">* Barrio:</label>
+                                    <input type="text" class="form-control" id="barrio" name="barrio" required="true" /> <!--th:field="*{}"-->
 
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="consultas">Consultas:</label>
-                                    <input type="text" class="form-control" id="consultas" /> <!--th:field="*{}"-->
+                                    <label for="consultas">* Consultas:</label>
+                                    <input type="text" class="form-control" id="consultas" name="consultas" required="true" /> <!--th:field="*{}"-->
 
                                 </div>
                             </div>
@@ -71,6 +70,7 @@
 
                         </div>
                     </div>
+                    </form>
                 </div>
 
             </div>
@@ -309,15 +309,73 @@
     });
     $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
 
-        $('#example').bootstrapTable( {
-            language: {
-                search: "Buscar:"
-            }
-        } );
+
         cargarTablaEventos();
+
+        $('#altaUsuarioForm').formValidation({
+            framework : 'bootstrap',
+            icon : {
+                invalid : 'glyphicon glyphicon-remove',
+                validating : 'glyphicon glyphicon-refresh'
+            },
+            excluded : ':disabled',
+            fields : {
+
+                dias: {
+                    validators: {
+                        notEmpty : {
+                            message : 'No puede ser vacio'
+                        }
+                    }
+                },
+                horarios: {
+                    validators: {
+                        notEmpty : {
+                            message : 'No puede ser vacio'
+                        }
+                    }
+                },
+
+                direccion: {
+                    validators: {
+                        notEmpty : {
+                            message : 'No puede ser vacio'
+                        }
+                    }
+                },
+                lugar: {
+                    validators: {
+                        notEmpty : {
+                            message : 'No puede ser vacio'
+                        }
+                    }
+                },
+                barrio: {
+                    validators: {
+                        notEmpty : {
+                            message : 'No puede ser vacio'
+                        }
+                    }
+                },
+                consultas: {
+                    validators: {
+                        notEmpty : {
+                            message : 'No puede ser vacio'
+                        }
+                    }
+                }
+
+            }
+        });
+
 
 
     });
+
+    function revalidarDias() {
+        $("#altaUsuarioForm").formValidation('revalidateField',
+            'dias');
+    }
 
     function cargarTablaEventos() {
         $.ajax({
@@ -336,51 +394,65 @@
     }
 
     $('#crearEvento').click(function() {
-        var data = {
+            var data = {
 
-            dias : $('#dias').val(),
-            horarios	: $('#horarios').val(),
-            direccion	:$('#direccion').val(),
-            lugar	: $('#lugar').val(),
-            barrio: $('#barrio').val(),
-            consultas	: $('#consultas').val()
-
-
-        };
-        $.ajax({
-            type: 'POST',
-            url: '../eventos/guardarEvento',
-            data:JSON.stringify(data),
-
-            contentType: 'application/json; charset=utf-8',
-            success: function(response) {
-                console.log(response.status);
-                $("#error").hide();
-                if(response.status=="SUCESS"){
-                    $('#textoAltaEvento').text(response.result);
-                    $('#modalAltaEvento').show();
-                    cargarTablaEventos();
-                    limpiarCampos();
-                    $("#error").hide();
-                }else{
-                    var errorInfo="";
-                    $.each(response.result,function (index,elem) {
-                        errorInfo+="<br />"+(index+1)+". "+elem.field+" : "+elem.defaultMessage ;
-
-                    });
-                    $("#error").html("Efectue las siguientes correciones: "+errorInfo);
-                    $("#error").show();
-                    console.log(errorInfo);
-
-                }
+                dias : $('#dias').val(),
+                horarios	: $('#horarios').val(),
+                direccion	:$('#direccion').val(),
+                lugar	: $('#lugar').val(),
+                barrio: $('#barrio').val(),
+                consultas	: $('#consultas').val()
 
 
-            },
-            error: function(error) {
+            };
 
-                console.log(error);
+
+
+             $('#altaUsuarioForm').formValidation();
+             $('#altaUsuarioForm').data('formValidation').validate();
+             var validForm = $('#altaUsuarioForm').data('formValidation').isValid()
+
+
+
+            if (validForm == true) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '../eventos/guardarEvento',
+                    data:JSON.stringify(data),
+
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(response) {
+                        console.log(response.status);
+                        $("#error").hide();
+                        if(response.status=="SUCESS"){
+                            $('#textoAltaEvento').text(response.result);
+                            $('#modalAltaEvento').show();
+                            cargarTablaEventos();
+                            limpiarCampos();
+                            $("#error").hide();
+                        }else{
+                            var errorInfo="";
+                            $.each(response.result,function (index,elem) {
+                                errorInfo+="<br />"+(index+1)+". "+elem.field+" : "+elem.defaultMessage ;
+
+                            });
+                            $("#error").html("Efectue las siguientes correciones: "+errorInfo);
+                            $("#error").show();
+                            console.log(errorInfo);
+
+                        }
+
+
+                    },
+                    error: function(error) {
+
+                        console.log(error);
+                    }
+                });
+            }else{
+                return false;
             }
-        });
     });
 
     function cerrarModal(nombre){
@@ -494,6 +566,12 @@
        $('#lugar').val("");
        $('#barrio').val("");
        $('#consultas').val("");
+       $("#altaUsuarioForm").data('formValidation').updateStatus("dias", 'NOT_VALIDATED');
+       $("#altaUsuarioForm").data('formValidation').updateStatus("horarios", 'NOT_VALIDATED');
+       $("#altaUsuarioForm").data('formValidation').updateStatus("direccion", 'NOT_VALIDATED');
+       $("#altaUsuarioForm").data('formValidation').updateStatus("lugar", 'NOT_VALIDATED');
+       $("#altaUsuarioForm").data('formValidation').updateStatus("barrio", 'NOT_VALIDATED');
+       $("#altaUsuarioForm").data('formValidation').updateStatus("consultas", 'NOT_VALIDATED');
 
     }
 </script>

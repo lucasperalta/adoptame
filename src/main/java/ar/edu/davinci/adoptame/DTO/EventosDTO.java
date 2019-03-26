@@ -33,27 +33,19 @@ public class EventosDTO {
 
 
     private Long id;
-    @NotNull
-    @Size(min=1, max=100)
+
     private String direccion;
 
-    @NotNull
-    @NotBlank
+
     private String dias;
-    @NotNull
-    @Size(min=1, max=50)
+
     private String horarios;
 
-    @NotNull
-    @Size(min=1, max=100)
+
     private String lugar;
 
-    @NotNull
-    @Size(min=1, max=50)
     private String barrio;
 
-    @NotNull
-    @Size(min=1, max=100)
     private String consultas;
 
 
