@@ -62,13 +62,9 @@ public class EventosController {
     }
     @PostMapping("/guardarEvento")
     public  @ResponseBody
-    ResponseDTO guardarEvento(@RequestBody @Valid EventosDTO eventosDTO , BindingResult bindingResult) {
+    ResponseDTO guardarEvento(@RequestBody  EventosDTO eventosDTO ) {
         ResponseDTO responseDTO= new ResponseDTO();
-        if (bindingResult.hasErrors()) {
-            responseDTO.setStatus("ERROR");
-            responseDTO.setResult(bindingResult.getAllErrors());
-            return responseDTO;
-        }
+
 
         Eventos evento = new Eventos(eventosDTO);
         eventosService.addEvento(evento);
