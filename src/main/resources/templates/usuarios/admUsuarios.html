@@ -24,34 +24,35 @@
 <!--AGREGAR USUARIO-->
 
     <div class="col-md-11">
+        <form id="formAltaUsuario"  name="formAltaUsuario" >
 
-             <h6>Crear Usuario</h6>
+        <h6>Crear Usuario</h6>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
 
                             <div class="col-md-4">
-                                    <label for="nombre">Nombre:</label>
-                                    <input type="text" class="form-control" id="nombre" /> <!--th:field="*{}"-->
+                                    <label for="nombre">* Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" /> <!--th:field="*{}"-->
                             </div>
                             <div class="col-md-4">
-                                <label for="apellido">Apellido:</label>
-                                <input type="text" class="form-control" id="apellido" /> <!--th:field="*{}"-->
+                                <label for="apellido">* Apellido:</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido" /> <!--th:field="*{}"-->
 
                             </div>
 
                             <div class="col-md-4">
-                                <label for="email">Email:</label>
-                                <input type="text" class="form-control" id="email" /> <!--th:field="*{}"-->
+                                <label for="email">* Email:</label>
+                                <input type="text" class="form-control" id="email" name="email" /> <!--th:field="*{}"-->
                                 </div>
 
                             <div class="col-md-4">
-                                    <label for="password">Password:</label>
-                                    <input type="password" class="form-control" id="password" /> <!--th:field="*{}"-->
+                                    <label for="password">* Password:</label>
+                                    <input type="password" class="form-control" id="password" name="password"/> <!--th:field="*{}"-->
                             </div>
 
                             <div class="col-md-4">
-                                    <label for="rol">Rol:</label>
+                                    <label for="rol">* Rol:</label>
                                      <select class="form-control" id="rol" name="rol">
                                         <option value="">Seleccionar rol</option>
                                         <option th:each="rol : ${roles}"
@@ -64,6 +65,7 @@
 
                     </div>
                 </div>
+        </form>
     </div>
 
 </div>
@@ -143,28 +145,28 @@
             </div>
             <div class="modal-body">
 
-                    <form id="formEditarUsuario" role="form">
+                    <form id="formEditarUsuario" name="formEditarUsuario" role="form">
                     <input type="hidden" class="form-control" id="idUsuarioEditar" />
                      <div class="container-fluid">
                          <div class="row">
                              <div class="col-md-6">
                                  <label for="nombre">Nombre:</label>
-                                 <input type="text" class="form-control" id="nombreUsuarioEditar" />
+                                 <input type="text" class="form-control" id="nombreUsuarioEditar" name="nombreUsuarioEditar" />
                              </div>
                              <div class="col-md-6">
                                  <label for="nombre">Apellido:</label>
-                                 <input type="text" class="form-control" id="apellidoUsuarioEditar" />
+                                 <input type="text" class="form-control" id="apellidoUsuarioEditar" name="apellidoUsuarioEditar" />
                              </div>
                          </div>
 
                          <div class="row">
                              <div class="col-md-6">
                                  <label for="nombre">Email:</label>
-                                 <input type="text" class="form-control" id="emailUsuarioEditar" />
+                                 <input type="text" class="form-control" id="emailUsuarioEditar" name="emailUsuarioEditar" />
                              </div>
                              <div class="col-md-6">
                                  <label for="rol">Estado:</label>
-                                 <select class="form-control" id="estadoUsuarioEditar" name="rol">
+                                 <select class="form-control" id="estadoUsuarioEditar" name="estadoUsuarioEditar">
                                      <option value="">Seleccionar Estado</option>
                                      <option th:each="estado : ${estados}"
                                              th:value="${estado.id}"
@@ -177,7 +179,7 @@
                             <div class="col-md-6">
                     <div class="form-group">
                         <label for="rol">Rol:</label>
-                        <select class="form-control" id="rolUsuarioEditar" name="rol">
+                        <select class="form-control" id="rolUsuarioEditar" name="rolUsuarioEditar">
                             <option value="">Seleccionar rol</option>
                             <option th:each="rol : ${roles}"
                                     th:value="${rol.id}"

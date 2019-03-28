@@ -1,5 +1,139 @@
 $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
     cargarTablaUsuarios();
+
+
+    $('#formAltaUsuario').formValidation({
+        framework : 'bootstrap',
+        icon : {
+            invalid : 'glyphicon glyphicon-remove',
+            validating : 'glyphicon glyphicon-refresh'
+        },
+        excluded : ':disabled',
+        fields : {
+
+            nombre: {
+                validators: {
+                    notEmpty: {
+                        message: 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 45,
+                        message : 'Máximo 45 caracteres'
+                    }
+                }
+            },
+            apellido: {
+                validators: {
+                    notEmpty: {
+                        message: 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 50,
+                        message : 'Máximo 45 caracteres'
+                    }
+                }
+            },
+
+            email: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 45,
+                        message : 'Máximo 45 caracteres'
+                    },
+                    emailAddress: {
+                        message: 'Debe ser una dirección de mail válida'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        min:8,
+                        max : 10,
+                        message : 'Debe tener entre 8 y 10 caracteres'
+                    }
+                }
+            },
+            rol: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    }
+                }
+            }
+        }
+    });
+
+    $('#formEditarUsuario').formValidation({
+        framework : 'bootstrap',
+        icon : {
+            invalid : 'glyphicon glyphicon-remove',
+            validating : 'glyphicon glyphicon-refresh'
+        },
+        excluded : ':disabled',
+        fields : {
+
+            nombreUsuarioEditar: {
+                validators: {
+                    notEmpty: {
+                        message: 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 45,
+                        message : 'Máximo 45 caracteres'
+                    }
+                }
+            },
+            apellidoUsuarioEditar: {
+                validators: {
+                    notEmpty: {
+                        message: 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 50,
+                        message : 'Máximo 45 caracteres'
+                    }
+                }
+            },
+
+            emailUsuarioEditar: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 45,
+                        message : 'Máximo 45 caracteres'
+                    },
+                    emailAddress: {
+                        message: 'Debe ser una dirección de mail válida'
+                    }
+                }
+            },
+            rolUsuarioEditar: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    }
+                }
+            },
+            estadoUsuarioEditar: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    }
+                }
+            }
+        }
+    });
+
+
 });
 
 function cargarTablaUsuarios() {
@@ -28,23 +162,36 @@ $('#crearUsuario').click(function() {
         rol: document.getElementById('rol').value
 
     };
-    $.ajax({
-        type: 'POST',
-        url: '../usuarios/guardarUsuario',
-        data:JSON.stringify(data),
 
-        contentType: 'application/json; charset=utf-8',
-        success: function(response) {
-            console.log(response)
-            $('#textoAltaUsuario').text(response);
-            $('#modalAltaUsuario').show();
-            cargarTablaUsuarios();
+    $('#formAltaUsuario').formValidation();
+    $('#formAltaUsuario').data('formValidation').validate();
+    var validForm = $('#formAltaUsuario').data('formValidation').isValid()
 
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
+
+
+    if (validForm == true) {
+
+        $.ajax({
+            type: 'POST',
+            url: '../usuarios/guardarUsuario',
+            data: JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                console.log(response)
+                $('#textoAltaUsuario').text(response);
+                $('#modalAltaUsuario').show();
+                cargarTablaUsuarios();
+                limpiarCampos();
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }else{
+        return false;
+    }
 });
 
 
@@ -119,7 +266,6 @@ function confirmaBorrarUsuario(){
 }
 
 function confirmaEditarUsuario(){
-    $('#modalEditarUsuario').hide();
 
 
     var data = {
@@ -132,24 +278,51 @@ function confirmaEditarUsuario(){
 
 
     };
-
-    $.ajax({
-        type: 'POST',
-        url: '../usuarios/editarUsuario',
-        data:JSON.stringify(data),
-
-        contentType: 'application/json; charset=utf-8',
-        success: function(response) {
-            console.log(response)
-            $('#textoEditarUsuario').text(response);//cargamos el texto de respuesta del servidor
-            $('#modalRespuestaEditarUsuario').show();//mostramos popup con respuesta
-
-            cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
+    $('#formEditarUsuario').formValidation();
+    $('#formEditarUsuario').data('formValidation').validate();
+    var validForm = $('#formEditarUsuario').data('formValidation').isValid()
 
 
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
+
+    if (validForm == true) {
+        $('#modalEditarUsuario').hide();
+
+
+        $.ajax({
+            type: 'POST',
+            url: '../usuarios/editarUsuario',
+            data: JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                console.log(response)
+                $('#textoEditarUsuario').text(response);//cargamos el texto de respuesta del servidor
+                $('#modalRespuestaEditarUsuario').show();//mostramos popup con respuesta
+
+                cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada
+
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }else{
+        return false;
+    }
+
+}
+
+function limpiarCampos() {
+    $('#nombre').val("");
+    $('#apellido').val("");
+    $('#email').val("");
+    $('#password').val("");
+    $('#rol').val("");
+    $("#formAltaUsuario").data('formValidation').updateStatus("nombre", 'NOT_VALIDATED');
+    $("#formAltaUsuario").data('formValidation').updateStatus("apellido", 'NOT_VALIDATED');
+    $("#formAltaUsuario").data('formValidation').updateStatus("email", 'NOT_VALIDATED');
+    $("#formAltaUsuario").data('formValidation').updateStatus("password", 'NOT_VALIDATED');
+    $("#formAltaUsuario").data('formValidation').updateStatus("rol", 'NOT_VALIDATED');
+
 }
