@@ -101,13 +101,18 @@
                     <div class="row">
 
                         <!-- TABLA DE SERVICIOS INGRESADOS-->
-                        <div class="offset-md-1 col-md-12">
+                        <div class=" col-md-12">
                             <div class="divisor"></div>
                             <h6>Activos</h6>
 
                             <table  id="tablaServicios"
                                     data-toggle="table"
                                     data-toolbar="#toolbar"
+                                    data-search="true"
+                                    data-pagination="true"
+                                    data-page-size="10"
+                                    style=" width: 1px; white-space: nowrap;"
+
                             >
                                 <thead>
                                 <tr>
@@ -185,7 +190,7 @@ function TableActions (value, row, index) {
 return [
 
 '<a class="danger remove" onclick="borrarServicio(\''+row.email+ '\')" title="Borrar Usuario">',
-    '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
+    '<img class="options" src="../img/delete.png" alt="cancel"/>',
     '</a>'
 ].join('');
 }

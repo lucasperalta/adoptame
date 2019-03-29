@@ -25,7 +25,7 @@ public class RolServiceImpl implements RolService{
 	@Override
     @Transactional
 	public Rol findRolById(Integer id) {
-		return rolRepository.findOne(id.longValue());
+		return rolRepository.getOne(id.longValue());
 	}
 
 
