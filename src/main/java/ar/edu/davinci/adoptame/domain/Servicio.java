@@ -42,7 +42,18 @@ public class Servicio implements Serializable {
     @Column(name="descripcion")
     private String descripcion;
 
+    @Column(name="url_pago")
+    private String urlPago;
+
     public Servicio() {
+    }
+
+    public String getUrlPago() {
+        return urlPago;
+    }
+
+    public void setUrlPago(String urlPago) {
+        this.urlPago = urlPago;
     }
 
     public Prestador getPrestador() {

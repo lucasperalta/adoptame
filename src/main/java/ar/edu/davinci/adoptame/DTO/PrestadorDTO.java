@@ -14,7 +14,15 @@ public class PrestadorDTO extends PersonaDTO  {
     private Float costo;
     private String titulo;
     private Integer id;
+    private String telefono;
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     @Override
     public Integer getId() { return id; }

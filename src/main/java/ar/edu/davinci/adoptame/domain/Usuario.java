@@ -5,8 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="usuarios")
-@PrimaryKeyJoinColumn(name = "id")
-@DiscriminatorValue("USUARIO")
+
 @NamedQueries({
         @NamedQuery(name = "Usuario.buscarUsuarioByEmail", query = "select p from Usuario p where p.email = :email"),
         @NamedQuery(name = "Usuario.findAdmin", query = "select p from Usuario p where p.email = :email and p.password=:password and rol=1")

@@ -31,7 +31,9 @@ $('#crearPrestador').click(function() {
         costo     : document.getElementById('costo').value,
         tipoServicio : document.getElementById('tipoServicio').value,
         descripcion : document.getElementById('descripcion').value,
-        vigencia : document.getElementById('vigencia').value
+        vigencia : document.getElementById('vigencia').value,
+        telefono : document.getElementById('telefono').value
+
 
     };
     $.ajax({
@@ -53,6 +55,7 @@ $('#crearPrestador').click(function() {
             document.getElementById("descripcion").value = "";
             document.getElementById("vigencia").value = "";
             document.getElementById("urlPago").value = "";
+            document.getElementById("telefono").value = "";
             cargarTablaServicio();
 
         },
