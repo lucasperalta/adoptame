@@ -179,7 +179,7 @@ $('#crearUsuario').click(function() {
             contentType: 'application/json; charset=utf-8',
             success: function (response) {
                 console.log(response)
-                $('#textoAltaUsuario').text(response);
+                $('#textoAltaUsuario').text(response.result);
                 $('#modalAltaUsuario').show();
                 cargarTablaUsuarios();
                 limpiarCampos();
@@ -296,7 +296,7 @@ function confirmaEditarUsuario(){
             contentType: 'application/json; charset=utf-8',
             success: function (response) {
                 console.log(response)
-                $('#textoEditarUsuario').text(response);//cargamos el texto de respuesta del servidor
+                $('#textoEditarUsuario').text(response.result);//cargamos el texto de respuesta del servidor
                 $('#modalRespuestaEditarUsuario').show();//mostramos popup con respuesta
 
                 cargarTablaUsuarios();//recargamos la tabla de usuarios actualizada

@@ -46,7 +46,7 @@ public class PrestadorController {
 
     @PostMapping("/buscarEmail")
     public @ResponseBody String buscarEmail( @RequestBody PersonaDTO personaDTO) {
-     //   Persona persona = personaService.econtrarPersonaPorEmail(personaDTO.getEmail());
+     //   Persona persona = personaService.encontrarPersonaPorEmail(personaDTO.getEmail());
         return "persona.toString()";
     }
 
@@ -54,16 +54,20 @@ public class PrestadorController {
     @PostMapping("/guardarPrestador")
     public  @ResponseBody  String  guardarPrestador(@RequestBody PrestadorDTO prestadorDTO  ) {
 
-        Prestador prestador= new Prestador();
-        prestador.setNombre(prestadorDTO.getNombre());
-        prestador.setApellido(prestadorDTO.getApellido());
-        prestador.setEmail(prestadorDTO.getEmail());
-        prestador.setFechaVinculacion(new Date());
-        prestador.setUrlPago(prestadorDTO.getUrlPago());
-        prestador.setTipoServicio(prestadorDTO.getTipoServicio());
-        prestadorService.addPrestador(prestador);
+        Prestador prestador=null;
 
+        prestador= prestadorService.encontrarPrestadorPorEmail(prestadorDTO.getEmail());
 
+        if(prestador==null){
+            prestador  = new Prestador();
+            prestador.setNombre(prestadorDTO.getNombre());
+            prestador.setApellido(prestadorDTO.getApellido());
+            prestador.setEmail(prestadorDTO.getEmail());
+            prestador.setFechaVinculacion(new Date());
+            prestador.setTipoServicio(prestadorDTO.getTipoServicio());
+            prestador.setTelefono(prestadorDTO.getTelefono());
+            prestadorService.addPrestador(prestador);
+        }
 
         Servicio servicio= new Servicio();
         servicio.setPrestador(prestador);
@@ -74,6 +78,7 @@ public class PrestadorController {
         servicio.setDescripcion(prestadorDTO.getDescripcion());
         servicio.setCosto(prestadorDTO.getCosto());
         servicio.setFechaFin(AddFecha(prestadorDTO.getVigencia()));
+        servicio.setUrlPago(prestadorDTO.getUrlPago());
         servicioService.addServicio(servicio);
 
 		return "Prestador dado de alta exitosamente";
@@ -87,7 +92,7 @@ public class PrestadorController {
     }
 
     @GetMapping("/todos")
-    public @ResponseBody Iterable<PrestadorDTO> listarServicios( ) { //TODO hay filtros en la pantalla de busqueda?
+    public @ResponseBody Iterable<PrestadorDTO> listarServicios( ) {
         List<Servicio> servicios =servicioService.listarServicios();
         List<PrestadorDTO> prestadoresDTO= new ArrayList<>();
         for (Servicio serv:servicios) {

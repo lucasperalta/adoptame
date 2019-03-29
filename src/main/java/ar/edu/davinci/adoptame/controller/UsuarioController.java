@@ -1,6 +1,7 @@
 package ar.edu.davinci.adoptame.controller;
 
 import ar.edu.davinci.adoptame.DTO.EstadoDTO;
+import ar.edu.davinci.adoptame.DTO.ResponseDTO;
 import ar.edu.davinci.adoptame.DTO.RolDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.constantes.Constantes;
@@ -75,9 +76,17 @@ public class UsuarioController {
 
 
     @PostMapping("/guardarUsuario")
-	public  @ResponseBody  String nuevoUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
+	public  @ResponseBody  ResponseDTO nuevoUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
 
-        Usuario usuario= new Usuario();
+        ResponseDTO responseDTO= new ResponseDTO();
+        Usuario usuario= usuarioService.buscarUsuarioByEmail(usuarioDTO.getEmail());
+        if(usuario!= null){
+            responseDTO.setStatus("FAIL");
+            responseDTO.setResult("Ya existe un usuario registrado con ese email");
+            return responseDTO;
+        }
+
+        usuario= new Usuario();
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
         usuario.setEmail(usuarioDTO.getEmail());
@@ -87,12 +96,15 @@ public class UsuarioController {
         Rol rol=rolService.findRolById(new Integer(usuarioDTO.getRol()));
         usuario.setRol(rol);
         usuarioService.addUsuario(usuario);
-		return "Usuario dado de alta exitosamente";
+        responseDTO.setStatus("SUCESS");
+        responseDTO.setResult("Usuario dado de alta exitosamente");
+		return responseDTO;
 	}
 
     @PostMapping("/editarUsuario")
-    public  @ResponseBody  String editarUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
+    public  @ResponseBody  ResponseDTO editarUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
 
+        ResponseDTO responseDTO= new ResponseDTO();
 
         Usuario usuario= usuarioService.buscarUsuarioByID(usuarioDTO.getId());
        if(usuario!= null){
@@ -105,9 +117,14 @@ public class UsuarioController {
            Rol rol=rolService.findRolById(new Integer(usuarioDTO.getRol()));
            usuario.setRol(rol);
            usuarioService.addUsuario(usuario);
-           return "Usuario Modificado exitosamente";
+           responseDTO.setStatus("SUCESS");
+           responseDTO.setResult("Usuario Modificado exitosamente");
+           return responseDTO;
        }
-       return "Hubo un error al modificar el usuario";
+
+        responseDTO.setStatus("FAIL");
+        responseDTO.setResult("Hubo un error al modificar el usuario");
+       return responseDTO;
 
     }
 

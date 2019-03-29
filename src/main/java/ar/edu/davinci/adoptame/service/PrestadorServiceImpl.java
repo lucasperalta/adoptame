@@ -1,7 +1,9 @@
 package ar.edu.davinci.adoptame.service;
 
+import ar.edu.davinci.adoptame.domain.Persona;
 import ar.edu.davinci.adoptame.domain.Prestador;
 import ar.edu.davinci.adoptame.domain.Usuario;
+import ar.edu.davinci.adoptame.exception.NotFoundException;
 import ar.edu.davinci.adoptame.repository.PrestadorRepository;
 import ar.edu.davinci.adoptame.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,16 @@ public class PrestadorServiceImpl implements PrestadorService{
 	public Prestador addPrestador(Prestador prestador) {
 		return prestadorRepository.save(prestador);
 	}
+
+	@Override
+	@Transactional
+	public Prestador encontrarPrestadorPorEmail(String email)  {
+		Prestador prestadorEncontrado = null;
+
+		prestadorEncontrado = prestadorRepository.findByEmail(email);
+
+		return prestadorEncontrado;
+	}
+
 
 }

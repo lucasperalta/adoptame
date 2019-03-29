@@ -31,21 +31,6 @@ public class PersonaServiceImpl implements PersonaService{
 		return personaRepository.findOne(persona.getId().longValue());
 	}
 
-	@Override
-	@Transactional
-	public Persona econtrarPersonaPorEmail(String email) throws NotFoundException {
-		Persona personaEncontrada = null;
-//		Query query = entityManager.createNamedQuery(Persona.PERSONA_FIND_BY_EMAIL);
-//		query.setParameter("email", persona.getEmail());
-//		if (query.getResultList() != null && query.getResultList().size() > 1) {
-//			result = (Persona) query.getResultList().get(0);
-//		}
-		personaEncontrada = personaRepository.findByEmail(email);
-		if (personaEncontrada == null) {
-			throw new NotFoundException();
-		}
-		return personaEncontrada;
-	}
 
 	@Override
 	@Transactional
