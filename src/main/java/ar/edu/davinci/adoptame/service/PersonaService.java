@@ -13,7 +13,6 @@ public interface PersonaService {
 
 	public Persona encontrarPersonaPorId(Persona persona);
 
-	public Persona econtrarPersonaPorEmail(String email) throws NotFoundException;
 
 	public Persona registrarPersona(Persona persona);
 

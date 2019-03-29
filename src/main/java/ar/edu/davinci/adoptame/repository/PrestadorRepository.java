@@ -1,6 +1,7 @@
 package ar.edu.davinci.adoptame.repository;
 
 import ar.edu.davinci.adoptame.domain.Permiso;
+import ar.edu.davinci.adoptame.domain.Persona;
 import ar.edu.davinci.adoptame.domain.Prestador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,5 +13,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
 
+    Prestador findByEmail(@Param("email") String email);
 
 }

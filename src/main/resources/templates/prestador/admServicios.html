@@ -28,23 +28,28 @@
                                             <label for="nombre">Nombre:</label>
                                             <input type="text" class="form-control" id="nombre"/>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="email">Email:</label>
-                                            <input type="text" class="form-control" id="email" onblur="buscoEmail()"/>
-                                        </div>
 
                                         <div class="col-md-4">
                                             <label for="apellido">Apellido:</label>
                                             <input type="text" class="form-control" id="apellido"/>
                                         </div>
+
                                         <div class="col-md-4">
-                                            <label for="urlPago">Link de Pago:</label>
-                                            <input type="text" class="form-control" id="urlPago"/>
+                                            <label for="email">Email:</label>
+                                            <input type="text" class="form-control" id="email" onblur="buscoEmail()"/>
                                         </div>
+
+
+
 
                                         <div class="col-md-4">
                                             <label for="direccion">Direccion:</label>
                                             <input type="text" class="form-control" id="direccion"/>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="direccion">Teléfono:</label>
+                                            <input type="text" class="form-control" id="telefono"/>
                                         </div>
                                     </div>
 
@@ -65,6 +70,7 @@
                                             <label for="vigencia">Vigencia:</label>
                                             <input type="text" class="form-control" id="vigencia"/>
                                         </div>
+
                                         <div class="col-md-2">
                                             <label for="tipoServicio">Tipo Servicio:</label>
                                             <select class="form-control" id="tipoServicio">
@@ -75,6 +81,10 @@
                                                 <option th:value="Guarderia" th:text="Guarderia"></option>
                                                 <option th:value="Veterinaria" th:text="Veterinaria"></option>
                                             </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="urlPago">Link de Pago:</label>
+                                            <input type="text" class="form-control" id="urlPago"/>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="descripcion">Descripción:</label>

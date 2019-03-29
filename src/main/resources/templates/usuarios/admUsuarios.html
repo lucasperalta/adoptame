@@ -85,30 +85,16 @@
               <div class="col-md-5">
                <h6>Ingresados</h6>
                </div>
-               <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="filtrar_combo">Filtrar:</label>
-                        <select class="form-control" id="filtrar_combo">
-                            <option th:value="null" th:text="Todos"></option>
-                            <option th:value="null" th:text="Admin"></option>
-                            <option th:value="null" th:text="Activos"></option>
-                            <option th:value="null" th:text="Suspendidos"></option>
-                            <option th:value="null" th:text="Usuario"></option>
-                        </select>
-                    </div>
-               </div>
-              <div class="col-md-3">
-                <label for="filtro">Ingrese filtro:</label>
-                <input type="text" class="form-control" id="filtro" />
-              </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-secondary buscar">Buscar</button>
-                </div>
+
+
           </div>
         </form>
             <table  id="tablaUsuarios"
                     data-toggle="table"
                     data-toolbar="#toolbar"
+                    data-search="true"
+                    data-pagination="true"
+                    data-page-size="10"
                     >
               <thead>
                 <tr>
