@@ -43,7 +43,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
 	public Usuario buscarUsuarioByID(Integer id) {
-		return usuarioRepository.findOne(id);
+		return usuarioRepository.getOne(id);
 	}
 
 }

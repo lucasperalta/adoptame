@@ -36,7 +36,7 @@ public class EventosServiceImpl implements EventosService{
 
 	@Override
 	public Eventos findOne(Long id) {
-		return eventosRepository.findOne(id);
+		return eventosRepository.getOne(id);
 	}
 
 	@Override
