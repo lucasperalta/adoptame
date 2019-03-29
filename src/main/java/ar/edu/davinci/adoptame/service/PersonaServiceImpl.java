@@ -28,7 +28,7 @@ public class PersonaServiceImpl implements PersonaService{
 	@Override
 	@Transactional
 	public Persona encontrarPersonaPorId(Persona persona) {
-		return personaRepository.findOne(persona.getId().longValue());
+		return personaRepository.getOne(persona.getId().longValue());
 	}
 
 
@@ -41,7 +41,7 @@ public class PersonaServiceImpl implements PersonaService{
 	@Override
 	@Transactional(rollbackOn=NotFoundException.class)
 	public Persona modificarPersona(Persona persona) throws NotFoundException {
-		Persona personaModificada = personaRepository.findOne(persona.getId().longValue());
+		Persona personaModificada = personaRepository.getOne(persona.getId().longValue());
 		if (personaModificada == null) {
 			throw new NotFoundException();
 		}
@@ -55,7 +55,7 @@ public class PersonaServiceImpl implements PersonaService{
 	@Override
 	@Transactional(rollbackOn=NotFoundException.class)
 	public Persona eliminarPersona(Persona persona) throws NotFoundException {
-		Persona personaAEliminar = personaRepository.findOne(persona.getId().longValue());
+		Persona personaAEliminar = personaRepository.getOne(persona.getId().longValue());
 		if (personaAEliminar == null) {
 			throw new NotFoundException();
 		}

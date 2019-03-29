@@ -25,6 +25,7 @@
                 <div class="col-md-11">
 
                     <h6>Crear Evento</h6>
+
                     <form id="altaEventoForm"  name="altaEventoForm" >
                     <div class="card">
                         <div class="card-body">
@@ -269,7 +270,7 @@
 </body>
 <script type="text/javascript" th:src="@{/js/admEventos.js}"></script>
 
-<script type="text/javascript">
+<script th:inline="javascript" >
 
     /** ncomo estoy usando tags de ThymeLeaf si lo saco a un JS no me lo toma**/
     function TableActions (value, row, index) {
@@ -277,15 +278,18 @@
 
 
             '<a class="like"  onclick="editarEvento( \''+row.id+'\',  \''+row.dias+'\',   \''+row.horarios+'\',   \''+row.direccion+'\' ,   \''+row.lugar+'\' ,\''+row.barrio+'\', \''+row.consultas+'\');" title="Editar evento">',
-            '<img class="options" th:src="@{/img/edit.png}" alt="check"/>',
+            '<img class="options" src="../img/edit.png" alt="check"/>',
             '</a> ',
             '<a class="danger remove" onclick="borrarEvento(\''+row.id+ '\')" title="Borrar Evento">',
-            '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
+            '<img class="options" src="../img/delete.png" alt="cancel"/>',
             '</a>'
         ].join('');
     }
 
 
 </script>
+
+
+
 
 </html>

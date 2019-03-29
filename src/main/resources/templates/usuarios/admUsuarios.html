@@ -271,10 +271,10 @@
 
 
             '<a class="like"  onclick="editarUsuario( \''+row.id+'\',  \''+row.nombre+'\',   \''+row.apellido+'\',   \''+row.email+'\' ,   \''+row.estado+'\' ,\''+row.rol+'\');" title="Editar usuario">',
-            '<img class="options" th:src="@{/img/edit.png}" alt="check"/>',
+            '<img class="options" src="../img/edit.png" alt="check"/>',
             '</a> ',
             '<a class="danger remove" onclick="borrarUsuario(\''+row.email+ '\')" title="Borrar Usuario">',
-            '<img class="options" th:src="@{/img/delete.png}" alt="cancel"/>',
+            '<img class="options" src="../img/delete.png" alt="cancel"/>',
             '</a>'
         ].join('');
     }
