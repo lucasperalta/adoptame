@@ -3,14 +3,9 @@ package ar.edu.davinci.adoptame.DTO;
 
 
 import ar.edu.davinci.adoptame.domain.Eventos;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class EventosDTO {
 

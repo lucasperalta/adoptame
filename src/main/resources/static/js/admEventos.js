@@ -232,7 +232,7 @@ $('#crearEvento').click(function() {
 
     $('#altaEventoForm').formValidation();
     $('#altaEventoForm').data('formValidation').validate();
-    var validForm = $('#altaEventoForm').data('formValidation').isValid()
+    var validForm = $('#altaEventoForm').data('formValidation').isValid();
 
 
 
