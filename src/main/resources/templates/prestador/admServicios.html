@@ -18,38 +18,42 @@
 
                     <!-- formulario de Ing de servicio-->
                     <div class="col-md-11">
-                        <form action="">
+                        <form id="altaServicioForm"  name="altaServicioForm" >
                             <h6>Ingresar Nuevo Servicio</h6>
                             <div class="card">
                                 <div class="card-body">
                                     <h6>Datos de Usuario</h6>
                                     <div class="row">
+
+
                                         <div class="col-md-4">
-                                            <label for="nombre">Nombre:</label>
-                                            <input type="text" class="form-control" id="nombre"/>
+                                            <label for="email">* Email:</label>
+                                            <input type="text" class="form-control" id="email" name="email" onblur="buscoEmail()"/>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="apellido">Apellido:</label>
-                                            <input type="text" class="form-control" id="apellido"/>
+                                            <label for="nombre">* Nombre:</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre"/>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="email">Email:</label>
-                                            <input type="text" class="form-control" id="email" onblur="buscoEmail()"/>
+                                            <label for="apellido">* Apellido:</label>
+                                            <input type="text" class="form-control" id="apellido" name="apellido"/>
                                         </div>
 
 
 
 
+
+
                                         <div class="col-md-4">
-                                            <label for="direccion">Direccion:</label>
-                                            <input type="text" class="form-control" id="direccion"/>
+                                            <label for="direccion">* Direccion:</label>
+                                            <input type="text" class="form-control" id="direccion" name="direccion"/>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="direccion">Teléfono:</label>
-                                            <input type="text" class="form-control" id="telefono"/>
+                                            <label for="direccion">* Teléfono:</label>
+                                            <input type="text" class="form-control" id="telefono" name="telefono"/>
                                         </div>
                                     </div>
 
@@ -58,37 +62,33 @@
                                     <h6>Datos de Servicio</h6>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label for="titulo">Título:</label>
-                                            <input type="text" class="form-control" id="titulo"/>
+                                            <label for="titulo">* Título:</label>
+                                            <input type="text" class="form-control" id="titulo" name="titulo"/>
                                         </div>
 
                                         <div class="col-md-2">
-                                            <label for="costo">Costo:</label>
-                                            <input type="text" class="form-control" id="costo"/>
+                                            <label for="costo">* Costo:</label>
+                                            <input type="text" class="form-control" id="costo" name="costo"/>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="vigencia">Vigencia:</label>
-                                            <input type="text" class="form-control" id="vigencia"/>
+                                            <label for="vigencia">* Vigencia (Días):</label>
+                                            <input type="text" class="form-control" id="vigencia" name="vigencia"/>
                                         </div>
 
                                         <div class="col-md-2">
-                                            <label for="tipoServicio">Tipo Servicio:</label>
-                                            <select class="form-control" id="tipoServicio">
-                                                <!-- <option value="">Seleccionar rubro</option>
-                                                 <option th:each="rub : ${rubro}"
-                                                         th:value="${rub.id}"
-                                                         th:text="${rub.nombreRol}"></option>-->
+                                            <label for="tipoServicio">* Tipo Servicio:</label>
+                                            <select class="form-control" id="tipoServicio" name="tipoServicio">
                                                 <option th:value="Guarderia" th:text="Guarderia"></option>
                                                 <option th:value="Veterinaria" th:text="Veterinaria"></option>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="urlPago">Link de Pago:</label>
-                                            <input type="text" class="form-control" id="urlPago"/>
+                                            <label for="urlPago">* Link de Pago:</label>
+                                            <input type="text" class="form-control" id="urlPago" name="urlPago"/>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="descripcion">Descripción:</label>
-                                            <textarea class="form-control" rows="3" cols="50" id="descripcion" ></textarea>
+                                            <label for="descripcion">* Descripción:</label>
+                                            <textarea class="form-control" rows="3" cols="50" id="descripcion" name="descripcion"></textarea>
                                         </div>
                                     </div>
                                     <button type="button"  id="crearPrestador" class="btn btn-secondary float-right">Agregar</button>

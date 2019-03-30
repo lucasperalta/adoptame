@@ -15,6 +15,17 @@ public class PrestadorDTO extends PersonaDTO  {
     private String titulo;
     private Integer id;
     private String telefono;
+    private String direccion;
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
     public String getTelefono() {
         return telefono;
