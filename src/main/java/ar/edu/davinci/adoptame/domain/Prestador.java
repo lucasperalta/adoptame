@@ -41,8 +41,21 @@ public class Prestador  implements Serializable {
 
     private String telefono;
 
+    @Column(name="direccion")
+
+    private String direccion;
+
+
     public Prestador(){
 
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getTelefono() {

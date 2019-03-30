@@ -45,9 +45,9 @@ public class PrestadorController {
 
 
     @PostMapping("/buscarEmail")
-    public @ResponseBody String buscarEmail( @RequestBody PersonaDTO personaDTO) {
-     //   Persona persona = personaService.encontrarPersonaPorEmail(personaDTO.getEmail());
-        return "persona.toString()";
+    public @ResponseBody Prestador buscarEmail( @RequestBody PrestadorDTO prestadorDTO) {
+        Prestador  prestador= prestadorService.encontrarPrestadorPorEmail(prestadorDTO.getEmail());
+        return prestador;
     }
 
 
@@ -60,14 +60,16 @@ public class PrestadorController {
 
         if(prestador==null){
             prestador  = new Prestador();
+        }
             prestador.setNombre(prestadorDTO.getNombre());
             prestador.setApellido(prestadorDTO.getApellido());
             prestador.setEmail(prestadorDTO.getEmail());
             prestador.setFechaVinculacion(new Date());
             prestador.setTipoServicio(prestadorDTO.getTipoServicio());
             prestador.setTelefono(prestadorDTO.getTelefono());
+            prestador.setDireccion(prestadorDTO.getDireccion());
             prestadorService.addPrestador(prestador);
-        }
+
 
         Servicio servicio= new Servicio();
         servicio.setPrestador(prestador);

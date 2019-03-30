@@ -1,5 +1,148 @@
 $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
     cargarTablaServicio();
+
+
+    $('#altaServicioForm').formValidation({
+        framework : 'bootstrap',
+        icon : {
+            invalid : 'glyphicon glyphicon-remove',
+            validating : 'glyphicon glyphicon-refresh'
+        },
+        excluded : ':disabled',
+        fields : {
+
+            nombre: {
+                validators: {
+                    notEmpty: {
+                        message: 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 45,
+                        message : 'Máximo 45 caracteres'
+                    }
+                }
+            },
+            apellido: {
+                validators: {
+                    notEmpty: {
+                        message: 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 50,
+                        message : 'Máximo 45 caracteres'
+                    }
+                }
+            },
+
+            email: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 45,
+                        message : 'Máximo 45 caracteres'
+                    },
+                    emailAddress: {
+                        message: 'Debe ser una dirección de mail válida'
+                    }
+                }
+            },
+            direccion: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+
+                        max : 100,
+                        message : 'Máximo 100 caracteres'
+                    }
+                }
+            },
+            telefono: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+
+                        max : 20,
+                        message : 'Máximo 20 caracteres'
+                    }
+                }
+            },
+            titulo: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+
+                        max : 255,
+                        message : 'Máximo 255 caracteres'
+                    }
+                }
+            } ,
+            costo: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    greaterThan: {
+                        message: 'Debe ser mayor que 0',
+                        value: 0
+                    }
+                }
+            },
+            vigencia: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    greaterThan: {
+                        message: 'Debe ser mayor que 0',
+                        value: 0
+                    }
+                }
+            },
+            tipoServicio: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    }
+                }
+            },
+            urlPago: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+
+                        max : 255,
+                        message : 'Máximo 255 caracteres'
+                    }
+                }
+            },
+            descripcion: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+
+                        max : 255,
+                        message : 'Máximo 255 caracteres'
+                    }
+                }
+            }
+
+        }
+    });
+
+
+
 });
 
 function cargarTablaServicio() {
@@ -18,7 +161,39 @@ function cargarTablaServicio() {
     });
 }
 
+function buscoEmail() {
 
+    var data = {
+
+        email     : document.getElementById('email').value
+    };
+
+
+    $.ajax({
+        type: 'POST',
+        url: '../prestador/buscarEmail',
+        contentType: 'application/json; charset=utf-8',
+        data:JSON.stringify(data),
+        success: function(response) {
+            console.log(response);
+            if(typeof response.nombre!='undefined'){
+                document.getElementById('nombre').value=response.nombre;
+            }
+            if(typeof response.apellido!='undefined'){
+                document.getElementById('apellido').value=response.apellido;
+            }
+            if(typeof response.direccion!='undefined'){
+                document.getElementById('direccion').value=response.direccion;
+            }
+            if(typeof response.telefono!='undefined'){
+                document.getElementById('telefono').value=response.telefono;
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
 $('#crearPrestador').click(function() {
     var data = {
 
@@ -35,34 +210,46 @@ $('#crearPrestador').click(function() {
         telefono : document.getElementById('telefono').value
 
 
+
     };
-    $.ajax({
-        type: 'POST',
-        url: '../prestador/guardarPrestador',
-        data:JSON.stringify(data),
 
-        contentType: 'application/json; charset=utf-8',
-        success: function(response) {
-            console.log(response);
-            $('#textoAltaServicio').text(response);
-            $('#modalAltaServicio').show();
-            document.getElementById("nombre").value = "";
-            document.getElementById("email").value = "";
-            document.getElementById("apellido").value = "";
-            document.getElementById("direccion").value = "";
-            document.getElementById("titulo").value = "";
-            document.getElementById("costo").value = "";
-            document.getElementById("descripcion").value = "";
-            document.getElementById("vigencia").value = "";
-            document.getElementById("urlPago").value = "";
-            document.getElementById("telefono").value = "";
-            cargarTablaServicio();
+    $('#altaServicioForm').formValidation();
+    $('#altaServicioForm').data('formValidation').validate();
+    var validForm = $('#altaServicioForm').data('formValidation').isValid();
 
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
+
+
+    if (validForm == true) {
+        $.ajax({
+            type: 'POST',
+            url: '../prestador/guardarPrestador',
+            data: JSON.stringify(data),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                console.log(response);
+                $('#textoAltaServicio').text(response);
+                $('#modalAltaServicio').show();
+                document.getElementById("nombre").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("apellido").value = "";
+                document.getElementById("direccion").value = "";
+                document.getElementById("titulo").value = "";
+                document.getElementById("costo").value = "";
+                document.getElementById("descripcion").value = "";
+                document.getElementById("vigencia").value = "";
+                document.getElementById("urlPago").value = "";
+                document.getElementById("telefono").value = "";
+                cargarTablaServicio();
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }else{
+        return false;
+    }
 });
 
 function cerrarModal(nombre){
