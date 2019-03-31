@@ -1,5 +1,6 @@
 package ar.edu.davinci.adoptame.service;
 
+import ar.edu.davinci.adoptame.domain.Prestador;
 import ar.edu.davinci.adoptame.domain.Servicio;
 
 import java.util.List;
@@ -11,5 +12,8 @@ public interface ServicioService {
 	List<Servicio> listarServicios();
 
 	public void borrarServicio(Servicio servicio);
+
+	public Servicio findOne(Integer id) ;
+
 
 }

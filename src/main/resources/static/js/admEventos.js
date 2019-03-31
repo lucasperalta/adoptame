@@ -292,13 +292,13 @@ function cerrarModalEditarEvento(){
 
 function editarEvento(id,dia,horario,direccion,lugar,barrio,consultas) {
 
-    $('#idEventoEditar').val(id),
-        $('#diaEventoEditar').val(dia),
-        $('#horarioEventoEditar').val(horario),
-        $('#direccionEventoEditar').val(direccion),
-        $('#lugarEventoEditar').val(lugar),
-        $('#barrioEventoEditar').val(barrio),
-        $('#consultasEventoEditar').val(consultas)
+    $('#idEventoEditar').val(id);
+        $('#diaEventoEditar').val(dia);
+        $('#horarioEventoEditar').val(horario);
+        $('#direccionEventoEditar').val(direccion);
+        $('#lugarEventoEditar').val(lugar);
+        $('#barrioEventoEditar').val(barrio);
+        $('#consultasEventoEditar').val(consultas);
 
     $('#modalEditarEvento').show();
 
