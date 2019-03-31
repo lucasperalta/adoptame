@@ -1,7 +1,9 @@
 package ar.edu.davinci.adoptame.controller;
 
+import ar.edu.davinci.adoptame.DTO.EventosDTO;
 import ar.edu.davinci.adoptame.DTO.PersonaDTO;
 import ar.edu.davinci.adoptame.DTO.PrestadorDTO;
+import ar.edu.davinci.adoptame.domain.Eventos;
 import ar.edu.davinci.adoptame.domain.Persona;
 import ar.edu.davinci.adoptame.domain.Prestador;
 import ar.edu.davinci.adoptame.domain.Servicio;
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +29,7 @@ import java.util.List;
 public class PrestadorController {
     private static final Logger logger = LoggerFactory.getLogger(PrestadorController.class);
 
+    private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
 
     @Autowired
@@ -104,11 +110,59 @@ public class PrestadorController {
             prestadorDTO.setApellido(serv.getPrestador().getApellido());
             prestadorDTO.setEmail(serv.getPrestador().getEmail());
             prestadorDTO.setFechaVinculacion(serv.getFechaInicio());
-            prestadorDTO.setFechaFin(serv.getFechaFin());
+            prestadorDTO.setFechaFin(format.format(serv.getFechaFin()));
             prestadorDTO.setTitulo(serv.getTitulo());
+            prestadorDTO.setIdServicio(serv.getId_servicio());
+            prestadorDTO.setCosto(serv.getCosto());
+            prestadorDTO.setDescripcion(serv.getDescripcion());
+            prestadorDTO.setUrlPago(serv.getUrlPago());
             prestadoresDTO.add(prestadorDTO);
             }
         return prestadoresDTO;
+    }
+
+
+    @PostMapping("/borrar")
+    public @ResponseBody String borrarServicio( @RequestBody PrestadorDTO prestadorDTO) {
+
+        Servicio servicio =servicioService.findOne(prestadorDTO.getIdServicio());
+        if(servicio!=null){
+            logger.info("servicio a borrar "+ servicio.getId_servicio());
+
+            servicioService.borrarServicio(servicio);
+
+        }else{
+            logger.info("Servicio no encontrado");
+
+            return "Servicio no encontrado";
+        }
+        return "Servicio borrado";
+    }
+
+
+
+    @PostMapping("/editarServicio")
+    public  @ResponseBody  String editarServicio(@RequestBody PrestadorDTO prestadorDTO  ) {
+
+
+        Servicio servicio= servicioService.findOne(prestadorDTO.getIdServicio());
+        if(servicio!= null){
+
+            servicio.setTitulo(prestadorDTO.getTitulo());
+            servicio.setCosto(prestadorDTO.getCosto());
+            servicio.setDescripcion(prestadorDTO.getDescripcion());
+            servicio.setUrlPago(prestadorDTO.getUrlPago());
+            try {
+                servicio.setFechaFin(format.parse(prestadorDTO.getFechaFin()) );
+            } catch (ParseException e) {
+                //si falla ponemos la fecha de hoy
+                servicio.setFechaFin(new Date() );
+            }
+            servicioService.addServicio(servicio);//si existe lo actualiza sino lo inserta
+            return "Servicio Modificado exitosamente";
+        }
+        return "Hubo un error al modificar el servicio";
+
     }
 
 

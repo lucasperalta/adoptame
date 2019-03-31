@@ -40,13 +40,7 @@
                                             <label for="apellido">* Apellido:</label>
                                             <input type="text" class="form-control" id="apellido" name="apellido"/>
                                         </div>
-
-
-
-
-
-
-                                        <div class="col-md-4">
+                                       <div class="col-md-4">
                                             <label for="direccion">* Direccion:</label>
                                             <input type="text" class="form-control" id="direccion" name="direccion"/>
                                         </div>
@@ -111,18 +105,21 @@
                                     data-search="true"
                                     data-pagination="true"
                                     data-page-size="10"
-                                    style=" width: 1px; white-space: nowrap;"
+                                   style="table-layout: fixed; word-wrap: break-word"
+
+
 
                             >
                                 <thead>
                                 <tr>
-                                    <th data-field="id">Id Persona</th>
-                                    <th data-field="nombre">Nombre</th>
-                                    <th data-field="apellido">Apellido</th>
+                                    <th data-field="idServicio" data-visible="false">idServicio</th>
+                                    <th data-formatter="nameFormatter">Prestador</th>
                                     <th data-field="email">Email</th>
                                     <th data-field="titulo">Titulo</th>
-                                    <th data-field="fechaVinculacion" data-formatter="dateFormat">Fecha Desde</th>
-                                    <th data-field="fechaFin" data-formatter="dateFormat">Fecha Hasta</th>
+                                    <th data-field="descripcion">Descripcion</th>
+                                    <th data-field="costo">Costo $</th>
+                                    <th data-field="urlPago">URL Pago</th>
+                                    <th data-field="fechaFin" >Fecha Hasta</th>
                                     <th data-formatter="TableActions">Action</th>
                                 </tr>
                                 </thead>
@@ -167,9 +164,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="textoBorrarUsuario">Seguro que desea borrar este Servicio?</p>
+                    <p id="textoBorrarServicio"></p>
                     <form id="formBorrarServicio" role="form">
-                        <input type="hidden" class="form-control" id="emailServicioBorrar" />
+                        <input type="hidden" class="form-control" id="idServicio" />
                     </form>
 
                 </div>
@@ -183,19 +180,117 @@
         </div>
     </div>
 
+
+<div class="modal editar" tabindex="-1" role="dialog" id="modalEditarServicio">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Evento</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalEditarServicio')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="formEditarServicio" name="formEditarServicio" role="form">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <input type="hidden" class="form-control" id="idServicioEditar" />
+                            <div class="col-md-6">
+                                <label for="Titulo">* Titulo</label>
+                                <input type="text" class="form-control" id="tituloServicioEditar" name="tituloServicioEditar"  />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Costo">* Costo</label>
+                                <input type="text" class="form-control" id="costoServicioEditar" name="costoServicioEditar" />
+                            </div>
+                        </div>
+                            <div class="row">
+
+
+                            <div class="col-md-12">
+                                <label for="Descripcion">* Descripcion</label>
+                                <input type="text" class="form-control" id="descripcionServicioEditar" name="descripcionServicioEditar"/>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <label for="urlPagoServicioEditar">* URL Pago</label>
+                                <input type="text" class="form-control" id="urlPagoServicioEditar" name="urlPagoServicioEditar"/>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fechaFinServicioEditar">* Fecha Fin </label>
+                                <input type="text" class="form-control" id="fechaFinServicioEditar" name="fechaFinServicioEditar" onchange="revalidarDias()" />
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary " id="confirmarEditarServicioBtn" onclick="confirmaEditarServicio()">Grabar</button>
+
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalEditarServicio')">Cerrar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal alta" tabindex="-1" role="dialog" id="modalRespuestaEditarServicio">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar evento</h5>
+                <button type="button" class="close" onclick="cerrarModal('modalRespuestaEditarServicio')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="textoEditarServicio">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal('modalRespuestaEditarServicio')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" th:src="@{/js/admServicios.js}"></script>
 <script>
 
-function TableActions (value, row, index) {
-return [
 
-'<a class="danger remove" onclick="borrarServicio(\''+row.email+ '\')" title="Borrar Usuario">',
-    '<img class="options" src="../img/delete.png" alt="cancel"/>',
-    '</a>'
-].join('');
+/** ncomo estoy usando tags de ThymeLeaf si lo saco a un JS no me lo toma**/
+function TableActions (value, row, index) {
+    return [
+
+
+        '<a class="like"  onclick="editarServicio( \''+row.idServicio+'\',  \''+row.titulo+'\',   \''+row.descripcion+'\',   \''+row.costo+'\' ,   \''+row.urlPago+'\' ,\''+row.fechaFin+'\');" title="Editar Servicio">',
+        '<img class="options" src="../img/edit.png" alt="check"/>',
+        '</a> ',
+        '<a class="danger remove" onclick="borrarServicio(\''+row.idServicio+ '\')" title="Borrar Servicio">',
+        '<img class="options" src="../img/delete.png" alt="cancel"/>',
+        '</a>'
+    ].join('');
 }
 
-
+function nameFormatter(value, row, index) {
+    return row.nombre + " " + row.apellido;
+}
 </script>
 </body>
 </html>
