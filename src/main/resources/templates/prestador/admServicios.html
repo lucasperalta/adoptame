@@ -113,8 +113,10 @@
                                 <thead>
                                 <tr>
                                     <th data-field="idServicio" data-visible="false">idServicio</th>
+
                                     <th data-formatter="nameFormatter">Prestador</th>
                                     <th data-field="email">Email</th>
+                                    <th data-field="tipoServicio" >Tipo Servicio</th>
                                     <th data-field="titulo">Titulo</th>
                                     <th data-field="descripcion">Descripcion</th>
                                     <th data-field="costo">Costo $</th>
@@ -221,8 +223,11 @@
                         <div class="row">
 
                             <div class="col-md-6">
-                                <label for="urlPagoServicioEditar">* URL Pago</label>
-                                <input type="text" class="form-control" id="urlPagoServicioEditar" name="urlPagoServicioEditar"/>
+                                <label for="tipoServicioEditar">* Tipo Servicio</label>
+                                <select class="form-control" id="tipoServicioEditar" name="tipoServicioEditar">
+                                    <option th:value="Guarderia" th:text="Guarderia"></option>
+                                    <option th:value="Veterinaria" th:text="Veterinaria"></option>
+                                </select>
 
                             </div>
                             <div class="col-md-6">
@@ -234,7 +239,16 @@
 
                         </div>
 
+                        <div class="row">
 
+                            <div class="col-md-12">
+                                <label for="urlPagoServicioEditar">* URL Pago</label>
+                                <input type="text" class="form-control" id="urlPagoServicioEditar" name="urlPagoServicioEditar"/>
+
+                            </div>
+
+
+                        </div>
                     </div>
 
 
@@ -279,7 +293,7 @@ function TableActions (value, row, index) {
     return [
 
 
-        '<a class="like"  onclick="editarServicio( \''+row.idServicio+'\',  \''+row.titulo+'\',   \''+row.descripcion+'\',   \''+row.costo+'\' ,   \''+row.urlPago+'\' ,\''+row.fechaFin+'\');" title="Editar Servicio">',
+        '<a class="like"  onclick="editarServicio( \''+row.idServicio+'\',  \''+row.titulo+'\',   \''+row.descripcion+'\',   \''+row.costo+'\' ,   \''+row.urlPago+'\' ,\''+row.fechaFin+'\'  ,\''+row.tipoServicio+'\' );" title="Editar Servicio">',
         '<img class="options" src="../img/edit.png" alt="check"/>',
         '</a> ',
         '<a class="danger remove" onclick="borrarServicio(\''+row.idServicio+ '\')" title="Borrar Servicio">',
