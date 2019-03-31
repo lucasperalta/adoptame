@@ -116,6 +116,7 @@ public class PrestadorController {
             prestadorDTO.setCosto(serv.getCosto());
             prestadorDTO.setDescripcion(serv.getDescripcion());
             prestadorDTO.setUrlPago(serv.getUrlPago());
+            prestadorDTO.setTipoServicio(serv.getTipoServicio());
             prestadoresDTO.add(prestadorDTO);
             }
         return prestadoresDTO;

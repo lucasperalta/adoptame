@@ -162,6 +162,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     }
                 }
             } ,
+            tipoServicioEditar: {
+                validators: {
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    }
+                }
+            },
+
             costoServicioEditar: {
                 validators: {
                     notEmpty : {
@@ -363,7 +371,7 @@ function confirmaBorrarServicio(){
 
 
 }
-function editarServicio(idServicio,titulo,descripcion,costo,urlPago,fechaFin) {
+function editarServicio(idServicio,titulo,descripcion,costo,urlPago,fechaFin,tipoServicio) {
 
     $('#idServicioEditar').val(idServicio);
     $('#tituloServicioEditar').val(titulo);
@@ -371,8 +379,7 @@ function editarServicio(idServicio,titulo,descripcion,costo,urlPago,fechaFin) {
     $('#costoServicioEditar').val(costo);
     $('#urlPagoServicioEditar').val(urlPago);
     $('#fechaFinServicioEditar').val(fechaFin);
-
-
+    $('#tipoServicioEditar').val(tipoServicio);
     $('#modalEditarServicio').show();
 
 }
@@ -398,6 +405,8 @@ function confirmaEditarServicio(){
         costo	: $('#costoServicioEditar').val(),
         urlPago:$('#urlPagoServicioEditar').val(),
         fechaFin:$('#fechaFinServicioEditar').val(),
+        tipoServicio:$('#tipoServicioEditar').val()
+
 
 
     };
