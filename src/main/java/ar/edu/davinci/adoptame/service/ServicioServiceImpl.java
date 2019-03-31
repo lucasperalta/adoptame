@@ -27,7 +27,10 @@ public class ServicioServiceImpl implements ServicioService {
     @Override
     public void borrarServicio(Servicio servicio) { servicioRepository.delete(servicio); }
 
-
+    @Override
+    public Servicio findOne(Integer id) {
+        return servicioRepository.getOne(id);
+    }
 
 
 }

@@ -9,13 +9,30 @@ public class PrestadorDTO extends PersonaDTO  {
     private Integer vigencia;
     private String urlPago;
     private Date fechaVinculacion;
-    private Date fechaFin;
+    private String fechaFin;
     private String descripcion;
     private Float costo;
     private String titulo;
     private Integer id;
     private String telefono;
     private String direccion;
+    private Integer idServicio;
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Integer getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(Integer idServicio) {
+        this.idServicio = idServicio;
+    }
 
     public String getDireccion() {
         return direccion;
@@ -41,9 +58,6 @@ public class PrestadorDTO extends PersonaDTO  {
     @Override
     public void setId(Integer id) { this.id = id; }
 
-    public Date getFechaFin() { return fechaFin; }
-
-    public void setFechaFin(Date fechaFin) { this.fechaFin = fechaFin; }
 
     public String getTitulo() { return titulo; }
 
