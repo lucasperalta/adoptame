@@ -1,7 +1,11 @@
 package ar.edu.davinci.adoptame.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name="usuarios")
@@ -37,9 +41,14 @@ public class Usuario extends Persona implements Serializable {
         this.rol = rol;
     }
 
+
+
     public String getPassword() {
         return password;
     }
+
+
+
 
     public void setPassword(String password) {
         this.password = password;
