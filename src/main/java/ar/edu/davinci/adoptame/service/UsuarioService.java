@@ -6,7 +6,7 @@ import ar.edu.davinci.adoptame.domain.Usuario;
 
 import java.util.List;
 
-public interface UsuarioService {
+public interface UsuarioService  {
 
 	public List<Usuario> listarUsuarios();
 

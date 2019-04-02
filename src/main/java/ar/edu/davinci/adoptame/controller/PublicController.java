@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller    // This means that this class is a Controller
 @RequestMapping(path="/") // This means URL's start with /demo (after Application path)
-public class PublicController {
+public class    PublicController {
 
 
     @Autowired

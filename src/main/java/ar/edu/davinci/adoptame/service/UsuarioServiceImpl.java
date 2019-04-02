@@ -7,6 +7,9 @@ import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
 import ar.edu.davinci.adoptame.repository.PersonaRepository;
 import ar.edu.davinci.adoptame.repository.UsuarioRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +18,7 @@ import java.util.List;
 
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService{
+public class UsuarioServiceImpl implements UsuarioService {
 
 	@Resource
 	UsuarioRepository usuarioRepository;
@@ -45,5 +48,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario buscarUsuarioByID(Integer id) {
 		return usuarioRepository.getOne(id);
 	}
+
 
 }
