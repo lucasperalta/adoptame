@@ -19,7 +19,7 @@
 		<div class="logo">Adopta.Me</div>
 		<nav>
 			<a th:href="@{/}">Inicio</a>
-			<a th:href="@{/login/login}">Admin</a>
+			<a th:href="@{/login}">Admin</a>
 		</nav>
 	</div>
 </header>
@@ -108,8 +108,8 @@ cargarProximosEventos();
 function cargarProximosEventos() {
     $.ajax({
         type: 'GET',
-        url: '../eventos/listarProximos',
-        contentType: 'application/json; charset=utf-8',
+        url: 'eventos/listarProximos',
+        contentType: 'application/json;',
         cache:'false',
         success: function(eventos) {
             console.log(eventos);
@@ -142,7 +142,7 @@ function cargarProximosEventos() {
 function cargarMascotasEnAdopcion() {
     $.ajax({
         type: 'GET',
-        url: '../mascotas/mascotasEnAdopcion',
+        url: 'mascotas/mascotasEnAdopcion',
         contentType: 'application/json; charset=utf-8',
 
         success: function(mascotas) {

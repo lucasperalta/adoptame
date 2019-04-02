@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @GetMapping("/nuevoUsuario")
@@ -91,7 +95,7 @@ public class UsuarioController {
         usuario.setEmail(usuarioDTO.getEmail());
         Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
         usuario.setEstado(estado);
-        usuario.setPassword(usuarioDTO.getPassword());
+        usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
         Rol rol=rolService.findRolById(new Integer(usuarioDTO.getRol()));
         usuario.setRol(rol);
         usuarioService.addUsuario(usuario);
@@ -134,7 +138,7 @@ public class UsuarioController {
      */
     @GetMapping("/todos")
     public @ResponseBody Iterable<UsuarioDTO> listarUsuarios( ) { //TODO hay filtros en la pantalla de busqueda?
-       List<Usuario> usuarios=usuarioService.listarUsuarios();
+           List<Usuario> usuarios=usuarioService.listarUsuarios();
         List<UsuarioDTO> usuariosDTO= new ArrayList<>();
         for (Usuario user:usuarios) {
             UsuarioDTO usuarioDTO= new UsuarioDTO();
