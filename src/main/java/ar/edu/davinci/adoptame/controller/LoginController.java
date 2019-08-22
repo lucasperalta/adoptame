@@ -96,27 +96,6 @@ public class LoginController {
         return new ModelAndView("redirect:/usuarios/nuevoUsuario");
 	}
 
-    @GetMapping("/ingresarMobile")
-    public @ResponseBody UsuarioDTO findUser( @RequestParam(value="usuario")String usuario,@RequestParam(value="password")String password  ) {
-        Usuario usuarioExiste=null;
 
-        try {
-            usuarioExiste = loginService.buscarUsuarioByEmail(usuario);
-        } catch (NotFoundException e) {
-
-            return new UsuarioDTO();
-        }
-
-
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        if(usuarioExiste.getPassword().equals(password)){
-            usuarioDTO.setEmail(usuarioExiste.getEmail());
-            usuarioDTO.setPassword(usuarioExiste.getPassword());
-            usuarioDTO.setNombre(usuarioExiste.getNombre());
-            usuarioDTO.setApellido(usuarioExiste.getApellido());
-            usuarioDTO.setEstado(usuarioExiste.getEstado().getEstado());
-        }
-        return usuarioDTO;
-    }
 
 }
