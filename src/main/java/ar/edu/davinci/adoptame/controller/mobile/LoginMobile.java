@@ -8,6 +8,7 @@ import ar.edu.davinci.adoptame.service.LoginService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,9 @@ public class LoginMobile {
     @Autowired
     private EstadoService estadoService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/ingresarMobile")
     public @ResponseBody
     UsuarioDTO findUser(HttpServletRequest request,
@@ -49,7 +53,7 @@ public class LoginMobile {
 
 
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        if (usuarioExiste.getPassword().equals(password)) {
+        if ((passwordEncoder.matches(password,usuarioExiste.getPassword()))) {
             usuarioDTO.setEmail(usuarioExiste.getEmail());
             usuarioDTO.setPassword(usuarioExiste.getPassword());
             usuarioDTO.setNombre(usuarioExiste.getNombre());
