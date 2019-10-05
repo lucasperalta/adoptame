@@ -32,7 +32,8 @@ public class MascotaMobileController {
     private MascotaService mascotaService;
 
     @PostMapping(path="/uploadPet")
-    public MascotaDTO uploadPet(@RequestPart("file") MultipartFile file,
+    @ResponseBody
+    public  MascotaDTO uploadPet(@RequestPart("file") MultipartFile file,
                                         @ModelAttribute  MascotaDTO mascota ) {
 
         String fileName = fileStorageService.storeFile(file);
@@ -45,7 +46,7 @@ public class MascotaMobileController {
 
       Mascota mascotaRespuesta=  mascotaService.addMascotas(mascota);
       MascotaDTO mascotaRespuestaDTO= new MascotaDTO(mascotaRespuesta);
-        return mascotaRespuestaDTO;
+        return   mascotaRespuestaDTO;
     }
 
 
