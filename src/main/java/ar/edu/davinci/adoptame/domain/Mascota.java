@@ -1,5 +1,7 @@
 package ar.edu.davinci.adoptame.domain;
 
+import ar.edu.davinci.adoptame.DTO.MascotaDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -50,7 +52,7 @@ public class Mascota implements Serializable {
     @JoinColumn(name="id")
     private Usuario rescatista;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_coordenada")
     private Coordenada coordenadas;
 
@@ -74,6 +76,9 @@ public class Mascota implements Serializable {
         this.rescatista = rescatista;
         this.coordenadas = coordenadas;
     }
+
+
+
 
     public Integer getId() {
         return id;
