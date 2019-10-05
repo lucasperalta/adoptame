@@ -20,6 +20,8 @@ public class MascotaDTO {
         this.descripcion = mascota.getDescripcion();
         this.tamanio = mascota.getTamanio();
         this.rescatista = mascota.getRescatista().getNombre();
+        this.latitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLatitud():null;
+        this.longitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLongitud():null;
     }
 
 
@@ -45,8 +47,12 @@ public class MascotaDTO {
 
     private String tamanio;
 
-
     private String rescatista;
+
+
+
+    private Double longitud;
+    private Double latitud;
 
     public Integer getId() {
         return id;
@@ -136,7 +142,21 @@ public class MascotaDTO {
         this.rescatista = rescatista;
     }
 
+    public Double getLongitud() {
+        return longitud;
+    }
 
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
 
 
 
