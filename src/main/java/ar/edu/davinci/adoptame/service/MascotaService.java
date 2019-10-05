@@ -1,5 +1,6 @@
 package ar.edu.davinci.adoptame.service;
 
+import ar.edu.davinci.adoptame.DTO.MascotaDTO;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +12,7 @@ public interface MascotaService {
 	public List<Mascota> listarMascotas();
 
 
-	public Mascota addMascotas(Mascota mascota);
+	public Mascota addMascotas(MascotaDTO mascota);
 
 
 	public List<Mascota> findAllByEstadoOrderByIdDesc(String estado);

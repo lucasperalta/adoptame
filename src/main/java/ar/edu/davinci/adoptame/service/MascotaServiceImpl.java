@@ -1,15 +1,14 @@
 package ar.edu.davinci.adoptame.service;
 
+import ar.edu.davinci.adoptame.DTO.MascotaDTO;
+import ar.edu.davinci.adoptame.domain.Coordenada;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.repository.MascotaRepository;
-import ar.edu.davinci.adoptame.repository.UsuarioRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -18,7 +17,8 @@ public class MascotaServiceImpl implements MascotaService{
 
 	@Resource
 	MascotaRepository mascotaRepository;
-
+	@Autowired
+	UsuarioService usuarioService;
 
 	@Override
 	public List<Mascota> listarMascotas() {
@@ -26,8 +26,16 @@ public class MascotaServiceImpl implements MascotaService{
 	}
 
 	@Override
-	public Mascota addMascotas(Mascota mascota) {
-		return mascotaRepository.save(mascota);
+	public Mascota addMascotas(MascotaDTO mascota) {
+
+	Usuario rescatista=	usuarioService.buscarUsuarioByID(new Integer(mascota.getRescatista()));
+	Coordenada coordenada= new Coordenada(new Double("-34.6131500"),new Double("-58.3772300"));
+
+		Mascota mascotaModel= new Mascota(mascota.getNombre(),mascota.getSexo(),
+				mascota.getTipoMascota(),mascota.getRaza(),
+				mascota.getEdad(),mascota.getFoto_url(),mascota.getEstado(),
+				mascota.getDescripcion(),mascota.getTamanio(),rescatista,coordenada);
+		return mascotaRepository.save(mascotaModel);
 	}
 
 
