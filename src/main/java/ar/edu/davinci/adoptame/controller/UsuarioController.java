@@ -79,7 +79,7 @@ public class UsuarioController {
 
 
     @PostMapping("/guardarUsuario")
-	public  @ResponseBody  ResponseDTO nuevoUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
+	public  @ResponseBody  ResponseDTO guardarUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
 
         ResponseDTO responseDTO= new ResponseDTO();
         Usuario usuario= usuarioService.buscarUsuarioByEmail(usuarioDTO.getEmail());
