@@ -4,4 +4,5 @@ public  class Constantes {
 
     public static String ESTADO_ACTIVO="ACTIVO";
     public static int ROL_ADMIN=1;
+    public static int ROL_USER=2;
 }

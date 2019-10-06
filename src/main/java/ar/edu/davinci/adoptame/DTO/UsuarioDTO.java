@@ -3,6 +3,7 @@ package ar.edu.davinci.adoptame.DTO;
 import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Persona;
 import ar.edu.davinci.adoptame.domain.Rol;
+import ar.edu.davinci.adoptame.domain.Usuario;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +24,11 @@ public class UsuarioDTO extends PersonaDTO  {
 
     }
 
+    public UsuarioDTO(Usuario usuario) {
+        super(usuario.getNombre(),usuario.getApellido(),usuario.getEmail(),usuario.getTelefono(),usuario.getUbicacion());
+        this.password=usuario.getPassword();
+
+    }
     public String getPassword() {
         return password;
     }

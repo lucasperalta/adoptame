@@ -1,11 +1,17 @@
 package ar.edu.davinci.adoptame.controller.mobile;
 
+import ar.edu.davinci.adoptame.DTO.ResponseDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
+import ar.edu.davinci.adoptame.constantes.Constantes;
+import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Persona;
+import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
 import ar.edu.davinci.adoptame.repository.PersonaRepository;
+import ar.edu.davinci.adoptame.service.EstadoService;
 import ar.edu.davinci.adoptame.service.PersonaService;
+import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,9 +27,13 @@ public class UsuarioMobileController {
 	private UsuarioService usuarioService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	@Autowired
+	EstadoService estadoService;
+	@Autowired
+	RolService rolService;
 
 	@PostMapping(path="/modifyUser") // Map ONLY GET Requests
-	public @ResponseBody Usuario modifyPersona (@RequestBody UsuarioDTO usuarioDTO)  {
+	public @ResponseBody UsuarioDTO modifyPersona (@RequestBody UsuarioDTO usuarioDTO)  {
 
 	 Usuario usuario=	usuarioService.buscarUsuarioByEmail(usuarioDTO.getEmail());
 
@@ -52,12 +62,39 @@ public class UsuarioMobileController {
 		usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
 	}
 
+
 	usuarioService.addUsuario(usuario);
+	UsuarioDTO usuarioResponse= new UsuarioDTO(usuario);
 
-
-
-	return usuario;
+	return usuarioResponse;
 	}
-	
 
+	@PostMapping("/signInUser")
+	public  @ResponseBody
+	ResponseDTO guardarUsuario(@RequestBody UsuarioDTO usuarioDTO  ) {
+
+		ResponseDTO responseDTO= new ResponseDTO();
+		Usuario usuario= usuarioService.buscarUsuarioByEmail(usuarioDTO.getEmail());
+		if(usuario!= null){
+			responseDTO.setStatus("FAIL");
+			responseDTO.setResult("Ya existe un usuario registrado con ese email");
+			return responseDTO;
+		}
+
+		usuario= new Usuario();
+		usuario.setNombre(usuarioDTO.getNombre());
+		usuario.setApellido(usuarioDTO.getApellido());
+		usuario.setEmail(usuarioDTO.getEmail());
+		usuario.setTelefono(usuarioDTO.getTelefono());
+		usuario.setUbicacion(usuarioDTO.getUbicacion());
+		Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
+		usuario.setEstado(estado);
+		usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+		Rol rol=rolService.findRolById(Constantes.ROL_USER);
+		usuario.setRol(rol);
+		usuarioService.addUsuario(usuario);
+		responseDTO.setStatus("SUCESS");
+		responseDTO.setResult("Usuario dado de alta exitosamente");
+		return responseDTO;
+	}
 }
