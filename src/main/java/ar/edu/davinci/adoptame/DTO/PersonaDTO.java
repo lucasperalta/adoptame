@@ -30,6 +30,15 @@ public class PersonaDTO {
     public PersonaDTO() {
     }
 
+    public PersonaDTO(String nombre, String apellido, String email, String telefono, String ubicacion) {
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.email=email;
+        this.telefono=telefono;
+        this.ubicacion=ubicacion;
+
+    }
+
 
     public String getTelefono() {
         return telefono;
