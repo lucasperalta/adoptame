@@ -33,19 +33,18 @@ public class MascotaMobileController {
 
     @PostMapping(path="/uploadPet")
     @ResponseBody
-    public  MascotaDTO uploadPet(@RequestPart("file") MultipartFile file,
-                                        @ModelAttribute  MascotaDTO mascota ) {
+    public  MascotaDTO uploadPet(@ModelAttribute  MascotaDTO params) {
 
-        String fileName = fileStorageService.storeFile(file);
+        String fileName = fileStorageService.storeFile(params.getImage());
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/mobile/downloadPet/")
                 .path(fileName)
                 .toUriString();
-        mascota.setFoto_url(fileDownloadUri);
+      //  mascota.setFoto_url(fileDownloadUri);
 
-      Mascota mascotaRespuesta=  mascotaService.addMascotas(mascota);
-      MascotaDTO mascotaRespuestaDTO= new MascotaDTO(mascotaRespuesta);
+     // Mascota mascotaRespuesta=  mascotaService.addMascotas(mascota);
+      MascotaDTO mascotaRespuestaDTO= new MascotaDTO();
         return   mascotaRespuestaDTO;
     }
 
