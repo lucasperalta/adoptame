@@ -18,10 +18,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path="/mobile") // This means URL's start with /demo (after Application path)
+@RequestMapping(path="/mobile")
 public class MascotaMobileController {
 
     private static final Logger logger = LoggerFactory.getLogger(MascotaMobileController.class);
@@ -31,6 +33,14 @@ public class MascotaMobileController {
     @Autowired
     private MascotaService mascotaService;
 
+    /**
+     * servicio para hacer upload de mascotas
+     * recibe los datos de la mascota y una imagen  MultipartFile image;
+     * con la foto de la mascota
+     * la guarda en bbdd y devuelve los datos de la mascota
+     * @param params
+     * @return
+     */
     @PostMapping(path="/uploadPet")
     @ResponseBody
     public  MascotaDTO uploadPet(@ModelAttribute  MascotaDTO params) {
@@ -41,11 +51,13 @@ public class MascotaMobileController {
                 .path("/mobile/downloadPet/")
                 .path(fileName)
                 .toUriString();
-      //  mascota.setFoto_url(fileDownloadUri);
+        params.setFoto_url(fileDownloadUri);
 
-     // Mascota mascotaRespuesta=  mascotaService.addMascotas(mascota);
-      MascotaDTO mascotaRespuestaDTO= new MascotaDTO();
-        return   mascotaRespuestaDTO;
+      Mascota mascotaRespuesta=  mascotaService.addMascotas(params);
+
+       MascotaDTO masDto= new MascotaDTO(mascotaRespuesta);
+
+        return  masDto  ;
     }
 
 
@@ -60,7 +72,7 @@ public class MascotaMobileController {
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
-            logger.info("Could not determine file type.");
+            logger.info("No se puede determinar el tipo de archivo.");
         }
 
         // Fallback to the default content type if type could not be determined
@@ -72,6 +84,18 @@ public class MascotaMobileController {
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
+    }
+
+
+    @GetMapping("/listaMascotasDisponible")
+    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion( ) {
+        List<Mascota> mascotas=mascotaService.findAllByEstadoOrderByIdDesc("DISPONIBLE");
+        List<MascotaDTO> mascotaDTOS= new ArrayList<>();
+        for (Mascota mascota:mascotas) {
+            MascotaDTO mascotaDTO= new MascotaDTO(mascota);
+            mascotaDTOS.add(mascotaDTO);
+        }
+        return mascotaDTOS;
     }
 
 }
