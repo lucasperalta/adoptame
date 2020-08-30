@@ -93,9 +93,16 @@ public class MascotaMobileController {
 
 
     @GetMapping("/listaMascotasDisponible")
-    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaDTO mascotaParams ) {
+    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaDTO params ) {
 
-        List<Mascota> mascotas=mascotaService.findAllByEstadoOrderByIdDesc("DISPONIBLE");
+        Mascota mascotaParam = new Mascota();
+        mascotaParam.setEstado("DISPONIBLE");
+        mascotaParam.setSexo(params.getSexo());
+        mascotaParam.setTamanio(params.getTamanio());
+        mascotaParam.setEdad(params.getEdad());
+
+
+        List<Mascota> mascotas=mascotaService.findAllByEstadoAndSexoAndTamanioAndEdad(mascotaParam);
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
             MascotaDTO mascotaDTO= new MascotaDTO(mascota);
