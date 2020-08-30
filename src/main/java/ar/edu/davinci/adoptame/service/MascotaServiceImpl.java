@@ -6,6 +6,7 @@ import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.repository.MascotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -51,8 +52,8 @@ public class MascotaServiceImpl implements MascotaService{
 
 
 	@Override
-	public List<Mascota> findAllBySexoOrTamanioOrEdad(String sexo,String tamanio,Integer edad) {
-		return mascotaRepository.findAllBySexoOrTamanioOrEdad(sexo,tamanio,edad);
+	public List<Mascota> findAllByEstadoAndSexoAndTamanioAndEdad(Mascota mascota) {
+		return mascotaRepository.findAll(Example.of(mascota));
 	}
 
 	@Override
