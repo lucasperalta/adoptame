@@ -54,11 +54,15 @@ public class LoginMobile {
 
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         if ((passwordEncoder.matches(password,usuarioExiste.getPassword()))) {
+            usuarioDTO.setId(usuarioExiste.getId());
             usuarioDTO.setEmail(usuarioExiste.getEmail());
             usuarioDTO.setPassword(usuarioExiste.getPassword());
             usuarioDTO.setNombre(usuarioExiste.getNombre());
             usuarioDTO.setApellido(usuarioExiste.getApellido());
             usuarioDTO.setEstado(usuarioExiste.getEstado().getEstado());
+            usuarioDTO.setRol(usuarioExiste.getRol().getNombreRol());
+            usuarioDTO.setUbicacion(usuarioExiste.getUbicacion());
+            usuarioDTO.setTelefono(usuarioExiste.getTelefono());
         }
         return usuarioDTO;
     }

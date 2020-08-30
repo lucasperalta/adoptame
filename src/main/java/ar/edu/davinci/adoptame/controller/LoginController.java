@@ -63,14 +63,6 @@ public class LoginController {
     @PostMapping("/ingresar")
 	public ModelAndView findAdmin(@ModelAttribute UsuarioDTO usuarioDTO ,Model model ) {
         Usuario usuario;
-/*
-        try {
-            usuario = loginService.findAdmin(usuarioDTO.getEmail(),usuarioDTO.getPassword());
-        } catch (NotFoundException e) {
-            model.addAttribute("loginfail", "Usuario o password incorrectos");
-            return new ModelAndView("redirect:/login");
-        }*/
-        //TODO  pasar el usuario a DTO y guardarlo usuario en session
 
         List<Rol> roles=rolService.listaRoles();
         List<RolDTO> rolesDto= new ArrayList<>();
