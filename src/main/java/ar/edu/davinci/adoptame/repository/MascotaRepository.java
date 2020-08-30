@@ -20,7 +20,6 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     @Query(value="SELECT * FROM mascotas where estado=:estado ORDER BY RAND() LIMIT 3", nativeQuery = true)
     List<Mascota> findTop3ByEstadoOrderByRandom(@Param("estado")String estado);
 
-    public List<Mascota> findAllBySexoOrTamanioOrEdad(String sexo,String tamanio,Integer edad);
 
     public List<Mascota> findAllByRescatista(Usuario usuario);
 
