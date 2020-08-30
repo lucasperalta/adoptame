@@ -1,7 +1,9 @@
 package ar.edu.davinci.adoptame.controller.mobile;
 
 import ar.edu.davinci.adoptame.DTO.MascotaDTO;
+import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.domain.Mascota;
+import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.service.*;
 import ar.edu.davinci.adoptame.utils.UploadFileResponse;
 import org.slf4j.Logger;
@@ -32,6 +34,9 @@ public class MascotaMobileController {
     private FileStorageService fileStorageService;
     @Autowired
     private MascotaService mascotaService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     /**
      * servicio para hacer upload de mascotas
@@ -88,8 +93,23 @@ public class MascotaMobileController {
 
 
     @GetMapping("/listaMascotasDisponible")
-    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion( ) {
+    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaDTO mascotaParams ) {
+
         List<Mascota> mascotas=mascotaService.findAllByEstadoOrderByIdDesc("DISPONIBLE");
+        List<MascotaDTO> mascotaDTOS= new ArrayList<>();
+        for (Mascota mascota:mascotas) {
+            MascotaDTO mascotaDTO= new MascotaDTO(mascota);
+            mascotaDTOS.add(mascotaDTO);
+        }
+        return mascotaDTOS;
+    }
+
+    @GetMapping("/mascotasUsuario/{id}")
+    public @ResponseBody Iterable<MascotaDTO> mascotasPropiasEnAdopcion(@PathVariable Integer id ) {
+
+      Usuario usuario=  usuarioService.buscarUsuarioByID(id);
+
+        List<Mascota> mascotas=mascotaService.findAllByRescatista(usuario);
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
             MascotaDTO mascotaDTO= new MascotaDTO(mascota);

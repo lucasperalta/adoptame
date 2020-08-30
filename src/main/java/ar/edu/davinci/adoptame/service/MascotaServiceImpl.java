@@ -48,4 +48,15 @@ public class MascotaServiceImpl implements MascotaService{
 
 		return mascotaRepository.findTop3ByEstadoOrderByRandom(estado);
 	}
+
+
+	@Override
+	public List<Mascota> findAllBySexoOrTamanioOrEdad(String sexo,String tamanio,Integer edad) {
+		return mascotaRepository.findAllBySexoOrTamanioOrEdad(sexo,tamanio,edad);
+	}
+
+	@Override
+	public List<Mascota> findAllByRescatista(Usuario usuario) {
+		return mascotaRepository.findAllByRescatista(usuario);
+	}
 }
