@@ -32,7 +32,7 @@ public class MascotaController {
 
 
     /**
-     * Lista el top 5 de mascotas
+     * Lista el top 3 de mascotas
      * @return
      */
     @GetMapping("/mascotasEnAdopcion")
