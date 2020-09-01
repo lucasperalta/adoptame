@@ -15,12 +15,12 @@ import java.util.List;
 
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
-    public List<Mascota> findAllByEstadoOrderByIdDesc(@Param("estado")String estado);
+     List<Mascota> findAllByEstadoOrderByIdDesc(@Param("estado")String estado);
 
     @Query(value="SELECT * FROM mascotas where estado=:estado ORDER BY RAND() LIMIT 3", nativeQuery = true)
     List<Mascota> findTop3ByEstadoOrderByRandom(@Param("estado")String estado);
 
 
-    public List<Mascota> findAllByRescatista(Usuario usuario);
+     List<Mascota> findAllByRescatista(Usuario usuario);
 
 }

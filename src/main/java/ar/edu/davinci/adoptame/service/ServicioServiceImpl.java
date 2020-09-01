@@ -2,16 +2,18 @@ package ar.edu.davinci.adoptame.service;
 
 import ar.edu.davinci.adoptame.domain.Servicio;
 import ar.edu.davinci.adoptame.repository.ServicioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
 @Service
 public class ServicioServiceImpl implements ServicioService {
 
-    @Resource
+    @Autowired
     ServicioRepository servicioRepository;
 
     @Override
@@ -32,5 +34,8 @@ public class ServicioServiceImpl implements ServicioService {
         return servicioRepository.getOne(id);
     }
 
-
+    @Override
+    public List<Servicio> listarServiciosVigentes(Date fechaFin) {
+        return servicioRepository.findAllByFechaFinAfter(fechaFin);
+    }
 }
