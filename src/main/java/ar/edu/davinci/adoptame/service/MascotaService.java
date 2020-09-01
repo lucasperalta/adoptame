@@ -9,20 +9,24 @@ import java.util.List;
 
 public interface MascotaService {
 
-	public List<Mascota> listarMascotas();
+	 List<Mascota> listarMascotas();
 
 
-	public Mascota addMascotas(MascotaDTO mascota);
+	 Mascota addMascotas(MascotaDTO mascota);
 
 
-	public List<Mascota> findAllByEstadoOrderByIdDesc(String estado);
-	public List<Mascota> findTop3ByEstadoRandom(String estado) ;
+	 List<Mascota> findAllByEstadoOrderByIdDesc(String estado);
+	 List<Mascota> findTop3ByEstadoRandom(String estado) ;
 
-	public List<Mascota> findAllByEstadoAndSexoAndTamanioAndEdad(Mascota mascota) ;
+	 List<Mascota> findAllByEstadoAndSexoAndTamanioAndEdad(Mascota mascota) ;
 
-	public List<Mascota> findAllByRescatista(Usuario usuario) ;
+	 List<Mascota> findAllByRescatista(Usuario usuario) ;
+
+	 Mascota findById(Long id);
+
+	 Mascota save (Mascota mascota);
 
 
 
 
-	}
+}
