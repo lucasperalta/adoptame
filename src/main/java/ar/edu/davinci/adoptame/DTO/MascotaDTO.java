@@ -27,7 +27,7 @@ public class MascotaDTO {
     }
 
 
-    private Integer id;
+    private Long id;
 
     private String nombre;
 
@@ -64,11 +64,11 @@ public class MascotaDTO {
     private Double longitud;
     private Double latitud;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
