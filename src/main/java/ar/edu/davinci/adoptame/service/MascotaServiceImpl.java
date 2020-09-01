@@ -60,4 +60,14 @@ public class MascotaServiceImpl implements MascotaService{
 	public List<Mascota> findAllByRescatista(Usuario usuario) {
 		return mascotaRepository.findAllByRescatista(usuario);
 	}
+
+	@Override
+	public Mascota findById(Long id) {
+		return mascotaRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public Mascota save (Mascota mascota) {
+		return mascotaRepository.save(mascota);
+	}
 }

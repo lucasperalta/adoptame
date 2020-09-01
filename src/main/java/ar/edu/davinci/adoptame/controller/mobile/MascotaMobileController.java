@@ -4,6 +4,7 @@ import ar.edu.davinci.adoptame.DTO.MascotaDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
+import ar.edu.davinci.adoptame.exception.NotFoundException;
 import ar.edu.davinci.adoptame.service.*;
 import ar.edu.davinci.adoptame.utils.UploadFileResponse;
 import org.slf4j.Logger;
@@ -124,5 +125,22 @@ public class MascotaMobileController {
         }
         return mascotaDTOS;
     }
+
+    @PostMapping(path="/estadoMascota")
+    @ResponseBody
+    public  MascotaDTO cambiarEstado(@RequestBody MascotaDTO params) {
+
+
+        Mascota mascotaRespuesta=  mascotaService.findById(new Long(params.getId()));
+        if(mascotaRespuesta==null){
+            throw new NotFoundException();
+        }
+
+        mascotaRespuesta.setEstado(params.getEstado());
+        mascotaRespuesta= mascotaService.save(mascotaRespuesta);
+        MascotaDTO masDto = new MascotaDTO(mascotaRespuesta);
+        return  masDto  ;
+    }
+
 
 }
