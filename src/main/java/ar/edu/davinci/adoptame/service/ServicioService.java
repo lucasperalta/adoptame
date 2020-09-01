@@ -1,19 +1,22 @@
 package ar.edu.davinci.adoptame.service;
 
-import ar.edu.davinci.adoptame.domain.Prestador;
 import ar.edu.davinci.adoptame.domain.Servicio;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ServicioService {
 
-	public Servicio addServicio(Servicio servicio);
+	 Servicio addServicio(Servicio servicio);
 
 	List<Servicio> listarServicios();
 
-	public void borrarServicio(Servicio servicio);
+	 void borrarServicio(Servicio servicio);
 
-	public Servicio findOne(Integer id) ;
+	 Servicio findOne(Integer id) ;
+
+	 List<Servicio> listarServiciosVigentes(Date fechaFin) ;
 
 
-}
+
+	}

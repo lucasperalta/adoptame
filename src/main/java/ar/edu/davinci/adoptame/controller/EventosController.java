@@ -72,7 +72,7 @@ public class EventosController {
      * @return
      */
     @GetMapping("/todos")
-    public @ResponseBody Iterable<EventosDTO> listarEventos( ) { //TODO hay filtros en la pantalla de busqueda?
+    public @ResponseBody Iterable<EventosDTO> listarEventos( ) {
         List<Eventos> eventos=eventosService.listarEventos();
         List<EventosDTO> eventosDTOS= new ArrayList<>();
         for (Eventos evento:eventos) {
