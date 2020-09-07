@@ -1,7 +1,9 @@
 package ar.edu.davinci.adoptame.controller;
 
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
+import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.service.EstadoService;
+import ar.edu.davinci.adoptame.service.MascotaService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 @Controller    // This means that this class is a Controller
@@ -25,6 +31,9 @@ public class AdminController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private MascotaService mascotaService;
 
 
     @GetMapping("/eventos")
@@ -45,6 +54,31 @@ public class AdminController {
         return "admin/admUsuarios";
     }
 
+    @RequestMapping(value = "/chart", method= RequestMethod.GET)
+    public String chart(Model model) {
 
+
+        List<Mascota> mascotasDisponibles =mascotaService.findAllByEstadoOrderByIdDesc("DISPONIBLE");
+        List<Mascota> mascotasAdoptadas =mascotaService.findAllByEstadoOrderByIdDesc("ADOPTADA");
+
+        //first, add the regional sales
+        Integer mascotasDisponiblesCant = mascotasDisponibles.size();
+        Integer mascotasAdoptadasCant = mascotasAdoptadas.size();
+
+        model.addAttribute("mascotasDisponibles", mascotasDisponiblesCant);
+        model.addAttribute("mascotasAdpotadas", mascotasAdoptadasCant);
+
+
+        //now add sales by lure type
+        List<Integer> inshoreSales = Arrays.asList(4074, 3455, 4112);
+        List<Integer> nearshoreSales = Arrays.asList(3222, 3011, 3788);
+        List<Integer> offshoreSales = Arrays.asList(7811, 7098, 6455);
+
+        model.addAttribute("inshoreSales", inshoreSales);
+        model.addAttribute("nearshoreSales", nearshoreSales);
+        model.addAttribute("offshoreSales", offshoreSales);
+
+        return "statistics/chart";
+    }
 
 }
