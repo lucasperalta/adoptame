@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Controller    // This means that this class is a Controller
@@ -60,10 +63,21 @@ public class AdminController {
 
         List<Mascota> mascotasDisponibles =mascotaService.findAllByEstadoOrderByIdDesc("DISPONIBLE");
         List<Mascota> mascotasAdoptadas =mascotaService.findAllByEstadoOrderByIdDesc("ADOPTADA");
+        List<Mascota> mascotas=  new ArrayList<>();
+
+        mascotas.addAll(mascotasDisponibles);
+        mascotas.addAll(mascotasAdoptadas);
+
+        Map<String,List<Mascota>> mascotasBySexo = mascotas.stream()
+                .collect(Collectors.groupingBy(Mascota::getSexo));
+
 
         //first, add the regional sales
         Integer mascotasDisponiblesCant = mascotasDisponibles.size();
         Integer mascotasAdoptadasCant = mascotasAdoptadas.size();
+        model.addAttribute("mascotasMacho", mascotasBySexo.get("MACHO").size());
+        model.addAttribute("mascotasHembra", mascotasBySexo.get("HEMBRA").size());
+
 
         model.addAttribute("mascotasDisponibles", mascotasDisponiblesCant);
         model.addAttribute("mascotasAdpotadas", mascotasAdoptadasCant);
