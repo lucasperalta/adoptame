@@ -27,6 +27,5 @@ public interface MascotaService {
 	 Mascota save (Mascota mascota);
 
 
-
-
+	List<Mascota> findAll();
 }

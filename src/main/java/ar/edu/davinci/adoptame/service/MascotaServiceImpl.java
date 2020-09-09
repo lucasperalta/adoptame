@@ -70,4 +70,10 @@ public class MascotaServiceImpl implements MascotaService{
 	public Mascota save (Mascota mascota) {
 		return mascotaRepository.save(mascota);
 	}
+
+	@Override
+	public List<Mascota> findAll() {
+		return mascotaRepository.findAll();
+	}
+
 }
