@@ -71,6 +71,52 @@ public class AdminController {
         Map<String,List<Mascota>> mascotasBySexo = mascotas.stream()
                 .collect(Collectors.groupingBy(Mascota::getSexo));
 
+        Map<Integer,List<Mascota>> mascotasByEdad = mascotas.stream()
+                .collect(Collectors.groupingBy(Mascota::getEdad));
+
+
+        List<Integer>mascotasByEdadList = new ArrayList<>(
+                Arrays.asList(0,0,0,0));
+
+        mascotasByEdad.forEach((k, v) -> {
+                                            System.out.println(k + ":" + v.size());
+
+                                            switch (k){
+                                                case 0:
+                                                case 1:
+                                                case 2:
+                                                case 3:
+                                                case 4:
+                                                    Integer cant =mascotasByEdadList.get(0);
+                                                    cant+=v.size();
+                                                    mascotasByEdadList.set(0,cant);
+                                                    break;
+                                                case 5:
+                                                case 6:
+                                                case 7:
+                                                case 8:
+                                                case 9:
+                                                    Integer cant1 =mascotasByEdadList.get(1);
+                                                    cant1+=v.size();
+                                                    mascotasByEdadList.set(1,cant1);                                                    break;
+                                                case 10:
+                                                case 11:
+                                                case 12:
+                                                case 13:
+                                                case 14:
+                                                    Integer cant2 =mascotasByEdadList.get(2);
+                                                    cant2+=v.size();
+                                                    mascotasByEdadList.set(2,cant2);
+                                                    break;
+                                                default:
+                                                    Integer cant3 =mascotasByEdadList.get(3);
+                                                    cant3+=v.size();
+                                                    mascotasByEdadList.set(3,cant3);
+
+                                            }
+                                            });
+
+
 
         //first, add the regional sales
         Integer mascotasDisponiblesCant = mascotasDisponibles.size();
@@ -81,16 +127,13 @@ public class AdminController {
 
         model.addAttribute("mascotasDisponibles", mascotasDisponiblesCant);
         model.addAttribute("mascotasAdpotadas", mascotasAdoptadasCant);
+        model.addAttribute("mascotasByEdad", mascotasByEdadList);
 
 
-        //now add sales by lure type
-        List<Integer> inshoreSales = Arrays.asList(4074, 3455, 4112);
-        List<Integer> nearshoreSales = Arrays.asList(3222, 3011, 3788);
-        List<Integer> offshoreSales = Arrays.asList(7811, 7098, 6455);
 
-        model.addAttribute("inshoreSales", inshoreSales);
-        model.addAttribute("nearshoreSales", nearshoreSales);
-        model.addAttribute("offshoreSales", offshoreSales);
+
+
+
 
         return "statistics/chart";
     }
