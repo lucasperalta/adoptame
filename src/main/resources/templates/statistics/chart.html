@@ -97,10 +97,7 @@
         }
 
         function drawMascotasByEdadPie() {
-            var categories = [
-                '0-4', '5-9', '10-14', '15-19',
-                '20-24', '25 + '
-            ];
+            var categories = ['0-4', '5-9', '10-14', '+15' ];
 
 
             var mascotasChart = Highcharts.chart('mascotasByEdad', {
@@ -125,30 +122,17 @@
                     accessibility: {
                         description: 'Edad (Macho)'
                     }
-                }, { // mirror axis on right side
-                    opposite: true,
-                    reversed: false,
-                    categories: categories,
-                    linkedTo: 0,
-                    labels: {
-                        step: 1
-                    },
-                    accessibility: {
-                        description: 'Edad (Male)'
-                    }
                 }],
                 yAxis: {
+                    allowDecimals: false,
+
                     title: {
                         text: null
                     },
                     labels: {
                         formatter: function () {
-                            return Math.abs(this.value) + '%';
+                            return this.value ;
                         }
-                    },
-                    accessibility: {
-                        description: 'Percentage population',
-                        rangeDescription: 'Range: 0 to 5%'
                     }
                 },
 
@@ -160,23 +144,14 @@
 
                 tooltip: {
                     formatter: function () {
-                        return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
-                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
+                        return '<b>' + this.series.name + ', edad ' + this.point.category + '</b><br/>' +
+                            'Cantidad: ' + this.point.y ;
                     }
                 },
 
                 series: [{
-                    name: 'Male',
-                    data: [
-                        -2.2, -2.1, -2.2, -2.4,
-                        -2.7
-                    ]
-                }, {
-                    name: 'Female',
-                    data: [
-                        2.1, 2.0, 2.1, 2.3, 2.6,
-                        2.9
-                    ]
+                    name: 'Mascotas',
+                    data: /*[[${mascotasByEdad}]]*/ 0
                 }]
             });
         }
