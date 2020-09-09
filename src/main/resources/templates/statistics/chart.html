@@ -97,41 +97,86 @@
         }
 
         function drawMascotasByEdadPie() {
+            var categories = [
+                '0-4', '5-9', '10-14', '15-19',
+                '20-24', '25 + '
+            ];
+
+
             var mascotasChart = Highcharts.chart('mascotasByEdad', {
                 chart: {
-                    type: 'pie',
-                    margin: 40,
-                    options3d: {
-                        enabled: true,
-                        alpha: 45,
-                        beta: 0
-                    }
+                    type: 'bar'
                 },
                 title: {
-                    text: 'Edad'
+                    text: 'Mascotas por Edad'
                 },
-                tooltip: {
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        depth: 35,
-                        size: 280,
-                        slicedOffset: 20
 
-
+                accessibility: {
+                    point: {
+                        valueDescriptionFormat: '{index}. Edad {xDescription}, {value}%.'
                     }
                 },
+                xAxis: [{
+                    categories: categories,
+                    reversed: false,
+                    labels: {
+                        step: 1
+                    },
+                    accessibility: {
+                        description: 'Edad (Macho)'
+                    }
+                }, { // mirror axis on right side
+                    opposite: true,
+                    reversed: false,
+                    categories: categories,
+                    linkedTo: 0,
+                    labels: {
+                        step: 1
+                    },
+                    accessibility: {
+                        description: 'Edad (Male)'
+                    }
+                }],
+                yAxis: {
+                    title: {
+                        text: null
+                    },
+                    labels: {
+                        formatter: function () {
+                            return Math.abs(this.value) + '%';
+                        }
+                    },
+                    accessibility: {
+                        description: 'Percentage population',
+                        rangeDescription: 'Range: 0 to 5%'
+                    }
+                },
+
+                plotOptions: {
+                    series: {
+                        stacking: 'normal'
+                    }
+                },
+
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
+                    }
+                },
+
                 series: [{
-                    name: 'Mascotas',
-                    colorByPoint:true,
-                    data: [{
-                        name: 'En adopcion',
-                        y: /*[[${mascotasDisponibles}]]*/ 0
-                    },{
-                        name: 'Adoptadas',
-                        y: /*[[${mascotasAdpotadas}]]*/ 0
-                    }]
+                    name: 'Male',
+                    data: [
+                        -2.2, -2.1, -2.2, -2.4,
+                        -2.7
+                    ]
+                }, {
+                    name: 'Female',
+                    data: [
+                        2.1, 2.0, 2.1, 2.3, 2.6,
+                        2.9
+                    ]
                 }]
             });
         }
@@ -208,11 +253,11 @@
                     name: 'Mascotas',
                     colorByPoint:true,
                     data: [{
-                        name: 'En adopcion',
-                        y: /*[[${mascotasDisponibles}]]*/ 0
+                        name: 'Macho',
+                        y: /*[[${mascotasMacho}]]*/ 0
                     },{
-                        name: 'Adoptadas',
-                        y: /*[[${mascotasAdpotadas}]]*/ 0
+                        name: 'Hembra',
+                        y: /*[[${mascotasHembra}]]*/ 0
                     }]
                 }]
             });
