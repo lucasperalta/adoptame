@@ -74,12 +74,14 @@ public class AdminController {
         Map<Integer,List<Mascota>> mascotasByEdad = mascotas.stream()
                 .collect(Collectors.groupingBy(Mascota::getEdad));
 
+        Map<String,List<Mascota>> mascotasByTipo = mascotas.stream()
+                .collect(Collectors.groupingBy(Mascota::getTipoMascota));
+
 
         List<Integer>mascotasByEdadList = new ArrayList<>(
                 Arrays.asList(0,0,0,0));
 
         mascotasByEdad.forEach((k, v) -> {
-                                            System.out.println(k + ":" + v.size());
 
                                             switch (k){
                                                 case 0:
@@ -118,7 +120,6 @@ public class AdminController {
 
 
 
-        //first, add the regional sales
         Integer mascotasDisponiblesCant = mascotasDisponibles.size();
         Integer mascotasAdoptadasCant = mascotasAdoptadas.size();
         model.addAttribute("mascotasMacho", mascotasBySexo.get("MACHO").size());
@@ -129,10 +130,11 @@ public class AdminController {
         model.addAttribute("mascotasAdpotadas", mascotasAdoptadasCant);
         model.addAttribute("mascotasByEdad", mascotasByEdadList);
 
+        List<Integer>mascotasPerro = new ArrayList<>(Arrays.asList(mascotasByTipo.get("PERRO").size()));
+        List<Integer>mascotasGato = new ArrayList<>(Arrays.asList(mascotasByTipo.get("GATO").size()));
 
-
-
-
+        model.addAttribute("mascotasPerro", mascotasPerro);
+        model.addAttribute("mascotasGato",mascotasGato );
 
 
         return "statistics/chart";
