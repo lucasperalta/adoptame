@@ -161,39 +161,60 @@
         function drawMascotasByTipoPie() {
             var mascotasChart = Highcharts.chart('mascotasByTipo', {
                 chart: {
-                    type: 'pie',
-                    margin: 40,
-                    options3d: {
-                        enabled: true,
-                        alpha: 45,
-                        beta: 0
-                    }
+                    type: 'column'
                 },
                 title: {
-                    text: 'Tipo'
+                    text: 'Mascotas por Tipo'
+                },
+                xAxis: {
+                    categories: ['Mascotas']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total de mascotas'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: ( // theme
+                                Highcharts.defaultOptions.title.style &&
+                                Highcharts.defaultOptions.title.style.color
+                            ) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    x: -30,
+                    verticalAlign: 'top',
+                    y: 25,
+                    floating: true,
+                    backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
                 },
                 tooltip: {
+                    headerFormat: '<b>{point.x}</b><br/>',
+                    pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
                 },
                 plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        depth: 35,
-                        size: 280,
-                        slicedOffset: 20
-
-
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true
+                        }
                     }
                 },
                 series: [{
-                    name: 'Mascotas',
-                    colorByPoint:true,
-                    data: [{
-                        name: 'En adopcion',
-                        y: /*[[${mascotasDisponibles}]]*/ 0
-                    },{
-                        name: 'Adoptadas',
-                        y: /*[[${mascotasAdpotadas}]]*/ 0
-                    }]
+                    name: 'Perros',
+                    data:  /*[[${mascotasPerro}]]*/ 0
+                }, {
+                    name: 'Gatos',
+                    data:  /*[[${mascotasGato}]]*/ 0
                 }]
             });
         }
