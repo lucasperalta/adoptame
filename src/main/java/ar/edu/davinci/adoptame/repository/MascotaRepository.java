@@ -23,4 +23,10 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
      List<Mascota> findAllByRescatista(Usuario usuario);
 
+
+    List<Mascota> findAllByEstadoAndSexoOrTamanioOrEdadLessThanEqual(@Param("estado") String estado,
+                                                                       @Param("sexo") String sexo,
+                                                                       @Param("tamanio") String tamanio,
+                                                                       @Param("edad") Integer edad);
+
 }

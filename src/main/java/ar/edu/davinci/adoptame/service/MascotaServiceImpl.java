@@ -53,7 +53,8 @@ public class MascotaServiceImpl implements MascotaService{
 
 	@Override
 	public List<Mascota> findAllByEstadoAndSexoAndTamanioAndEdad(Mascota mascota) {
-		return mascotaRepository.findAll(Example.of(mascota));
+		//return mascotaRepository.findAll(Example.of(mascota));
+		return mascotaRepository.findAllByEstadoAndSexoOrTamanioOrEdadLessThanEqual(mascota.getEstado(),mascota.getSexo(),mascota.getTamanio(),mascota.getEdad());
 	}
 
 	@Override

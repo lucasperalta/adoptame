@@ -1,6 +1,9 @@
 package ar.edu.davinci.adoptame.controller.mobile;
 
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
+import ar.edu.davinci.adoptame.constantes.Constantes;
+import ar.edu.davinci.adoptame.domain.Estado;
+import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
 import ar.edu.davinci.adoptame.service.EstadoService;
@@ -35,25 +38,53 @@ public class LoginMobile {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    Boolean loggedWithFb;
+
     @PostMapping("/ingresarMobile")
     public @ResponseBody
     UsuarioDTO findUser(HttpServletRequest request,
                         HttpServletResponse response,@RequestBody Map<String, Object> params) {
+
         Usuario usuarioExiste = null;
         String usuario= (String)params.get("usuario");
         String password= (String)params.get("password");
+        String facebookId= (String)params.get("facebookId");
+
+        if(facebookId!=null && !facebookId.isEmpty()){
+            System.out.println("entre con facebook");
+            loggedWithFb=true;
+
+        }
         try {
 
 
             usuarioExiste = loginService.buscarUsuarioByEmail(usuario);
-        } catch (NotFoundException e) {
 
-            return new UsuarioDTO();
+
+        } catch (NotFoundException e) {
+            if(!loggedWithFb){
+                return new UsuarioDTO();
+            }else{
+                System.out.println("se logueo con fb y no existe tengo que crear un user");
+                usuarioExiste= new Usuario();
+                usuarioExiste.setNombre(" ");
+                usuarioExiste.setApellido(" ");
+                usuarioExiste.setEmail(usuario);
+                usuarioExiste.setTelefono(" ");
+                usuarioExiste.setUbicacion(" ");
+                Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
+                usuarioExiste.setEstado(estado);
+                usuarioExiste.setPassword(passwordEncoder.encode("12345678"));//por default
+                Rol rol=rolService.findRolById(Constantes.ROL_USER);
+                usuarioExiste.setRol(rol);
+                usuarioExiste= usuarioService.addUsuario(usuarioExiste);
+            }
+
         }
 
 
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        if ((passwordEncoder.matches(password,usuarioExiste.getPassword()))) {
+        if ((passwordEncoder.matches(password,usuarioExiste.getPassword())) || loggedWithFb) {
             usuarioDTO.setId(usuarioExiste.getId());
             usuarioDTO.setEmail(usuarioExiste.getEmail());
             usuarioDTO.setPassword(usuarioExiste.getPassword());
@@ -66,4 +97,5 @@ public class LoginMobile {
         }
         return usuarioDTO;
     }
+
 }
