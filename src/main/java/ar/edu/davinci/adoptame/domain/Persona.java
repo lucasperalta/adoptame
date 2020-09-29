@@ -17,6 +17,8 @@ public abstract class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //  @SequenceGenerator(name="personas_id_seq", sequenceName="personas_id_seq", allocationSize=1)
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="personas_id_seq")
     @Column(name = "id")
     private Integer id;
 
