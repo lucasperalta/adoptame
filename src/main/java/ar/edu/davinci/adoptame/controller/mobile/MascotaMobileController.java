@@ -1,6 +1,7 @@
 package ar.edu.davinci.adoptame.controller.mobile;
 
 import ar.edu.davinci.adoptame.DTO.MascotaDTO;
+import ar.edu.davinci.adoptame.DTO.MascotaFilterDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
@@ -94,16 +95,16 @@ public class MascotaMobileController {
 
 
     @GetMapping("/listaMascotasDisponible")
-    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaDTO params ) {
+    public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaFilterDTO params ) {
 
         Mascota mascotaParam = new Mascota();
         mascotaParam.setEstado("DISPONIBLE");
-        mascotaParam.setSexo(params.getSexo());
-        mascotaParam.setTamanio(params.getTamanio());
+      //  mascotaParam.setSexo(params.getSexo());
+      //  mascotaParam.setTamanio(params.getTamanio());
         mascotaParam.setEdad(params.getEdad());
 
 
-        List<Mascota> mascotas=mascotaService.findAllByEstadoAndSexoAndTamanioAndEdad(mascotaParam);
+        List<Mascota> mascotas=mascotaService.findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(mascotaParam.getEstado(),params.getSexo(),mascotaParam.getEdad(),params.getTamanio());
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
             MascotaDTO mascotaDTO= new MascotaDTO(mascota);
