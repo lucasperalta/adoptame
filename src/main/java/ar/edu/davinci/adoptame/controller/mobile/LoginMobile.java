@@ -67,8 +67,8 @@ public class LoginMobile {
             }else{
                 System.out.println("se logueo con fb y no existe tengo que crear un user");
                 usuarioExiste= new Usuario();
-                usuarioExiste.setNombre(" ");
-                usuarioExiste.setApellido(" ");
+                usuarioExiste.setNombre("pocho");
+                usuarioExiste.setApellido("lopez");
                 usuarioExiste.setEmail(usuario);
                 usuarioExiste.setTelefono(" ");
                 usuarioExiste.setUbicacion(" ");
@@ -84,7 +84,7 @@ public class LoginMobile {
 
 
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        if ((passwordEncoder.matches(password,usuarioExiste.getPassword())) || loggedWithFb) {
+        if (loggedWithFb || (passwordEncoder.matches(password,usuarioExiste.getPassword())) ) {
             usuarioDTO.setId(usuarioExiste.getId());
             usuarioDTO.setEmail(usuarioExiste.getEmail());
             usuarioDTO.setPassword(usuarioExiste.getPassword());
