@@ -29,9 +29,9 @@ public class MascotaServiceImpl implements MascotaService{
 	@Override
 	public Mascota addMascotas(MascotaDTO mascota) {
 
-	Usuario rescatista=	usuarioService.buscarUsuarioByID(new Integer(mascota.getRescatista()));
-	//TODO sacar este hardcodeo de aca
-	Coordenada coordenada= new Coordenada(new Double("-34.6131500"),new Double("-58.3772300"));
+		Usuario rescatista=	usuarioService.buscarUsuarioByID(new Integer(mascota.getRescatista()));
+		//TODO sacar este hardcodeo de aca
+		Coordenada coordenada= new Coordenada(new Double("-34.6131500"),new Double("-58.3772300"));
 
 		Mascota mascotaModel= new Mascota(mascota.getNombre(),mascota.getSexo(),
 				mascota.getTipoMascota(),mascota.getRaza(),
@@ -52,9 +52,9 @@ public class MascotaServiceImpl implements MascotaService{
 
 
 	@Override
-	public List<Mascota> findAllByEstadoAndSexoAndTamanioAndEdad(Mascota mascota) {
+	public List<Mascota> findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(String estado, List<String> sexo, Integer edad, List<String> tamanio){
 		//return mascotaRepository.findAll(Example.of(mascota));
-		return mascotaRepository.findAllByEstadoAndSexoOrTamanioOrEdadLessThanEqual(mascota.getEstado(),mascota.getSexo(),mascota.getTamanio(),mascota.getEdad());
+		return mascotaRepository.findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(estado,sexo,edad,tamanio);
 	}
 
 	@Override
