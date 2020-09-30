@@ -45,6 +45,7 @@ public class LoginMobile {
     UsuarioDTO findUser(HttpServletRequest request,
                         HttpServletResponse response,@RequestBody Map<String, Object> params) {
 
+        loggedWithFb=false;
         Usuario usuarioExiste = null;
         String usuario= (String)params.get("usuario");
         String password= (String)params.get("password");
@@ -84,7 +85,7 @@ public class LoginMobile {
 
 
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        if (loggedWithFb || (passwordEncoder.matches(password,usuarioExiste.getPassword())) ) {
+        if (loggedWithFb || (!loggedWithFb && passwordEncoder.matches(password,usuarioExiste.getPassword())) ) {
             usuarioDTO.setId(usuarioExiste.getId());
             usuarioDTO.setEmail(usuarioExiste.getEmail());
             usuarioDTO.setPassword(usuarioExiste.getPassword());
