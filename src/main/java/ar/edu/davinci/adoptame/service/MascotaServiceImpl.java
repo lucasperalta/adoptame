@@ -30,8 +30,7 @@ public class MascotaServiceImpl implements MascotaService{
 	public Mascota addMascotas(MascotaDTO mascota) {
 
 		Usuario rescatista=	usuarioService.buscarUsuarioByID(new Integer(mascota.getRescatista()));
-		//TODO sacar este hardcodeo de aca
-		Coordenada coordenada= new Coordenada(new Double("-34.6131500"),new Double("-58.3772300"));
+		Coordenada coordenada= new Coordenada(mascota.getLatitud(),mascota.getLongitud());
 
 		Mascota mascotaModel= new Mascota(mascota.getNombre(),mascota.getSexo(),
 				mascota.getTipoMascota(),mascota.getRaza(),

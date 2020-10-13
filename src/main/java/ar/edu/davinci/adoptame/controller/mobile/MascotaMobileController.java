@@ -144,4 +144,15 @@ public class MascotaMobileController {
     }
 
 
+    @GetMapping(path="/distancia")
+    @ResponseBody
+    public void calculateDistanceInMeters() {
+
+
+        double dist = org.apache.lucene.util.SloppyMath.haversinKilometers(-34.683994, -58.516947, -34.674544, -58.502652);
+        System.out.println(dist);
+        //  return dist;
+
+    }
+
 }
