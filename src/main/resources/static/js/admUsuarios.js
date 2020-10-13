@@ -53,10 +53,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
-                    stringLength : {
-                        min:8,
-                        max : 10,
-                        message : 'Debe tener entre 8 y 10 caracteres'
+
+                    regexp: {
+                        regexp: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                        message: 'Debe contener 8 caracteres ,1 numero,una mayuscula ,una minuscula'
                     }
                 }
             },
