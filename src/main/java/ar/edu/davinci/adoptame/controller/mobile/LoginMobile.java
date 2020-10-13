@@ -52,7 +52,6 @@ public class LoginMobile {
         String facebookId= (String)params.get("facebookId");
 
         if(facebookId!=null && !facebookId.isEmpty()){
-            System.out.println("entre con facebook");
             loggedWithFb=true;
 
         }
@@ -66,16 +65,18 @@ public class LoginMobile {
             if(!loggedWithFb){
                 return new UsuarioDTO();
             }else{
-                System.out.println("se logueo con fb y no existe tengo que crear un user");
+                //si me logeo con facebook y no teno usuario
+                ///creo uno por default
                 usuarioExiste= new Usuario();
-                usuarioExiste.setNombre("pocho");
-                usuarioExiste.setApellido("lopez");
+                usuarioExiste.setNombre(usuario);
+                usuarioExiste.setApellido(usuario);
                 usuarioExiste.setEmail(usuario);
                 usuarioExiste.setTelefono(" ");
                 usuarioExiste.setUbicacion(" ");
                 Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
                 usuarioExiste.setEstado(estado);
-                usuarioExiste.setPassword(passwordEncoder.encode("12345678"));//por default
+                //Debe contener 8 caracteres ,1 numero,una mayuscula ,una minuscula
+                usuarioExiste.setPassword(passwordEncoder.encode("Adoptam1"));//por default y lo encripto
                 Rol rol=rolService.findRolById(Constantes.ROL_USER);
                 usuarioExiste.setRol(rol);
                 usuarioExiste= usuarioService.addUsuario(usuarioExiste);
