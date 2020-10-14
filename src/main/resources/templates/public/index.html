@@ -30,23 +30,9 @@
 			<div class="row">
 				<!--Mascotas adoptadas-->
 				<div class="col-xs-8 col-sm-3">
-					<div class="card ">
-						<div class="card-body">
-							<img class="logo_masc_adop float-right" th:src="@{/img/iconPet.png}" alt="Logo"/>
-							<h2>Mascotas Adoptadas</h2>
-						</div>
-						<!-- Items Mascotas adoptadas-->
-						<div class=" col-sm-12">
-							<div class="card item_card off-border">
-								<div class="card-body item_body">
-									<div class="offset-sm-2 col-sm-3">
-										<img class="img_masc_adop float-top" th:src="@{/img/iconPet.png}" alt="Logo"/>
-									</div>
-									<h2>Nombre</h2>
-								</div>
-							</div>
-						</div>
-						<!-- Items Mascotas adoptadas-->
+					<div class="card scroll-box" id="mascotasAdopDiv">
+						<h2 class="card-header " >Mascotas Adoptadas</h2>
+
 					</div>
 				</div>
 				<!--FIN Mascotas adoptadas-->
@@ -102,6 +88,7 @@
 <script>
 $(document).ready(function () { //Cuando la pagina termina de cargar y esta lista, llama a los que esta aca dentro
 cargarMascotasEnAdopcion();
+cargarMascotasAdoptadas();
 cargarProximosEventos();
 });
 
@@ -172,6 +159,39 @@ function cargarMascotasEnAdopcion() {
 }
 
 
+
+
+function cargarMascotasAdoptadas() {
+    $.ajax({
+        type: 'GET',
+        url: 'mascotas/mascotasAdoptadas',
+        contentType: 'application/json; charset=utf-8',
+
+        success: function(mascotas) {
+            console.log(mascotas);
+
+            var mascotaDiv=  $('#mascotasAdopDiv');//Div que contiene el listado de mascotas
+            $.each( mascotas, function( index, mascota ) {
+
+                //creo un elemento mascota
+
+
+                var mascotaElem= $('<div class="card-body"> <div class="col-sm-3"> <img src="'+mascota.foto_url+'" class=" rounded-circle img_list float-left "/>   </div>'
+                    +' <div class="offset-sm-4 col-sm-8" style="margin-left:110px ;margin-top:40px">  Nombre:' +mascota.nombre
+
+                    +' </div></div> '
+                );
+
+                mascotaDiv.append(mascotaElem);//lo agrego al div del listado de mascotas
+            });
+
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
 </script>
 </body>
 </html>
