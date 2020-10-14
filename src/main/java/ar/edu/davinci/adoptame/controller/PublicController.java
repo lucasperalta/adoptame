@@ -21,8 +21,7 @@ import java.util.List;
 public class    PublicController {
 
 
-    @Autowired
-    MascotaService mascotaService;
+
 
 @RequestMapping("/")
 public String index(Model model){
