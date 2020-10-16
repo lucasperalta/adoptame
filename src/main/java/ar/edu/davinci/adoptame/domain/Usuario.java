@@ -19,9 +19,6 @@ public class Usuario extends Persona implements Serializable {
 
     private static final long serialVersionUID = 1548205958242267599L;
 
-    @OneToOne
-    @JoinColumn(name = "id_estado")
-    private Estado estado;
 
     @Column(name="password")
     private String password;
@@ -34,9 +31,8 @@ public class Usuario extends Persona implements Serializable {
 
     }
 
-    public Usuario(String nombre, String apellido, String email, Estado estado, String password, Rol rol,String telefono,String ubicacion) {
+    public Usuario(String nombre, String apellido, String email, String password, Rol rol,String telefono,String ubicacion) {
         super(nombre, apellido, email,telefono,ubicacion);
-        this.estado = estado;
         this.password = password;
         this.rol = rol;
     }
@@ -62,18 +58,11 @@ public class Usuario extends Persona implements Serializable {
         this.rol = rol;
     }
 
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "estado=" + estado +
+                "password='" + password + '\'' +
                 ", rol=" + rol +
                 '}';
     }

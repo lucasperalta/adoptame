@@ -2,11 +2,9 @@ package ar.edu.davinci.adoptame.controller.mobile;
 
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.constantes.Constantes;
-import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
-import ar.edu.davinci.adoptame.service.EstadoService;
 import ar.edu.davinci.adoptame.service.LoginService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
@@ -32,8 +30,7 @@ public class LoginMobile {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private EstadoService estadoService;
+
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -73,8 +70,6 @@ public class LoginMobile {
                 usuarioExiste.setEmail(usuario);
                 usuarioExiste.setTelefono(" ");
                 usuarioExiste.setUbicacion(" ");
-                Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
-                usuarioExiste.setEstado(estado);
                 //Debe contener 8 caracteres ,1 numero,una mayuscula ,una minuscula
                 usuarioExiste.setPassword(passwordEncoder.encode("Adoptam1"));//por default y lo encripto
                 Rol rol=rolService.findRolById(Constantes.ROL_USER);
@@ -92,7 +87,6 @@ public class LoginMobile {
             usuarioDTO.setPassword(usuarioExiste.getPassword());
             usuarioDTO.setNombre(usuarioExiste.getNombre());
             usuarioDTO.setApellido(usuarioExiste.getApellido());
-            usuarioDTO.setEstado(usuarioExiste.getEstado().getEstado());
             usuarioDTO.setRol(usuarioExiste.getRol().getNombreRol());
             usuarioDTO.setUbicacion(usuarioExiste.getUbicacion());
             usuarioDTO.setTelefono(usuarioExiste.getTelefono());

@@ -102,7 +102,6 @@
                     <th data-field="nombre">Nombre</th>
                     <th data-field="apellido">Apellido</th>
                     <th data-field="email">email</th>
-                    <th data-field="estado">estado</th>
                     <th data-field="rol">rol</th>
                     <th data-formatter="TableActions">Action</th>
 
@@ -150,29 +149,23 @@
                                  <label for="nombre">Email:</label>
                                  <input type="text" class="form-control" id="emailUsuarioEditar" name="emailUsuarioEditar" />
                              </div>
+
                              <div class="col-md-6">
-                                 <label for="rol">Estado:</label>
-                                 <select class="form-control" id="estadoUsuarioEditar" name="estadoUsuarioEditar">
-                                     <option value="">Seleccionar Estado</option>
-                                     <option th:each="estado : ${estados}"
-                                             th:value="${estado.id}"
-                                             th:text="${estado.estado}"></option>
-                                 </select>
+                                 <div class="form-group">
+                                     <label for="rol">Rol:</label>
+                                     <select class="form-control" id="rolUsuarioEditar" name="rolUsuarioEditar">
+                                         <option value="">Seleccionar rol</option>
+                                         <option th:each="rol : ${roles}"
+                                                 th:value="${rol.id}"
+                                                 th:text="${rol.nombreRol}"></option>
+                                     </select>
+                                 </div>
                              </div>
+
                          </div>
 
                         <div class="row">
-                            <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="rol">Rol:</label>
-                        <select class="form-control" id="rolUsuarioEditar" name="rolUsuarioEditar">
-                            <option value="">Seleccionar rol</option>
-                            <option th:each="rol : ${roles}"
-                                    th:value="${rol.id}"
-                                    th:text="${rol.nombreRol}"></option>
-                        </select>
-                    </div>
-                            </div>
+
                         </div>
                      </div>
                 </form>
@@ -270,7 +263,7 @@
         return [
 
 
-            '<a class="like"  onclick="editarUsuario( \''+row.id+'\',  \''+row.nombre+'\',   \''+row.apellido+'\',   \''+row.email+'\' ,   \''+row.estado+'\' ,\''+row.rol+'\');" title="Editar usuario">',
+            '<a class="like"  onclick="editarUsuario( \''+row.id+'\',  \''+row.nombre+'\',   \''+row.apellido+'\',   \''+row.email+'\'  ,\''+row.rol+'\');" title="Editar usuario">',
             '<img class="options" src="../img/edit.png" alt="check"/>',
             '</a> ',
             '<a class="danger remove" onclick="borrarUsuario(\''+row.email+ '\')" title="Borrar Usuario">',

@@ -1,8 +1,8 @@
 package ar.edu.davinci.adoptame.controller;
 
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
+import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.Mascota;
-import ar.edu.davinci.adoptame.service.EstadoService;
 import ar.edu.davinci.adoptame.service.MascotaService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
@@ -26,8 +26,7 @@ public class AdminController {
 	
 
 
-	@Autowired
-    private EstadoService estadoService;
+
 
     @Autowired
     private RolService rolService;
@@ -61,8 +60,8 @@ public class AdminController {
     public String chart(Model model) {
 
 
-        List<Mascota> mascotasDisponibles =mascotaService.findAllByEstadoOrderByIdDesc("DISPONIBLE");
-        List<Mascota> mascotasAdoptadas =mascotaService.findAllByEstadoOrderByIdDesc("ADOPTADA");
+        List<Mascota> mascotasDisponibles =mascotaService.findAllByEstadoOrderByIdDesc(Constantes.DISPONIBLE);
+        List<Mascota> mascotasAdoptadas =mascotaService.findAllByEstadoOrderByIdDesc(Constantes.ADOPTADA);
         List<Mascota> mascotas=  new ArrayList<>();
 
         mascotas.addAll(mascotasDisponibles);
