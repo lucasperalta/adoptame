@@ -27,10 +27,10 @@
 		<div class="divisor"></div>
 		
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row" style="justify-content: center;">
 				<!--Mascotas adoptadas-->
 				<div class="col-xs-8 col-sm-3">
-					<div class="card scroll-box" id="mascotasAdopDiv">
+					<div class="card-puntas scroll-box" id="mascotasAdopDiv">
 						<h2 class="card-header " >Mascotas Adoptadas</h2>
 
 					</div>
@@ -40,7 +40,7 @@
 				<!--Lista de Mascotas por Adoptar-->
 				<div class="col-sm-5">
 
-					<div class="card" id="mascotaDiv">
+					<div class="card-masc" id="mascotaDiv">
                         <h2 class="card-header " >Mascotas En Adopción</h2>
 
 					</div>
@@ -49,18 +49,14 @@
 
 
                     <!--Eventos Proximos-->
-                <div class="card scroll-box ">
-						<div class="card-header ">
-							<h2>Eventos Próximos</h2>
-						</div>
-						
-						<div class="col-sm-12  ">
-							<div class="card-body off-border " id="eventosDiv" >
+				<div class="col-xs-8 col-sm-3">
+					<div class="card-puntas scroll-box" id="eventosDiv">
+						<h2 class="card-header " >Eventos Próximos</h2>
 
-						</div>
 					</div>
-
+				</div>
 				    <!-- FIN Eventos Proximos-->
+
 			</div>
 		</div>
 	</div>
@@ -105,14 +101,31 @@ function cargarProximosEventos() {
             $.each( eventos, function( index, evento ) {
 
                //creo un elemento mascota
+				var eventoElem= $('<div class="card-event bg-light mb-3" style="max-width: 50rem;"> '
+						+'<div class="card-header">'
+						//+'<img class="iconCalendar" th:src="@{/static/img/calendar.png}" alt="calendar">'
+						+'<spam class="titEvent">'+evento.lugar+'</spam>'
+						+'</div>'
+						+'<div class="card-body">'
+						+'<div class="row">'
+						+'<div class="col-md-5 titDato">Dirección:</div>'
+						+'<spam class="datoText">'+evento.direccion+'</spam>'
+						+'</div>'
+						+'<div class="row">'
+						+'<div class="col-md-5 titDato">Barrio:</div>'
+						+'<spam class="datoText">'+evento.barrio+'</spam>'
+						+'</div>'
+						+'<div class="row">'
+						+'<div class="col-md-5 titDato">Día y Hora:</div>'
+						+'<spam class="datoText">'+evento.dias+' '+evento.horarios+' </spam>'
+						+'</div>'
+						+'<div class="row">'
+						+'<div class="col-md-5 titDato">Descripción:</div>'
+						+'<spam class="datoText">'+evento.consultas+'</spam>'
+						+'</div>'
+						+'</div>'
 
-
-                var eventoElem= $('<div class="card-body " > '
-                    +'<h3 class="tituloChico">'+evento.dias+' '+evento.horarios+' </h3>'
-                    +'<h3 class="tituloChico">'+evento.barrio+'<br/> <span >'+evento.lugar+'</span></h3>'
-                    +'<h4 class="descripcion">'+evento.direccion+'</h4>'
-                    +'<h4 class="descripcion">'+evento.consultas+'</h4></div>'
-                );
+				);
 
                 eventosDiv.append(eventoElem);//lo agrego al div del listado de eventos
             });
@@ -141,9 +154,9 @@ function cargarMascotasEnAdopcion() {
                 //creo un elemento mascota
 
 
-                var mascotaElem= $('<div class="card-body"> <div class="col-sm-3"> <img src="'+mascota.foto_url+'" class=" rounded-circle img_list float-left "/>   </div>'
-                    +' <div class="offset-sm-3 col-sm-9">  <h2 class="tit_item">Nombre:' +mascota.nombre+' <span class="edad"> Edad: '+mascota.edad+'</span></h2>'
-                    +' <p class="descripcion"> '+mascota.descripcion+'  Raza '+mascota.raza+' Sexo '+mascota.sexo+' Tamaño '+mascota.tamanio+'</p>\n'
+                var mascotaElem= $('<div class="card-adopt"> <div class="col-sm-3"> <img src="'+mascota.foto_url+'" class=" rounded-circle img_list float-left "/>   </div>'
+                    +' <div class="offset-sm-3 col-sm-9">  <h2 class="tit_item">' +mascota.nombre+' - <span class="edad">'+mascota.edad+' años</span></h2>'
+                    +' <p class="descripcion"> '+mascota.descripcion+'<br> Sexo: '+mascota.sexo+'</br> Tamaño: '+mascota.tamanio+'</p>\n'
                     +' </div></div> '
                 );
 
@@ -176,10 +189,14 @@ function cargarMascotasAdoptadas() {
                 //creo un elemento mascota
 
 
-                var mascotaElem= $('<div class="card-body"> <div class="col-sm-3"> <img src="'+mascota.foto_url+'" class=" rounded-circle img_list float-left "/>   </div>'
-                    +' <div class="offset-sm-4 col-sm-8" style="margin-left:110px ;margin-top:40px">  Nombre:' +mascota.nombre
-
-                    +' </div></div> '
+                var mascotaElem= $('<div class="card-peque"> '
+									+'<div class="row " style="justify-content: center;">'
+									+'<img src="'+mascota.foto_url+'" class="img-adop"/>   '
+									+'</div>'
+						+'<div class="row" style="justify-content: center;">'
+									+'<spam class="nom-masc">'+mascota.nombre+'</spam>'
+						+'</div>'
+									+'</div> '
                 );
 
                 mascotaDiv.append(mascotaElem);//lo agrego al div del listado de mascotas
