@@ -3,14 +3,9 @@ package ar.edu.davinci.adoptame.controller.mobile;
 import ar.edu.davinci.adoptame.DTO.ResponseDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.constantes.Constantes;
-import ar.edu.davinci.adoptame.domain.Estado;
-import ar.edu.davinci.adoptame.domain.Persona;
 import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
-import ar.edu.davinci.adoptame.repository.PersonaRepository;
-import ar.edu.davinci.adoptame.service.EstadoService;
-import ar.edu.davinci.adoptame.service.PersonaService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +22,7 @@ public class UsuarioMobileController {
 	private UsuarioService usuarioService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	@Autowired
-	EstadoService estadoService;
+
 	@Autowired
 	RolService rolService;
 
@@ -87,8 +81,7 @@ public class UsuarioMobileController {
 		usuario.setEmail(usuarioDTO.getEmail());
 		usuario.setTelefono(usuarioDTO.getTelefono());
 		usuario.setUbicacion(usuarioDTO.getUbicacion());
-		Estado estado= estadoService.findEstadoByDescripcion(Constantes.ESTADO_ACTIVO);
-		usuario.setEstado(estado);
+
 		usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
 		Rol rol=rolService.findRolById(Constantes.ROL_USER);
 		usuario.setRol(rol);

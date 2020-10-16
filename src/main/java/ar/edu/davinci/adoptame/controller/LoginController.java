@@ -1,19 +1,13 @@
 package ar.edu.davinci.adoptame.controller;
 
-import ar.edu.davinci.adoptame.DTO.EstadoDTO;
 import ar.edu.davinci.adoptame.DTO.RolDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
-import ar.edu.davinci.adoptame.constantes.Constantes;
-import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
-import ar.edu.davinci.adoptame.exception.NotFoundException;
-import ar.edu.davinci.adoptame.service.EstadoService;
 import ar.edu.davinci.adoptame.service.LoginService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +32,7 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private EstadoService estadoService;
+
 
 
     @GetMapping("/login")
@@ -73,16 +66,8 @@ public class LoginController {
             rolesDto.add(rolDTO);
         }
 
-        List<Estado> estados=estadoService.listarEstados();
-        List<EstadoDTO> estadosDto= new ArrayList<>();
-        for (Estado estado:estados ) {
-            EstadoDTO estadoDTO= new EstadoDTO();
-            estadoDTO.setId(estado.getId());
-            estadoDTO.setEstado(estado.getEstado());
-            estadosDto.add(estadoDTO);
-        }
 
-        model.addAttribute("estados", estadosDto);
+
         model.addAttribute("roles", rolesDto);
 
         return new ModelAndView("redirect:/usuarios/nuevoUsuario");
