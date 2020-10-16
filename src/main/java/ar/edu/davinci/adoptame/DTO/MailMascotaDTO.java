@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class MailDTO {
+public class MailMascotaDTO {
 
 
     @Email
@@ -15,6 +15,24 @@ public class MailDTO {
     private String subject;
     private String text;
     private String senderName;
+    private Long idMascota;
+    private Long idAdoptante;
+
+    public Long getIdMascota() {
+        return idMascota;
+    }
+
+    public void setIdMascota(Long idMascota) {
+        this.idMascota = idMascota;
+    }
+
+    public Long getIdAdoptante() {
+        return idAdoptante;
+    }
+
+    public void setIdAdoptante(Long idAdoptante) {
+        this.idAdoptante = idAdoptante;
+    }
 
     public String getTo() {
         return to;
