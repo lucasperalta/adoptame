@@ -3,6 +3,7 @@ package ar.edu.davinci.adoptame.controller.mobile;
 import ar.edu.davinci.adoptame.DTO.MascotaDTO;
 import ar.edu.davinci.adoptame.DTO.MascotaFilterDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
+import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
@@ -97,18 +98,14 @@ public class MascotaMobileController {
     @GetMapping("/listaMascotasDisponible")
     public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaFilterDTO params ) {
 
-        Mascota mascotaParam = new Mascota();
-        mascotaParam.setEstado("DISPONIBLE");
-      //  mascotaParam.setSexo(params.getSexo());
-      //  mascotaParam.setTamanio(params.getTamanio());
-        mascotaParam.setEdad(params.getEdad());
-
-
-        List<Mascota> mascotas=mascotaService.findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(mascotaParam.getEstado(),params.getSexo(),mascotaParam.getEdad(),params.getTamanio());
+        List<Mascota> mascotas=mascotaService.findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(Constantes.DISPONIBLE,params.getSexo(),params.getEdad(),params.getTamanio());
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
-            MascotaDTO mascotaDTO= new MascotaDTO(mascota);
-            mascotaDTOS.add(mascotaDTO);
+            if(calculateDistanceInkms(params.getLatitud(),params.getLongitud(),mascota.getCoordenadas().getLatitud(),mascota.getCoordenadas().getLongitud())<params.getDistancia()){
+                MascotaDTO mascotaDTO= new MascotaDTO(mascota);
+                mascotaDTOS.add(mascotaDTO);
+            }
+
         }
         return mascotaDTOS;
     }
@@ -144,14 +141,11 @@ public class MascotaMobileController {
     }
 
 
-    @GetMapping(path="/distancia")
-    @ResponseBody
-    public void calculateDistanceInMeters() {
 
-
-        double dist = org.apache.lucene.util.SloppyMath.haversinKilometers(-34.683994, -58.516947, -34.674544, -58.502652);
+    public Double calculateDistanceInkms(Double lat1, Double lon1,Double lat2,Double lon2) {
+        double dist = org.apache.lucene.util.SloppyMath.haversinMeters(lat1, lon1, lat2, lon2);
         System.out.println(dist);
-        //  return dist;
+        return dist/Constantes.MIL_MTS;
 
     }
 

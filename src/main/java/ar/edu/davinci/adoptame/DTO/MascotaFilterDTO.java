@@ -23,8 +23,6 @@ public class MascotaFilterDTO {
 
     private List<String> sexo;
 
-
-
     private String tipoMascota;
 
     private String raza;
@@ -53,6 +51,15 @@ public class MascotaFilterDTO {
 
     private Double longitud;
     private Double latitud;
+    private Integer distancia;
+
+    public Integer getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(Integer distancia) {
+        this.distancia = distancia;
+    }
 
     public Long getId() {
         return id;

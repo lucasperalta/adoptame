@@ -1,18 +1,12 @@
 package ar.edu.davinci.adoptame.DTO;
 
-import ar.edu.davinci.adoptame.domain.Estado;
-import ar.edu.davinci.adoptame.domain.Persona;
-import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
-
-import javax.persistence.*;
-import java.io.Serializable;
 
 
 public class UsuarioDTO extends PersonaDTO  {
 
 
-    private String estado;
+
 
 
     private String password;
@@ -45,11 +39,5 @@ public class UsuarioDTO extends PersonaDTO  {
         this.rol = rol;
     }
 
-    public String getEstado() {
-        return estado;
-    }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }
