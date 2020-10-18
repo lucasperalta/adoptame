@@ -21,11 +21,40 @@ public class PersonaDTO {
 
     private String email;
 
+    private String telefono;
+
+    private String ubicacion;
+
 
 
     public PersonaDTO() {
     }
 
+    public PersonaDTO(String nombre, String apellido, String email, String telefono, String ubicacion) {
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.email=email;
+        this.telefono=telefono;
+        this.ubicacion=ubicacion;
+
+    }
+
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
 
     public Integer getId() {
         return id;

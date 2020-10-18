@@ -2,6 +2,7 @@ package ar.edu.davinci.adoptame.DTO;
 
 
 import ar.edu.davinci.adoptame.domain.Mascota;
+import org.springframework.web.multipart.MultipartFile;
 
 public class MascotaDTO {
 
@@ -20,10 +21,13 @@ public class MascotaDTO {
         this.descripcion = mascota.getDescripcion();
         this.tamanio = mascota.getTamanio();
         this.rescatista = mascota.getRescatista().getNombre();
+        this.latitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLatitud():null;
+        this.longitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLongitud():null;
+
     }
 
 
-    private Integer id;
+    private Long id;
 
     private String nombre;
 
@@ -45,14 +49,26 @@ public class MascotaDTO {
 
     private String tamanio;
 
-
     private String rescatista;
 
-    public Integer getId() {
+    MultipartFile image;
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
+
+    private Double longitud;
+    private Double latitud;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -136,7 +152,21 @@ public class MascotaDTO {
         this.rescatista = rescatista;
     }
 
+    public Double getLongitud() {
+        return longitud;
+    }
 
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
 
 
 
