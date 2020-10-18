@@ -52,6 +52,12 @@ public class EventosController {
         logger.info("eventos"+eventosDTOS);
         return eventosDTOS;
     }
+
+    /**
+     * Creo evento nuevo
+     * @param eventosDTO
+     * @return
+     */
     @PostMapping("/guardarEvento")
     public  @ResponseBody
     ResponseDTO guardarEvento(@RequestBody  EventosDTO eventosDTO ) {
@@ -89,6 +95,11 @@ public class EventosController {
         return eventosDTOS;
     }
 
+    /**
+     * borro evento
+     * @param eventosDTO
+     * @return
+     */
     @PostMapping("/borrar")
     public @ResponseBody String borrarEvento( @RequestBody EventosDTO eventosDTO) {
 
@@ -107,7 +118,11 @@ public class EventosController {
     }
 
 
-
+    /**
+     * listo evento
+     * @param eventosDTO
+     * @return
+     */
     @PostMapping("/editarEvento")
     public  @ResponseBody  String editarEvento(@RequestBody EventosDTO eventosDTO  ) {
 

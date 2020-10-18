@@ -33,8 +33,12 @@ public class LoginController {
     private UsuarioService usuarioService;
 
 
-
-
+    /**
+     * maneja login de WEB
+     * @param model
+     * @param error
+     * @return
+     */
     @GetMapping("/login")
     public String loginAdmin(Model model,@RequestParam(value = "error", required = false) String error) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
@@ -52,7 +56,12 @@ public class LoginController {
         return "public/403";
     }
 
-
+    /**
+     * una vez que se logeo y autentico springsecurity vuelvo aca
+     * @param usuarioDTO
+     * @param model
+     * @return
+     */
     @PostMapping("/ingresar")
 	public ModelAndView findAdmin(@ModelAttribute UsuarioDTO usuarioDTO ,Model model ) {
         Usuario usuario;
@@ -65,8 +74,6 @@ public class LoginController {
             rolDTO.setNombreRol(rol.getNombreRol());
             rolesDto.add(rolDTO);
         }
-
-
 
         model.addAttribute("roles", rolesDto);
 

@@ -69,6 +69,12 @@ public class MascotaMobileController {
     }
 
 
+    /**
+     * devuelve la imagen de la mascota
+     * @param fileName
+     * @param request
+     * @return
+     */
 
     @GetMapping("/downloadPet/{fileName:.+}")
     public ResponseEntity<Resource> downloadPet(@PathVariable String fileName, HttpServletRequest request) {
@@ -95,6 +101,11 @@ public class MascotaMobileController {
     }
 
 
+    /**
+     * busca las mascotas disponibles para doptar segun los filtros pasados por parametro
+     * @param params
+     * @return
+     */
     @GetMapping("/listaMascotasDisponible")
     public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaFilterDTO params ) {
 
@@ -110,6 +121,12 @@ public class MascotaMobileController {
         return mascotaDTOS;
     }
 
+
+    /**
+     * devuelve las mascotas que el usuario puso en adopcion
+     * @param id
+     * @return
+     */
     @GetMapping("/mascotasUsuario/{id}")
     public @ResponseBody Iterable<MascotaDTO> mascotasPropiasEnAdopcion(@PathVariable Integer id ) {
 
@@ -141,8 +158,16 @@ public class MascotaMobileController {
     }
 
 
-
-    public Double calculateDistanceInkms(Double lat1, Double lon1,Double lat2,Double lon2) {
+    /**
+     * Calcula la distancia en kilometros entre dos coordenadas
+     * la libreria de lucene la calcula en metros asi que la dividimos por MIL para obtener los kms
+     * @param lat1
+     * @param lon1
+     * @param lat2
+     * @param lon2
+     * @return
+     */
+    private Double calculateDistanceInkms(Double lat1, Double lon1,Double lat2,Double lon2) {
         double dist = org.apache.lucene.util.SloppyMath.haversinMeters(lat1, lon1, lat2, lon2);
         System.out.println(dist);
         return dist/Constantes.MIL_MTS;
