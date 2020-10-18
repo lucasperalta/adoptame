@@ -27,6 +27,10 @@ public class PrestadorMobileController {
     @Autowired
     private ServicioService servicioService;
 
+    /**
+     * Lista los servicios vigentes
+     * @return
+     */
     @GetMapping("/servicios")
     public @ResponseBody
     Iterable<PrestadorDTO> listarServicios( ) {

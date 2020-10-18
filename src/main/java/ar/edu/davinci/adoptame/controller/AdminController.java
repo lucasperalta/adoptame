@@ -20,8 +20,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Controller    // This means that this class is a Controller
-@RequestMapping(path="/admin") // This means URL's start with /demo (after Application path)
+@Controller
+@RequestMapping(path="/admin")
 public class AdminController {
 	
 
@@ -38,24 +38,45 @@ public class AdminController {
     private MascotaService mascotaService;
 
 
+    /**
+     * redirecciona a la pantalla para administrar eventos
+     * @param model
+     * @return
+     */
     @GetMapping("/eventos")
     public String admEventos(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
         return "admin/admEventos";
     }
 
+    /**
+     * redirecciona a la pantala para administrar los servicios
+     * @param model
+     * @return
+     */
     @GetMapping("/servicios")
     public String admServicios(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
         return "admin/admServicios";
     }
 
+    /**
+     * redirecciona a la pantalla para administrar usuarios
+     * @param model
+     * @return
+     */
     @GetMapping("/usuarios")
     public String admUsuarios(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
         return "admin/admUsuarios";
     }
 
+
+    /**
+     * servicio que devuelve los datos para las estadisticas mostradas en la pagina web
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/chart", method= RequestMethod.GET)
     public String chart(Model model) {
 
@@ -99,7 +120,8 @@ public class AdminController {
                                                 case 9:
                                                     Integer cant1 =mascotasByEdadList.get(1);
                                                     cant1+=v.size();
-                                                    mascotasByEdadList.set(1,cant1);                                                    break;
+                                                    mascotasByEdadList.set(1,cant1);
+                                                    break;
                                                 case 10:
                                                 case 11:
                                                 case 12:

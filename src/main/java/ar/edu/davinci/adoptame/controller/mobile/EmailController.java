@@ -2,6 +2,7 @@ package ar.edu.davinci.adoptame.controller.mobile;
 
 
 import ar.edu.davinci.adoptame.DTO.MailMascotaDTO;
+import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.service.EmailService;
 import ar.edu.davinci.adoptame.service.MascotaService;
@@ -15,26 +16,33 @@ import javax.validation.Valid;
 @RequestMapping(path="/mobile")
 public class EmailController {
 
+
     @Autowired
     private EmailService emailService;
 
     @Autowired
     private MascotaService mascotaService;
 
+
+    /**
+     * envia mail cuando se adopta una mascotas
+     * @param emailObject
+     * @return
+     */
     @PostMapping(path="/enviarMailMascota")
     public @ResponseBody ResponseEntity<String> createMail(@RequestBody  MailMascotaDTO emailObject){
 
         Mascota mascota= mascotaService.findById(emailObject.getIdMascota());
-        StringBuilder sb = new StringBuilder("Te contactamos porque alguien");
-        sb.append(" esta interesado en tu mascota ");
+        StringBuilder sb = new StringBuilder(Constantes.TE_CONTACTAMOS_PORQUE_ALGUIEN);
+        sb.append(Constantes.ESTA_INTERESADO_EN_TU_MASCOTA);
         sb.append(mascota.getNombre());
         sb.append(" ");
         sb.append(mascota.getDescripcion());
-        sb.append(" por favor ponete en contacto con el a traves de ");
+        sb.append(Constantes.POR_FAVOR_PONETE_EN_CONTACTO_CON_EL_A_TRAVES_DE);
         sb.append(emailObject.getSenderName());
         emailObject.setText(sb.toString());
         emailObject.setTo(mascota.getRescatista().getEmail());
-        emailObject.setSubject("Alguien quiere adoptar tu mascota");
+        emailObject.setSubject(Constantes.ALGUIEN_QUIERE_ADOPTAR_TU_MASCOTA);
 
         emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
 

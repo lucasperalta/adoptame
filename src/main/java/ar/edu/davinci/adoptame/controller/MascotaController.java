@@ -46,6 +46,10 @@ public class MascotaController {
         return mascotaDTOS;
     }
 
+    /**
+     * devuelvo las mascotas adoptadas
+     * @return
+     */
     @GetMapping("/mascotasAdoptadas")
     public @ResponseBody Iterable<MascotaDTO> mascotasAdoptadas( ) {
         List<Mascota> mascotas=mascotaService.findAllByEstadoOrderByIdDesc(Constantes.ADOPTADA);

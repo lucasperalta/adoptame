@@ -13,6 +13,12 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
+    /**
+     * envia mail usando java mail a traves de GMAIL
+     * @param to
+     * @param subject
+     * @param text
+     */
     @Override
     public void sendSimpleMessage(String to, String subject, String text) {
         try {

@@ -17,12 +17,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * clase que se encargar de manejar el almacenamiento de archivos
+ */
 @Service
 public class FileStorageService {
 
 
     private final Path fileStorageLocation;
 
+    /**
+     * crea el directorio donde se van a almacenar las imagenes
+     * @param fileStorageProperties
+     */
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
@@ -35,6 +42,11 @@ public class FileStorageService {
         }
     }
 
+    /**
+     * guarda el archivo
+     * @param file
+     * @return
+     */
     public String storeFile(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -55,6 +67,11 @@ public class FileStorageService {
         }
     }
 
+    /**
+     * lee el archivo almacenado y lo carga como un resource
+     * @param fileName
+     * @return
+     */
     public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();

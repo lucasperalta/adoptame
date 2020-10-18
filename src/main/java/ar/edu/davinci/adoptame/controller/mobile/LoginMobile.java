@@ -37,6 +37,13 @@ public class LoginMobile {
 
     Boolean loggedWithFb;
 
+    /**
+     * se encarga del Login desde la app mobile
+     * @param request
+     * @param response
+     * @param params
+     * @return
+     */
     @PostMapping("/ingresarMobile")
     public @ResponseBody
     UsuarioDTO findUser(HttpServletRequest request,
@@ -62,7 +69,7 @@ public class LoginMobile {
             if(!loggedWithFb){
                 return new UsuarioDTO();
             }else{
-                //si me logeo con facebook y no teno usuario
+                //si me logeo con facebook y no tengo usuario
                 ///creo uno por default
                 usuarioExiste= new Usuario();
                 usuarioExiste.setNombre(usuario);
