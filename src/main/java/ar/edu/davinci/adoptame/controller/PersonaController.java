@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
-@Controller    // This means that this class is a Controller
-@RequestMapping(path="/adoptame") // This means URL's start with /demo (after Application path)
+@Controller
+@RequestMapping(path="/adoptame")
 public class PersonaController {
 	
 	@Autowired

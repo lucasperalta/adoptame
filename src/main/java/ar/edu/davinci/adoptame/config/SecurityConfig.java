@@ -31,13 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests()
               .antMatchers("/static/**").permitAll()
-              .antMatchers("/css/**").permitAll() //Adding this line solved it
-              .antMatchers("/img/**").permitAll() //Adding this line solved it
-              .antMatchers("/js/**").permitAll() //Adding this line solved it
+              .antMatchers("/css/**").permitAll()
+              .antMatchers("/img/**").permitAll()
+              .antMatchers("/js/**").permitAll()
               .antMatchers("/admin/**").access("hasRole('ADMIN')")
               .antMatchers("/usuarios/**").access("hasRole('ADMIN')")
               .antMatchers("/servicios/**").access("hasRole('ADMIN')")
