@@ -1,6 +1,8 @@
 package ar.edu.davinci.adoptame.domain;
 
 import ar.edu.davinci.adoptame.DTO.MascotaDTO;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -49,6 +51,7 @@ public class Mascota implements Serializable {
     private String tamanio;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="id")
     private Usuario rescatista;
 
