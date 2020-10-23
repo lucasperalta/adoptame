@@ -195,7 +195,7 @@ public class MascotaMobileController {
      */
     private Double calculateDistanceInkms(Double lat1, Double lon1,Double lat2,Double lon2) {
         double dist = org.apache.lucene.util.SloppyMath.haversinMeters(lat1, lon1, lat2, lon2);
-        System.out.println(dist);
+        System.out.println("kilometros de distancia:"+dist/Constantes.MIL_MTS);
         return dist/Constantes.MIL_MTS;
 
     }
