@@ -85,4 +85,8 @@ public class FileStorageService {
             throw new MyFileNotFoundException("Archivo no encontrado " + fileName, ex);
         }
     }
+
+    public Path getFileStorageLocation() {
+        return fileStorageLocation;
+    }
 }

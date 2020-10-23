@@ -2,28 +2,27 @@ package ar.edu.davinci.adoptame.controller.mobile;
 
 import ar.edu.davinci.adoptame.DTO.MascotaDTO;
 import ar.edu.davinci.adoptame.DTO.MascotaFilterDTO;
-import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
 import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.exception.NotFoundException;
+import ar.edu.davinci.adoptame.exception.ImageUploadException;
 import ar.edu.davinci.adoptame.service.*;
-import ar.edu.davinci.adoptame.utils.UploadFileResponse;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,21 +50,40 @@ public class MascotaMobileController {
      */
     @PostMapping(path="/uploadPet")
     @ResponseBody
-    public  MascotaDTO uploadPet(@ModelAttribute  MascotaDTO params) {
+    public  MascotaDTO uploadPet(@ModelAttribute  MascotaDTO params) throws ImageUploadException {
 
+
+        Map config = new HashMap();
+        config.put("cloud_name", "ddetocnzj");
+        config.put("api_key", "462997364764234");
+        config.put("api_secret", "qfNhbDEptEIZV1kSe70O8IZRIcE");
+        Cloudinary  cloudinary = new Cloudinary(config);
         String fileName = fileStorageService.storeFile(params.getImage());
+        String basePath=fileStorageService.getFileStorageLocation().toString();
+        logger.info("path imagen en servidor "+basePath);
+        Map resultado;
+        try {
+           resultado=  cloudinary.uploader().upload(basePath+"/"+fileName, ObjectUtils.emptyMap());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ImageUploadException();
+        }
 
+
+/*
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/mobile/downloadPet/")
                 .path(fileName)
                 .toUriString();
-        params.setFoto_url(fileDownloadUri);
+ */
+        params.setFoto_url(String.valueOf(resultado.get("secure_url")));
 
       Mascota mascotaRespuesta=  mascotaService.addMascotas(params);
 
        MascotaDTO masDto= new MascotaDTO(mascotaRespuesta);
 
         return  masDto  ;
+
     }
 
 
