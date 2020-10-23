@@ -16,4 +16,6 @@ public  class Constantes {
     public static final String ESTA_INTERESADO_EN_TU_MASCOTA = " esta interesado en tu mascota ";
     public static final String TE_CONTACTAMOS_PORQUE_ALGUIEN = "Te contactamos porque alguien";
 
+
+
 }

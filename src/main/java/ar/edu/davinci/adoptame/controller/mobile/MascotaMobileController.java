@@ -13,6 +13,7 @@ import com.cloudinary.utils.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -40,11 +41,23 @@ public class MascotaMobileController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Value( "${cloudinary.name}")
+    private String cloudName;
+
+    @Value( "${cloudinary.apikey}")
+    private String apikey;
+
+    @Value( "${cloudinary.apiSecret}")
+    private String apiSecret;
+
     /**
      * servicio para hacer upload de mascotas
      * recibe los datos de la mascota y una imagen  MultipartFile image;
      * con la foto de la mascota
-     * la guarda en bbdd y devuelve los datos de la mascota
+     * guarda temporalmente la foto en el servidor y lo manda a un servidor de imagenes
+     * cloudinary
+     * esto es porque el servidor web tiene un file system efimero , con cada deploy
+     * borra todo y arranca de cero, las iamgenes las tuvimos que almacenar un servidor CDN
      * @param params
      * @return
      */
@@ -54,9 +67,9 @@ public class MascotaMobileController {
 
 
         Map config = new HashMap();
-        config.put("cloud_name", "ddetocnzj");
-        config.put("api_key", "462997364764234");
-        config.put("api_secret", "qfNhbDEptEIZV1kSe70O8IZRIcE");
+        config.put("cloud_name", cloudName);
+        config.put("api_key", apikey);
+        config.put("api_secret", apiSecret);
         Cloudinary  cloudinary = new Cloudinary(config);
         String fileName = fileStorageService.storeFile(params.getImage());
         String basePath=fileStorageService.getFileStorageLocation().toString();
@@ -70,12 +83,7 @@ public class MascotaMobileController {
         }
 
 
-/*
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/mobile/downloadPet/")
-                .path(fileName)
-                .toUriString();
- */
+
         params.setFoto_url(String.valueOf(resultado.get("secure_url")));
 
       Mascota mascotaRespuesta=  mascotaService.addMascotas(params);
