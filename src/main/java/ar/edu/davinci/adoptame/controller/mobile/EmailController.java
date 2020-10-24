@@ -4,6 +4,7 @@ package ar.edu.davinci.adoptame.controller.mobile;
 import ar.edu.davinci.adoptame.DTO.MailMascotaDTO;
 import ar.edu.davinci.adoptame.constantes.Constantes;
 import ar.edu.davinci.adoptame.domain.Mascota;
+import ar.edu.davinci.adoptame.exception.EmailException;
 import ar.edu.davinci.adoptame.service.EmailService;
 import ar.edu.davinci.adoptame.service.MascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(path="/mobile")
@@ -44,7 +46,11 @@ public class EmailController {
         emailObject.setTo(mascota.getRescatista().getEmail());
         emailObject.setSubject(Constantes.ALGUIEN_QUIERE_ADOPTAR_TU_MASCOTA);
 
-        emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
+        try {
+            emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
+        } catch (IOException e) {
+           throw new EmailException();
+        }
 
         return ResponseEntity.ok().body("Email Enviado");
     }
