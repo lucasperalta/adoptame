@@ -48,7 +48,7 @@ public class EmailController {
 
         try {
             emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
-        } catch (IOException e) {
+        } catch (Exception e) {
            throw new EmailException();
         }
 
