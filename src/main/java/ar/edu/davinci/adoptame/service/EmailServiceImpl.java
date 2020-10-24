@@ -17,7 +17,7 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSender emailSender;
 
     /**
-     * envia mail usando java mail a traves de GMAIL
+     * envia mail usando java mail a traves de SENDGRID usando una cuenta de gmail
      * @param to
      * @param subject
      * @param text
@@ -33,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
             Content content = new Content("text/plain", text);
             Mail mail = new Mail(from, subject, to2, content);
 
-            SendGrid sg = new SendGrid("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");
+            SendGrid sg = new SendGrid(Constantes.API_KEY_SENDGRID);
             Request request = new Request();
             try {
                 request.setMethod(Method.POST);

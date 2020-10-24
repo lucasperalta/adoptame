@@ -15,6 +15,7 @@ public  class Constantes {
     public static final String POR_FAVOR_PONETE_EN_CONTACTO_CON_EL_A_TRAVES_DE = " por favor ponete en contacto con el a traves de ";
     public static final String ESTA_INTERESADO_EN_TU_MASCOTA = " esta interesado en tu mascota ";
     public static final String TE_CONTACTAMOS_PORQUE_ALGUIEN = "Te contactamos porque alguien";
+    public static final String API_KEY_SENDGRID = "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";
 
 
 
