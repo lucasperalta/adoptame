@@ -3,6 +3,7 @@ package ar.edu.davinci.adoptame.service;
 import ar.edu.davinci.adoptame.constantes.Constantes;
 import com.sendgrid.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,8 +14,10 @@ import java.io.IOException;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    @Autowired
-    private JavaMailSender emailSender;
+
+    @Value("${sendgrid.api.key}")
+    private String sendGridApiKey;
+
 
     /**
      * envia mail usando java mail a traves de SENDGRID usando una cuenta de gmail
@@ -32,8 +35,8 @@ public class EmailServiceImpl implements EmailService {
             Email to2 = new Email(to);
             Content content = new Content("text/plain", text);
             Mail mail = new Mail(from, subject, to2, content);
-
-            SendGrid sg = new SendGrid(Constantes.API_KEY_SENDGRID);
+            System.out.println("api key sendgrid"+ sendGridApiKey);
+            SendGrid sg = new SendGrid(sendGridApiKey);
             Request request = new Request();
             try {
                 request.setMethod(Method.POST);
@@ -49,6 +52,7 @@ public class EmailServiceImpl implements EmailService {
 
 
         } catch (MailException exception) {
+            System.out.println(exception.getStackTrace());
             exception.printStackTrace();
         }
     }
