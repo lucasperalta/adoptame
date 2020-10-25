@@ -37,6 +37,7 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             diaEventoEditar: {
                 validators: {
+
                     notEmpty: {
                         message: 'No puede ser vacio'
                     }
@@ -44,8 +45,28 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             horarioEventoEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 10,
+                        message : 'Máximo 10 caracteres'
+                    }
+                }
+            },
+
+            direccionEventoEditar: {
+                validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
+                    notEmpty : {
+                        message : 'No puede ser vacio'
                     },
                     stringLength : {
                         max : 50,
@@ -53,31 +74,29 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     }
                 }
             },
-
-            direccionEventoEditar: {
-                validators: {
-                    notEmpty : {
-                        message : 'No puede ser vacio'
-                    },
-                    stringLength : {
-                        max : 100,
-                        message : 'Máximo 100 caracteres'
-                    }
-                }
-            },
             lugarEventoEditar: {
+
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 100,
-                        message : 'Máximo 100 caracteres'
+                        max : 50,
+                        message : 'Máximo 50 caracteres'
                     }
                 }
             },
             barrioEventoEditar: {
+
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
@@ -88,13 +107,18 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 }
             },
             consultasEventoEditar: {
+
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 100,
-                        message : 'Máximo 100 caracteres'
+                        max : 60,
+                        message : 'Máximo 60 caracteres'
                     }
                 }
             }
@@ -127,7 +151,28 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 }
             },
             horarios: {
+
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
+                    notEmpty : {
+                        message : 'No puede ser vacio'
+                    },
+                    stringLength : {
+                        max : 10,
+                        message : 'Máximo 10 caracteres'
+                    }
+                }
+            },
+
+            direccion: {
+                validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
@@ -137,31 +182,27 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     }
                 }
             },
-
-            direccion: {
-                validators: {
-                    notEmpty : {
-                        message : 'No puede ser vacio'
-                    },
-                    stringLength : {
-                        max : 100,
-                        message : 'Máximo 100 caracteres'
-                    }
-                }
-            },
             lugar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 100,
-                        message : 'Máximo 100 caracteres'
+                        max : 50,
+                        message : 'Máximo 50 caracteres'
                     }
                 }
             },
             barrio: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
@@ -173,12 +214,16 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             consultas: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 100,
-                        message : 'Máximo 100 caracteres'
+                        max : 60,
+                        message : 'Máximo 60 caracteres'
                     }
                 }
             }

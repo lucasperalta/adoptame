@@ -13,6 +13,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             nombre: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
@@ -24,6 +28,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             apellido: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
@@ -50,6 +58,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             direccion: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
@@ -62,6 +74,7 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             telefono: {
                 validators: {
+                    numeric:{message:'solo números'},
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
@@ -74,13 +87,17 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             titulo: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
 
-                        max : 255,
-                        message : 'Máximo 255 caracteres'
+                        max : 20,
+                        message : 'Máximo 20 caracteres'
                     }
                 }
             } ,
@@ -115,25 +132,38 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             urlPago: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
+
+                    uri :{
+                        message:'la Url tiene que ser valida'
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
 
-                        max : 255,
-                        message : 'Máximo 255 caracteres'
+                        max : 100,
+                        message : 'Máximo 100 caracteres'
                     }
                 }
             },
             descripcion: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
+
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
 
-                        max : 255,
-                        message : 'Máximo 255 caracteres'
+                        max : 50,
+                        message : 'Máximo 50 caracteres'
                     }
                 }
             }
@@ -152,13 +182,17 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             tituloServicioEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
 
-                        max : 255,
-                        message : 'Máximo 255 caracteres'
+                        max : 20,
+                        message : 'Máximo 20 caracteres'
                     }
                 }
             } ,
@@ -191,6 +225,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             urlPagoServicioEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
@@ -203,13 +241,17 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             descripcionServicioEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
 
-                        max : 255,
-                        message : 'Máximo 255 caracteres'
+                        max : 50,
+                        message : 'Máximo 50 caracteres'
                     }
                 }
             }

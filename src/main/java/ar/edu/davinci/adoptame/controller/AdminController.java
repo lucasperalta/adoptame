@@ -143,16 +143,16 @@ public class AdminController {
 
         Integer mascotasDisponiblesCant = mascotasDisponibles.size();
         Integer mascotasAdoptadasCant = mascotasAdoptadas.size();
-        model.addAttribute("mascotasMacho", mascotasBySexo.get("MACHO").size());
-        model.addAttribute("mascotasHembra", mascotasBySexo.get("HEMBRA").size());
+        model.addAttribute("mascotasMacho",mascotasBySexo.get("MACHO")!=null?mascotasBySexo.get("MACHO").size():0);
+        model.addAttribute("mascotasHembra",mascotasBySexo.get("HEMBRA")!=null? mascotasBySexo.get("HEMBRA").size():0);
 
 
         model.addAttribute("mascotasDisponibles", mascotasDisponiblesCant);
         model.addAttribute("mascotasAdpotadas", mascotasAdoptadasCant);
         model.addAttribute("mascotasByEdad", mascotasByEdadList);
 
-        List<Integer>mascotasPerro = new ArrayList<>(Arrays.asList(mascotasByTipo.get("PERRO").size()));
-        List<Integer>mascotasGato = new ArrayList<>(Arrays.asList(mascotasByTipo.get("GATO").size()));
+        List<Integer>mascotasPerro = new ArrayList<>(Arrays.asList(mascotasByTipo.get("PERRO")!=null?mascotasByTipo.get("PERRO").size():0));
+        List<Integer>mascotasGato = new ArrayList<>(Arrays.asList(mascotasByTipo.get("GATO")!=null?mascotasByTipo.get("GATO").size():0));
 
         model.addAttribute("mascotasPerro", mascotasPerro);
         model.addAttribute("mascotasGato",mascotasGato );
