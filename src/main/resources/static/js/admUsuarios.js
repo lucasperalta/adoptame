@@ -13,6 +13,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             nombre: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
@@ -24,11 +28,15 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             apellido: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 50,
+                        max : 45,
                         message : 'Máximo 45 caracteres'
                     }
                 }
@@ -81,6 +89,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             nombreUsuarioEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
@@ -92,11 +104,15 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             apellidoUsuarioEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 50,
+                        max : 45,
                         message : 'Máximo 45 caracteres'
                     }
                 }
