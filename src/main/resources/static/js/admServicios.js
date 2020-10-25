@@ -120,8 +120,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     },
                     stringLength : {
 
-                        max : 255,
-                        message : 'Máximo 255 caracteres'
+                        max : 100,
+                        message : 'Máximo 100 caracteres'
                     }
                 }
             },

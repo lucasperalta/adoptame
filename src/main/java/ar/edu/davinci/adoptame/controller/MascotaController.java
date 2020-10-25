@@ -52,9 +52,6 @@ public class MascotaController {
         List<Mascota> mascotas=mascotaService.findAllByEstadoOrderByIdDesc(Constantes.ADOPTADA);
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
-            String[] arrayPath= mascota.getFoto_url().split("/",4);
-            String newUrl = ServletUriComponentsBuilder.fromCurrentContextPath().replacePath(null).build().toUriString()+"/"+arrayPath[3];
-            mascota.setFoto_url(newUrl);
             MascotaDTO mascotaDTO= new MascotaDTO(mascota);
             mascotaDTOS.add(mascotaDTO);
         }
