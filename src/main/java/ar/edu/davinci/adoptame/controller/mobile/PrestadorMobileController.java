@@ -38,7 +38,7 @@ public class PrestadorMobileController {
         List<PrestadorDTO> prestadoresDTO= new ArrayList<>();
         for (Servicio serv:servicios) {
             PrestadorDTO prestadorDTO = new PrestadorDTO();
-            prestadorDTO.setId(serv.getPrestador().getId());
+            prestadorDTO.setId(serv.getId_servicio());
             prestadorDTO.setNombre(serv.getPrestador().getNombre());
             prestadorDTO.setApellido(serv.getPrestador().getApellido());
             prestadorDTO.setEmail(serv.getPrestador().getEmail());
