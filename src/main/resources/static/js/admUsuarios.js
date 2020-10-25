@@ -122,14 +122,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                         message : 'No puede ser vacio'
                     }
                 }
-            },
-            estadoUsuarioEditar: {
-                validators: {
-                    notEmpty : {
-                        message : 'No puede ser vacio'
-                    }
-                }
             }
+
         }
     });
 
@@ -208,22 +202,14 @@ function cerrarModalEditarUsuario(){
 }
 
 
-function editarUsuario(id,nombre,apellido,email,estado,rol) {
+function editarUsuario(id,nombre,apellido,email,rol) {
     $('#idUsuarioEditar').val(id);
     $('#nombreUsuarioEditar').val(nombre);
     $('#apellidoUsuarioEditar').val(apellido);
     $('#emailUsuarioEditar').val(email);
-    $("#estadoUsuarioEditar option").each(function() {
-        if($(this).text() === estado) {
-            $(this).attr('selected', 'selected');
-        }
-    });
 
-    $("#rolUsuarioEditar option").each(function() {
-        if($(this).text() === rol) {
-            $(this).attr('selected', 'selected');
-        }
-    });
+
+
 
     $('#modalEditarUsuario').show();
 
@@ -273,7 +259,6 @@ function confirmaEditarUsuario(){
         nombre:$('#nombreUsuarioEditar').val(),
         apellido:$('#apellidoUsuarioEditar').val(),
         email	: $('#emailUsuarioEditar').val(),
-        estado:$('#estadoUsuarioEditar').val(),
         rol:$('#rolUsuarioEditar').val()
 
 
