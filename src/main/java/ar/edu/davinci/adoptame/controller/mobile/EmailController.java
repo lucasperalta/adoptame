@@ -33,7 +33,7 @@ public class EmailController {
      */
     @PostMapping(path="/enviarMailMascota")
     public @ResponseBody ResponseEntity<String> createMail(@RequestBody  MailMascotaDTO emailObject){
-
+        try {
         Mascota mascota= mascotaService.findById(emailObject.getIdMascota());
         StringBuilder sb = new StringBuilder(Constantes.TE_CONTACTAMOS_PORQUE_ALGUIEN);
         sb.append(Constantes.ESTA_INTERESADO_EN_TU_MASCOTA);
@@ -46,7 +46,7 @@ public class EmailController {
         emailObject.setTo(mascota.getRescatista().getEmail());
         emailObject.setSubject(Constantes.ALGUIEN_QUIERE_ADOPTAR_TU_MASCOTA);
 
-        try {
+
             emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
         } catch (Exception e) {
            throw new EmailException();
