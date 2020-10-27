@@ -49,7 +49,8 @@ public class EmailController {
 
             emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
         } catch (Exception e) {
-           throw new EmailException();
+            return ResponseEntity.status(500).body("Ha ocurrido un error al enviar el mail");
+
         }
 
         return ResponseEntity.ok().body("Email Enviado");
