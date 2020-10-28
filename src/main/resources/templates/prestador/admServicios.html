@@ -293,7 +293,7 @@ function TableActions (value, row, index) {
     return [
 
 
-        '<a class="like"  onclick="editarServicio( \''+row.idServicio+'\',  \''+row.titulo+'\',   \''+row.descripcion+'\',   \''+row.costo+'\' ,   \''+row.urlPago+'\' ,\''+row.fechaFin+'\'  ,\''+row.tipoServicio+'\' );" title="Editar Servicio">',
+        '<a class="like"  onclick="editarServicio( \''+row.idServicio+'\',  \''+row.titulo+'\',   \''+row.descripcion+'\',   \''+row.costo+'\' ,   \''+row.urlPago.replace(/'/g, "\\'")+'\' ,\''+row.fechaFin+'\'  ,\''+row.tipoServicio+'\' );" title="Editar Servicio">',
         '<img class="options" src="../img/edit.png" alt="check"/>',
         '</a> ',
         '<a class="danger remove" onclick="borrarServicio(\''+row.idServicio+ '\')" title="Borrar Servicio">',

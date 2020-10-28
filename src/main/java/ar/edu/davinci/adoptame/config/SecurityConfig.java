@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,16 +31,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests()
               .antMatchers("/static/**").permitAll()
-              .antMatchers("/css/**").permitAll() //Adding this line solved it
-              .antMatchers("/img/**").permitAll() //Adding this line solved it
-              .antMatchers("/js/**").permitAll() //Adding this line solved it
+              .antMatchers("/css/**").permitAll()
+              .antMatchers("/img/**").permitAll()
+              .antMatchers("/js/**").permitAll()
               .antMatchers("/admin/**").access("hasRole('ADMIN')")
               .antMatchers("/usuarios/**").access("hasRole('ADMIN')")
               .antMatchers("/servicios/**").access("hasRole('ADMIN')")
+              .antMatchers("/prestador/**").access("hasRole('ADMIN')")
+
               .and()
                 .formLogin().loginPage("/login").failureUrl("/login?error")
               .loginProcessingUrl("/ingresar")
@@ -47,7 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
               .defaultSuccessUrl("/usuarios/nuevoUsuario")
               .permitAll()
               .and()
-               .logout().invalidateHttpSession(true)
+               .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/")
                 .and()
@@ -60,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        PasswordEncoder encoder = new BCryptPasswordEncoder(4);
         return encoder;
     }
 

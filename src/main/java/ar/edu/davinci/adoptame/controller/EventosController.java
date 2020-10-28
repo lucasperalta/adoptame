@@ -1,24 +1,16 @@
 package ar.edu.davinci.adoptame.controller;
 
 import ar.edu.davinci.adoptame.DTO.EventosDTO;
-import ar.edu.davinci.adoptame.DTO.MascotaDTO;
 import ar.edu.davinci.adoptame.DTO.ResponseDTO;
-import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
-import ar.edu.davinci.adoptame.constantes.Constantes;
-import ar.edu.davinci.adoptame.domain.*;
+import ar.edu.davinci.adoptame.domain.Eventos;
 import ar.edu.davinci.adoptame.service.EventosService;
-import ar.edu.davinci.adoptame.service.MascotaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import sun.misc.Cleaner;
 
-import javax.validation.Valid;
-import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,6 +52,12 @@ public class EventosController {
         logger.info("eventos"+eventosDTOS);
         return eventosDTOS;
     }
+
+    /**
+     * Creo evento nuevo
+     * @param eventosDTO
+     * @return
+     */
     @PostMapping("/guardarEvento")
     public  @ResponseBody
     ResponseDTO guardarEvento(@RequestBody  EventosDTO eventosDTO ) {
@@ -80,7 +78,7 @@ public class EventosController {
      * @return
      */
     @GetMapping("/todos")
-    public @ResponseBody Iterable<EventosDTO> listarEventos( ) { //TODO hay filtros en la pantalla de busqueda?
+    public @ResponseBody Iterable<EventosDTO> listarEventos( ) {
         List<Eventos> eventos=eventosService.listarEventos();
         List<EventosDTO> eventosDTOS= new ArrayList<>();
         for (Eventos evento:eventos) {
@@ -97,6 +95,11 @@ public class EventosController {
         return eventosDTOS;
     }
 
+    /**
+     * borro evento
+     * @param eventosDTO
+     * @return
+     */
     @PostMapping("/borrar")
     public @ResponseBody String borrarEvento( @RequestBody EventosDTO eventosDTO) {
 
@@ -115,7 +118,11 @@ public class EventosController {
     }
 
 
-
+    /**
+     * listo evento
+     * @param eventosDTO
+     * @return
+     */
     @PostMapping("/editarEvento")
     public  @ResponseBody  String editarEvento(@RequestBody EventosDTO eventosDTO  ) {
 

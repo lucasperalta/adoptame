@@ -13,6 +13,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             nombre: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
@@ -24,11 +28,15 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             apellido: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 50,
+                        max : 45,
                         message : 'Máximo 45 caracteres'
                     }
                 }
@@ -53,10 +61,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     notEmpty : {
                         message : 'No puede ser vacio'
                     },
-                    stringLength : {
-                        min:8,
-                        max : 10,
-                        message : 'Debe tener entre 8 y 10 caracteres'
+
+                    regexp: {
+                        regexp: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                        message: 'Debe contener 8 caracteres ,1 numero,una mayuscula ,una minuscula'
                     }
                 }
             },
@@ -81,6 +89,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
 
             nombreUsuarioEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
@@ -92,11 +104,15 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             },
             apellidoUsuarioEditar: {
                 validators: {
+                    regexp: {
+                        regexp: /^[^'"]*$/,
+                        message: 'No puede contener comillas '
+                    },
                     notEmpty: {
                         message: 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 50,
+                        max : 45,
                         message : 'Máximo 45 caracteres'
                     }
                 }
@@ -122,14 +138,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                         message : 'No puede ser vacio'
                     }
                 }
-            },
-            estadoUsuarioEditar: {
-                validators: {
-                    notEmpty : {
-                        message : 'No puede ser vacio'
-                    }
-                }
             }
+
         }
     });
 
@@ -208,22 +218,14 @@ function cerrarModalEditarUsuario(){
 }
 
 
-function editarUsuario(id,nombre,apellido,email,estado,rol) {
+function editarUsuario(id,nombre,apellido,email,rol) {
     $('#idUsuarioEditar').val(id);
     $('#nombreUsuarioEditar').val(nombre);
     $('#apellidoUsuarioEditar').val(apellido);
     $('#emailUsuarioEditar').val(email);
-    $("#estadoUsuarioEditar option").each(function() {
-        if($(this).text() === estado) {
-            $(this).attr('selected', 'selected');
-        }
-    });
 
-    $("#rolUsuarioEditar option").each(function() {
-        if($(this).text() === rol) {
-            $(this).attr('selected', 'selected');
-        }
-    });
+
+
 
     $('#modalEditarUsuario').show();
 
@@ -273,7 +275,6 @@ function confirmaEditarUsuario(){
         nombre:$('#nombreUsuarioEditar').val(),
         apellido:$('#apellidoUsuarioEditar').val(),
         email	: $('#emailUsuarioEditar').val(),
-        estado:$('#estadoUsuarioEditar').val(),
         rol:$('#rolUsuarioEditar').val()
 
 

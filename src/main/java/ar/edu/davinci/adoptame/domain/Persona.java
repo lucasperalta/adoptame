@@ -17,6 +17,8 @@ public abstract class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //  @SequenceGenerator(name="personas_id_seq", sequenceName="personas_id_seq", allocationSize=1)
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="personas_id_seq")
     @Column(name = "id")
     private Integer id;
 
@@ -30,18 +32,38 @@ public abstract class Persona implements Serializable {
     @Column(name="email", nullable = false, length = 45)
     private String email;
 
+    @Column(name="telefono", nullable = true, length = 45)
+    private String telefono;
 
-
-
+    @Column(name="ubicacion", nullable = true, length = 45)
+    private String ubicacion;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, String email) {
+    public Persona(String nombre, String apellido, String email,String telefono,String ubicacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.telefono=telefono;
+        this.ubicacion=ubicacion;
 
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public Integer getId() {

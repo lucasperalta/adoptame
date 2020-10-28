@@ -1,19 +1,13 @@
 package ar.edu.davinci.adoptame.controller;
 
-import ar.edu.davinci.adoptame.DTO.EstadoDTO;
 import ar.edu.davinci.adoptame.DTO.RolDTO;
 import ar.edu.davinci.adoptame.DTO.UsuarioDTO;
-import ar.edu.davinci.adoptame.constantes.Constantes;
-import ar.edu.davinci.adoptame.domain.Estado;
 import ar.edu.davinci.adoptame.domain.Rol;
 import ar.edu.davinci.adoptame.domain.Usuario;
-import ar.edu.davinci.adoptame.exception.NotFoundException;
-import ar.edu.davinci.adoptame.service.EstadoService;
 import ar.edu.davinci.adoptame.service.LoginService;
 import ar.edu.davinci.adoptame.service.RolService;
 import ar.edu.davinci.adoptame.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,10 +32,13 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private EstadoService estadoService;
 
-
+    /**
+     * maneja login de WEB
+     * @param model
+     * @param error
+     * @return
+     */
     @GetMapping("/login")
     public String loginAdmin(Model model,@RequestParam(value = "error", required = false) String error) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
@@ -59,18 +56,15 @@ public class LoginController {
         return "public/403";
     }
 
-
+    /**
+     * una vez que se logeo y autentico springsecurity vuelvo aca
+     * @param usuarioDTO
+     * @param model
+     * @return
+     */
     @PostMapping("/ingresar")
 	public ModelAndView findAdmin(@ModelAttribute UsuarioDTO usuarioDTO ,Model model ) {
         Usuario usuario;
-/*
-        try {
-            usuario = loginService.findAdmin(usuarioDTO.getEmail(),usuarioDTO.getPassword());
-        } catch (NotFoundException e) {
-            model.addAttribute("loginfail", "Usuario o password incorrectos");
-            return new ModelAndView("redirect:/login");
-        }*/
-        //TODO  pasar el usuario a DTO y guardarlo usuario en session
 
         List<Rol> roles=rolService.listaRoles();
         List<RolDTO> rolesDto= new ArrayList<>();
@@ -81,16 +75,6 @@ public class LoginController {
             rolesDto.add(rolDTO);
         }
 
-        List<Estado> estados=estadoService.listarEstados();
-        List<EstadoDTO> estadosDto= new ArrayList<>();
-        for (Estado estado:estados ) {
-            EstadoDTO estadoDTO= new EstadoDTO();
-            estadoDTO.setId(estado.getId());
-            estadoDTO.setEstado(estado.getEstado());
-            estadosDto.add(estadoDTO);
-        }
-
-        model.addAttribute("estados", estadosDto);
         model.addAttribute("roles", rolesDto);
 
         return new ModelAndView("redirect:/usuarios/nuevoUsuario");

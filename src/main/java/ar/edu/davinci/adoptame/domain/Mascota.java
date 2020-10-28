@@ -1,5 +1,9 @@
 package ar.edu.davinci.adoptame.domain;
 
+import ar.edu.davinci.adoptame.DTO.MascotaDTO;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -15,24 +19,24 @@ public class Mascota implements Serializable {
     private static final long serialVersionUID = 4293421164107278076L;
 
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_mascota")
-	private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_mascota")
+    private Long id;
 
-	@Column(name="nombre", nullable = false, length = 45)
-	private String nombre;
+    @Column(name="nombre", nullable = false, length = 45)
+    private String nombre;
 
-	@Column(name = "sexo", nullable = false, length = 45)
-	private String sexo;
+    @Column(name = "sexo", nullable = false, length = 45)
+    private String sexo;
 
-	@Column(name = "tipo_mascota", length = 45)
-	private String tipoMascota;
+    @Column(name = "tipo_mascota", length = 45)
+    private String tipoMascota;
 
-	@Column(name="raza", nullable = false, length = 45)
-	private String raza;
+    @Column(name="raza", nullable = false, length = 45)
+    private String raza;
 
-	@Column(name="edad")
-	private Integer edad;
+    @Column(name="edad")
+    private Integer edad;
 
     @Column(name="foto_url")
     private String foto_url;
@@ -47,10 +51,11 @@ public class Mascota implements Serializable {
     private String tamanio;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="id")
     private Usuario rescatista;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_coordenada")
     private Coordenada coordenadas;
 
@@ -59,7 +64,7 @@ public class Mascota implements Serializable {
 
     public Mascota() {
 
-	}
+    }
 
     public Mascota(String nombre, String sexo, String tipoMascota, String raza, Integer edad, String foto_url, String estado, String descripcion, String tamanio, Usuario rescatista, Coordenada coordenadas) {
         this.nombre = nombre;
@@ -75,11 +80,14 @@ public class Mascota implements Serializable {
         this.coordenadas = coordenadas;
     }
 
-    public Integer getId() {
+
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

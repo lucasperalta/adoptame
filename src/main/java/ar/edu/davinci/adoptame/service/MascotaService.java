@@ -1,5 +1,6 @@
 package ar.edu.davinci.adoptame.service;
 
+import ar.edu.davinci.adoptame.DTO.MascotaDTO;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import org.springframework.data.repository.query.Param;
@@ -8,14 +9,25 @@ import java.util.List;
 
 public interface MascotaService {
 
-	public List<Mascota> listarMascotas();
+	 List<Mascota> listarMascotas();
 
 
-	public Mascota addMascotas(Mascota mascota);
+	 Mascota addMascotas(MascotaDTO mascota);
 
 
-	public List<Mascota> findAllByEstadoOrderByIdDesc(String estado);
-	public List<Mascota> findTop3ByEstadoRandom(String estado) ;
+	 List<Mascota> findAllByEstadoOrderByIdDesc(String estado);
+	 List<Mascota> findTop3ByEstadoRandom(String estado) ;
+
+	// List<Mascota> findAllByEstadoAndSexoAndTamanioAndEdad(Mascota mascota) ;
+
+	 List<Mascota> findAllByRescatista(Usuario usuario) ;
+
+	 Mascota findById(Long id);
+
+	 Mascota save (Mascota mascota);
 
 
+	List<Mascota> findAll();
+
+	List<Mascota> findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(String estado, List<String >sexo, Integer edad, List<String> tamanio);
 }

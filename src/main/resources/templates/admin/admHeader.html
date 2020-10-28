@@ -31,9 +31,7 @@
     <div class="wrapper col-xs-12 col-md-12">
         <img class="logo" th:src="@{/img/iconPet.png}" alt="logo"/>
         <div class="logo">Adopta.Me</div>
-        <nav>
-            <a th:href="@{/logout}">Logout</a>
-        </nav>
+
 
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -48,13 +46,16 @@
             <a th:href="@{/usuarios/nuevoUsuario}" class="list-group-item list-group-item-action">Usuarios</a>
             <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
             <a th:href="@{/admin/eventos}" class="list-group-item list-group-item-action">Eventos</a>
+            <a th:href="@{/logout}" class="list-group-item list-group-item-action">Logout</a>
+
 
             <div class="divisor"></div>
 
             <h3>Estadisticas</h3>
-            <a th:href="@{/usuarios/nuevoUsuario}" class="list-group-item list-group-item-action">Usuarios</a>
-            <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Servicios</a>
-            <a th:href="@{/prestador/nuevoPrestador}" class="list-group-item list-group-item-action">Eventos</a>
+            <a th:href="@{/admin/chart}" class="list-group-item list-group-item-action">Mascotas</a>
+
+
+
         </nav>
     </div>
 </header>
