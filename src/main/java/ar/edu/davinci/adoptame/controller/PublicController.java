@@ -22,6 +22,14 @@ public String index(Model model){
     }
 
 
+    @RequestMapping("/politicaPrivacidad")
+    public String politica(Model model){
+
+
+
+        return "public/politicaPrivacidad";
+
+    }
 
 
 
