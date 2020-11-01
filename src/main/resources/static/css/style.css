@@ -277,7 +277,7 @@ label{
 .pagination-info{
 	margin-left: 1em;
 }
-
+.card-masc
 .modal-footer{
 	border-top: none !important;
 }
@@ -291,20 +291,19 @@ label{
 }
 .titDato{
 	font-weight:bold;
-	font-size: 17px;
+	font-size: 15px;
 	padding: 0;
 	margin-top: 0;
-	text-align: right;
+	text-align: left;
 }
 .datoText{
 	padding: 0;
 	margin: 0;
-	font-size: 17px;
+	font-size: 15px;
 }
 
-.desc-evento{
-	margin-left: 5em;
-	font-size: 17px;
+.desc-evento{;
+	font-size: 15px;
 }
 
 .div-desc-evn{
@@ -373,6 +372,7 @@ label{
 	background-clip: border-box;
 	border: 1px solid rgba(0,0,0,.125);
 	border-radius: .25rem;
+
 }
 
 .card-peque{
@@ -574,7 +574,8 @@ a.article, a.article:hover {
 }
 
 .scroll-box {
-	height:447px;
+	font: icon;
+	height: 90%;
 	overflow-y: scroll;
 }
 /* ---------------------------------------------------
