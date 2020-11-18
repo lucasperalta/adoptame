@@ -223,9 +223,13 @@ function editarUsuario(id,nombre,apellido,email,rol) {
     $('#nombreUsuarioEditar').val(nombre);
     $('#apellidoUsuarioEditar').val(apellido);
     $('#emailUsuarioEditar').val(email);
+    $('#rolUsuarioEditar').val(email);
 
-
-
+    $("#rolUsuarioEditar option").each(function() {
+        if($(this).text() === rol) {
+            $(this).prop('selected', true);
+        }
+    });
 
     $('#modalEditarUsuario').show();
 
