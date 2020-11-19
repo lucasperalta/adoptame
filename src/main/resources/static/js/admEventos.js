@@ -53,8 +53,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                         message: 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 10,
-                        message : 'Máximo 10 caracteres'
+                        max : 15,
+                        message : 'Máximo 15 caracteres'
                     }
                 }
             },
@@ -117,8 +117,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 60,
-                        message : 'Máximo 60 caracteres'
+                        max : 140,
+                        message : 'Máximo 140 caracteres'
                     }
                 }
             }
@@ -161,8 +161,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 10,
-                        message : 'Máximo 10 caracteres'
+                        max : 15,
+                        message : 'Máximo 15 caracteres'
                     }
                 }
             },
@@ -222,8 +222,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                         message : 'No puede ser vacio'
                     },
                     stringLength : {
-                        max : 60,
-                        message : 'Máximo 60 caracteres'
+                        max : 140,
+                        message : 'Máximo 140 caracteres'
                     }
                 }
             }
@@ -324,6 +324,7 @@ $('#crearEvento').click(function() {
 
 function cerrarModal(nombre){
     $('#'+nombre+'').hide();
+    $('#formEditarEvento').data('formValidation').resetForm();
 }
 
 function cerrarModalBorrarEvento(){

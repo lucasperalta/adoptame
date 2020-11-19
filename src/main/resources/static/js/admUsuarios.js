@@ -207,6 +207,8 @@ $('#crearUsuario').click(function() {
 
 function cerrarModal(nombre){
     $('#'+nombre+'').hide();
+    $('#modalEditarUsuario').data('formValidation').resetForm();
+
 }
 
 function cerrarModalBorrarUsuario(){

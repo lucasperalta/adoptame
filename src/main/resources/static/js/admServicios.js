@@ -96,8 +96,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     },
                     stringLength : {
 
-                        max : 20,
-                        message : 'Máximo 20 caracteres'
+                        max : 25,
+                        message : 'Máximo 25 caracteres'
                     }
                 }
             } ,
@@ -162,8 +162,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     },
                     stringLength : {
 
-                        max : 50,
-                        message : 'Máximo 50 caracteres'
+                        max : 190,
+                        message : 'Máximo 190 caracteres'
                     }
                 }
             }
@@ -191,8 +191,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     },
                     stringLength : {
 
-                        max : 20,
-                        message : 'Máximo 20 caracteres'
+                        max : 25,
+                        message : 'Máximo 25 caracteres'
                     }
                 }
             } ,
@@ -250,8 +250,8 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                     },
                     stringLength : {
 
-                        max : 50,
-                        message : 'Máximo 50 caracteres'
+                        max : 190,
+                        message : 'Máximo 190 caracteres'
                     }
                 }
             }
@@ -362,6 +362,8 @@ $('#crearPrestador').click(function() {
 
 function cerrarModal(nombre){
     $('#'+nombre+'').hide();
+    $('#formEditarServicio').data('formValidation').resetForm();
+
 }
 
 function cerrarModalBorrarServicio(){
