@@ -39,7 +39,7 @@
             // - Use FontAwesome icons:
             //  icon: {
             //      valid: 'fa fa-check',
-            //      invalid: 'fa fa-times',
+            //      invalid: '  fa fa-times',
             //      validating: 'fa fa-refresh',
             //      feedback: 'form-control-feedback'
             //  }

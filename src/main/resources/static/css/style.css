@@ -397,6 +397,14 @@ label{
 	margin-right: 3em;
 }
 
+
+.ratio{
+	display: block;
+	max-width:250px;
+	max-height:250px;
+	width: auto;
+	height: auto;
+}
 .nom-masc{
 	font-weight:bold;
 	font-size: 20px;
