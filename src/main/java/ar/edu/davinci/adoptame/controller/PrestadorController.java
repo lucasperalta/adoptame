@@ -160,7 +160,7 @@ public class PrestadorController {
                 servicio.setFechaFin(new Date() );
             }
             servicioService.addServicio(servicio);//si existe lo actualiza sino lo inserta
-            return "Servicio Modificado exitosamente";
+            return "Servicio modificado exitosamente";
         }
         return "Hubo un error al modificar el servicio";
 

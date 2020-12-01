@@ -97,7 +97,7 @@ public class UsuarioController {
            usuario.setRol(rol);
            usuarioService.addUsuario(usuario);
            responseDTO.setStatus("SUCESS");
-           responseDTO.setResult("Usuario Modificado exitosamente");
+           responseDTO.setResult("Usuario modificado exitosamente");
            return responseDTO;
        }
 

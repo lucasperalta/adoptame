@@ -135,7 +135,7 @@ public class EventosController {
             try {
                 evento.setDias(format.parse(eventosDTO.getDias()));
             } catch (ParseException e) {
-               logger.error("hubo un error al parsear la fecha"+e.getMessage());
+               logger.error("hubo un error al parsear la fecha "+e.getMessage());
 
             }
             evento.setDireccion(eventosDTO.getDireccion());
@@ -143,7 +143,7 @@ public class EventosController {
             evento.setHorarios(eventosDTO.getHorarios());
 
             eventosService.addEvento(evento);//si existe lo actualiza sino lo inserta
-            return "Evento Modificado exitosamente";
+            return "Evento modificado exitosamente";
         }
         return "Hubo un error al modificar el evento";
 

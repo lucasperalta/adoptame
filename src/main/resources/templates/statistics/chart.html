@@ -67,6 +67,7 @@
                         beta: 0
                     }
                 },
+
                 title: {
                     text: 'Estado'
                 },
@@ -76,9 +77,14 @@
                     pie: {
                         allowPointSelect: true,
                         depth: 35,
-                        size: 280,
-                        slicedOffset: 20
-
+                        size: 200,
+                        slicedOffset: 20,
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                width: '150px'
+                            }
+                        }
 
                     }
                 },
@@ -86,7 +92,7 @@
                     name: 'Mascotas',
                     colorByPoint:true,
                     data: [{
-                        name: 'En adopcion',
+                        name: 'En adopción',
                         y: /*[[${mascotasDisponibles}]]*/ 0
                     },{
                         name: 'Adoptadas',
@@ -239,7 +245,7 @@
                     pie: {
                         allowPointSelect: true,
                         depth: 35,
-                        size: 280,
+                        size: 200,
                         slicedOffset: 20
 
 

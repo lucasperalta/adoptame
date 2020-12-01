@@ -27,7 +27,7 @@
 
 
                                         <div class="col-md-4">
-                                            <label for="email">* Email:</label>
+                                            <label for="email">* Correo electrónico:</label>
                                             <input type="text" class="form-control" id="email" name="email" onblur="buscoEmail()"/>
                                         </div>
 
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="descripcion">* Descripción:</label>
-                                            <textarea class="form-control" rows="3" cols="50" id="descripcion" name="descripcion"></textarea>
+                                            <textarea  style="resize: none;" class="form-control" rows="3" cols="50" id="descripcion" name="descripcion"></textarea>
                                         </div>
                                     </div>
                                     <button type="button"  id="crearPrestador" class="btn btn-secondary float-right">Agregar</button>
@@ -115,14 +115,14 @@
                                     <th data-field="idServicio" data-visible="false">idServicio</th>
 
                                     <th data-formatter="nameFormatter">Prestador</th>
-                                    <th data-field="email">Email</th>
-                                    <th data-field="tipoServicio" >Tipo Servicio</th>
-                                    <th data-field="titulo">Titulo</th>
+                                    <th data-field="email" data-width="170">Correo electrónico</th>
+                                    <th data-field="tipoServicio" >Tipo servicio</th>
+                                    <th data-field="titulo">Título</th>
                                     <th data-field="descripcion">Descripción</th>
                                     <th data-field="costo" data-width="80">Costo $</th>
-                                    <th data-field="urlPago">URL Pago</th>
-                                    <th data-field="fechaFin" >Fecha Hasta</th>
-                                    <th data-formatter="TableActions" data-width="80">Action</th>
+                                    <th data-field="urlPago">Link de pago</th>
+                                    <th data-field="fechaFin" >Fecha hasta</th>
+                                    <th data-formatter="TableActions" data-width="80">Acción</th>
                                 </tr>
                                 </thead>
 
@@ -242,7 +242,7 @@
                         <div class="row">
 
                             <div class="col-md-12">
-                                <label for="urlPagoServicioEditar">* URL Pago</label>
+                                <label for="urlPagoServicioEditar">* Link de Pago</label>
                                 <input type="text" class="form-control" id="urlPagoServicioEditar" name="urlPagoServicioEditar"/>
 
                             </div>

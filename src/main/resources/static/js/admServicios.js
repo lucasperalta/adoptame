@@ -15,14 +15,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Nombre no puede contener comillas '
                     },
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: 'Nombre no puede ser vacío '
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : ' Nombre debe tener un máximo de 45 caracteres'
                     }
                 }
             },
@@ -30,14 +30,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Apellido no puede contener comillas '
                     },
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: 'Apellido no puede ser vacío '
                     },
                     stringLength : {
                         max : 50,
-                        message : 'Máximo 45 caracteres'
+                        message : 'Apellido debe tener un máximo 45 caracteres'
                     }
                 }
             },
@@ -45,14 +45,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             email: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Correo electrónico no puede ser vacío '
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : ' Correo electrónico debe tener un máximo 45 caracteres '
                     },
                     emailAddress: {
-                        message: 'Debe ser una dirección de mail válida'
+                        message: ' Correo electrónico debe ser una dirección válida'
                     }
                 }
             },
@@ -60,28 +60,28 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Dirección no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : ' Dirección no  puede ser vacío '
                     },
                     stringLength : {
 
                         max : 100,
-                        message : 'Máximo 100 caracteres'
+                        message : ' Dirección debe tener un máximo 100 caracteres'
                     }
                 }
             },
             telefono: {
                 validators: {
-                    numeric:{message:'solo números'},
+                    numeric:{message:' Teléfono debe contener solo números '},
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Teléfono no puede ser vacío '
                     },
                     stringLength : {
 
                         max : 20,
-                        message : 'Máximo 20 caracteres'
+                        message : ' Teléfono debe tener un máximo 20 caracteres '
                     }
                 }
             },
@@ -89,25 +89,25 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Título no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Título no puede ser vacío '
                     },
                     stringLength : {
 
                         max : 25,
-                        message : 'Máximo 25 caracteres'
+                        message : 'Título debe tener un máximo de 25 caracteres '
                     }
                 }
             } ,
             costo: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Costo no puede ser vacío '
                     },
                     greaterThan: {
-                        message: 'Debe ser mayor que 0',
+                        message: 'Costo debe ser mayor que 0 ',
                         value: 0
                     }
                 }
@@ -115,10 +115,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             vigencia: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Vigencia no puede ser vacía '
                     },
                     greaterThan: {
-                        message: 'Debe ser mayor que 0',
+                        message: 'Vigencia debe ser mayor que 0 ' ,
                         value: 0
                     }
                 }
@@ -126,7 +126,7 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             tipoServicio: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Tipo de servicio no puede ser vacío '
                     }
                 }
             },
@@ -134,19 +134,19 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Link de pago no puede contener comillas '
                     },
 
                     uri :{
-                        message:'la Url tiene que ser valida'
+                        message:'Link de pago debe ser una url válida '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Link de pago no puede ser vacío '
                     },
                     stringLength : {
 
                         max : 100,
-                        message : 'Máximo 100 caracteres'
+                        message : 'Link de pago debe tener un máximo 100 caracteres'
                     }
                 }
             },
@@ -154,16 +154,16 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Descripcion no puede contener comillas '
                     },
 
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Descripcion no puede ser vacío '
                     },
                     stringLength : {
 
                         max : 190,
-                        message : 'Máximo 190 caracteres'
+                        message : 'Descripcion debe tener un máximo de 190 caracteres'
                     }
                 }
             }
@@ -184,22 +184,22 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: ' Título no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : ' Título no puede ser vacío '
                     },
                     stringLength : {
 
                         max : 25,
-                        message : 'Máximo 25 caracteres'
+                        message : ' Título debe tener un máximo de 25 caracteres '
                     }
                 }
             } ,
             tipoServicioEditar: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Tipo de servicio no puede ser vacío'
                     }
                 }
             },
@@ -207,10 +207,10 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             costoServicioEditar: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Costo no puede ser vacío '
                     },
                     greaterThan: {
-                        message: 'Debe ser mayor que 0',
+                        message: 'Costo debe ser mayor que 0',
                         value: 0
                     }
                 }
@@ -218,7 +218,7 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             fechaFinServicioEditar: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Fecha fin no puede ser vacío'
                     }
                 }
             },
@@ -227,15 +227,15 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Link de pago no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Link de pago no puede ser vacío '
                     },
                     stringLength : {
 
-                        max : 255,
-                        message : 'Máximo 255 caracteres'
+                        max : 100,
+                        message : 'Link de pago debe tener un máximo de 100 caracteres'
                     }
                 }
             },
@@ -243,15 +243,15 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Descripcion no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Descripcion no puede ser vacío'
                     },
                     stringLength : {
 
                         max : 190,
-                        message : 'Máximo 190 caracteres'
+                        message : 'Descripcion debe tener un máximo 190 caracteres'
                     }
                 }
             }
@@ -380,7 +380,7 @@ function borrarServicio(idServicio) {
     $('#idServicio').val(idServicio); //cargamos el mail del usuario a borrar en un campo oculto
     //lo vamos a necesitar despues cuando confirme la accion
     $('#confirmarBorrarServicioBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
-    $('#textoBorrarServicio').text("Seguro que desea borrar este servicio?"); //ponemos el texto
+    $('#textoBorrarServicio').text("¿Seguro que desea borrar este servicio?"); //ponemos el texto
     $('#modalBorrarServicio').show();//mostramos el popup de confirmacion
 }
 

@@ -15,14 +15,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: ' Nombre no puede contener comillas '
                     },
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: ' Nombre no puede ser vacío'
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : ' Nombre debe tener un máximo de 45 caracteres'
                     }
                 }
             },
@@ -30,14 +30,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: ' Apellido no puede contener comillas '
                     },
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: ' Apellido no puede ser vacío'
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : ' Apellido debe tener un máximo de 45 caracteres '
                     }
                 }
             },
@@ -45,33 +45,33 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             email: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : ' Correo electrónico no puede ser vacío '
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : ' Correo electrónico debe tener un máximo de 45 caracteres '
                     },
                     emailAddress: {
-                        message: 'Debe ser una dirección de mail válida'
+                        message: ' Correo electrónico debe ser una dirección válida'
                     }
                 }
             },
             password: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : ' Contraseña no puede ser vacío '
                     },
 
                     regexp: {
                         regexp: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
-                        message: 'Debe contener 8 caracteres ,1 numero,una mayuscula ,una minuscula'
+                        message: ' Contraseña debe contener 8 caracteres ,1 número,una mayúscula ,una minúscula '
                     }
                 }
             },
             rol: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : ' Rol no puede ser vacío'
                     }
                 }
             }
@@ -91,14 +91,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Nombre no puede contener comillas '
                     },
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: 'Nombre no puede ser vacío'
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : 'Nombre debe tener un máximo de 45 caracteres'
                     }
                 }
             },
@@ -106,14 +106,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Apellido no puede contener comillas '
                     },
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: 'Apellido no puede ser vacío'
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : 'Apellido debe tener un máximo de 45 caracteres'
                     }
                 }
             },
@@ -121,21 +121,21 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             emailUsuarioEditar: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : ' Correo electrónico no puede ser vacío '
                     },
                     stringLength : {
                         max : 45,
-                        message : 'Máximo 45 caracteres'
+                        message : ' Correo electrónico debe tener un máximo 45 caracteres '
                     },
                     emailAddress: {
-                        message: 'Debe ser una dirección de mail válida'
+                        message: ' Correo electrónico debe ser una dirección de mail válida '
                     }
                 }
             },
             rolUsuarioEditar: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Rol no puede ser vacío'
                     }
                 }
             }
@@ -241,7 +241,7 @@ function borrarUsuario(email) {
     $('#emailUsuarioBorrar').val(email); //cargamos el mail del usuario a borrar en un campo oculto
     //lo vamos a necesitar despues cuando confirme la accion
     $('#confirmarBorrarUsuarioBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
-    $('#textoBorrarUsuario').text("Seguro que desea borrar este usuario?"); //ponemos el texto
+    $('#textoBorrarUsuario').text("¿Seguro que desea borrar este usuario?"); //ponemos el texto
     $('#modalBorrarUsuario').show();//mostramos el popup de confirmacion
 }
 

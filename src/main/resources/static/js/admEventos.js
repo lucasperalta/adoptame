@@ -39,7 +39,7 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
 
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: 'Día no puede ser vacío'
                     }
                 }
             },
@@ -47,14 +47,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Horario no puede contener comillas '
                     },
                     notEmpty: {
-                        message: 'No puede ser vacio'
+                        message: 'Horario puede ser vacío '
                     },
                     stringLength : {
                         max : 15,
-                        message : 'Máximo 15 caracteres'
+                        message : 'Horario debe contener un máximo de 15 caracteres '
                     }
                 }
             },
@@ -63,14 +63,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Direccion no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Direccion no puede ser vacío '
                     },
                     stringLength : {
                         max : 50,
-                        message : 'Máximo 50 caracteres'
+                        message : 'Direccion debe contener un máximo de 50 caracteres'
                     }
                 }
             },
@@ -79,14 +79,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Lugar no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Lugar no puede ser vacío'
                     },
                     stringLength : {
                         max : 50,
-                        message : 'Máximo 50 caracteres'
+                        message : 'Lugar debe contener un máximo de 50 caracteres'
                     }
                 }
             },
@@ -95,14 +95,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Barrio no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Barrio no puede ser vacío'
                     },
                     stringLength : {
                         max : 50,
-                        message : 'Máximo 50 caracteres'
+                        message : 'Barrio debe contener un máximo de 50 caracteres'
                     }
                 }
             },
@@ -111,14 +111,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Consultas no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Consultas no puede ser vacío'
                     },
                     stringLength : {
                         max : 140,
-                        message : 'Máximo 140 caracteres'
+                        message : 'Consultas debe contener un máximo de 140 caracteres'
                     }
                 }
             }
@@ -146,7 +146,7 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
             dias: {
                 validators: {
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Día no puede ser vacio'
                     }
                 }
             },
@@ -155,14 +155,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Horario no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Horario no puede ser vacío'
                     },
                     stringLength : {
                         max : 15,
-                        message : 'Máximo 15 caracteres'
+                        message : ' Horario debe tener un máximo de 15 caracteres'
                     }
                 }
             },
@@ -171,14 +171,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Direccion no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Direccion no puede ser vacío'
                     },
                     stringLength : {
                         max : 50,
-                        message : 'Máximo 50 caracteres'
+                        message : 'Direccion debe tener un máximo de 50 caracteres'
                     }
                 }
             },
@@ -186,14 +186,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Lugar no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Lugar no puede ser vacío'
                     },
                     stringLength : {
                         max : 50,
-                        message : 'Máximo 50 caracteres'
+                        message : 'Lugar debe tener un máximo de 50 caracteres'
                     }
                 }
             },
@@ -201,14 +201,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Barrio no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Barrio no puede ser vacío'
                     },
                     stringLength : {
                         max : 50,
-                        message : 'Máximo 50 caracteres'
+                        message : 'Barrio debe tener un máximo de 50 caracteres'
                     }
                 }
             },
@@ -216,14 +216,14 @@ $(document).ready(function () { //Cuando la pagina termina de cargar y esta list
                 validators: {
                     regexp: {
                         regexp: /^[^'"]*$/,
-                        message: 'No puede contener comillas '
+                        message: 'Consultas no puede contener comillas '
                     },
                     notEmpty : {
-                        message : 'No puede ser vacio'
+                        message : 'Consultas no puede ser vacío'
                     },
                     stringLength : {
                         max : 140,
-                        message : 'Máximo 140 caracteres'
+                        message : 'Consultas debe tener un máximo de 140 caracteres'
                     }
                 }
             }
@@ -304,7 +304,7 @@ $('#crearEvento').click(function() {
                         errorInfo+="<br />"+(index+1)+". "+elem.field+" : "+elem.defaultMessage ;
 
                     });
-                    $("#error").html("Efectue las siguientes correciones: "+errorInfo);
+                    $("#error").html("Efectúe las siguientes correcciones: "+errorInfo);
                     $("#error").show();
                     console.log(errorInfo);
 
@@ -355,7 +355,7 @@ function borrarEvento(idEvento) {
     $('#idEventoBorrar').val(idEvento); //cargamos el mail del usuario a borrar en un campo oculto
     //lo vamos a necesitar despues cuando confirme la accion
     $('#confirmarBorrarEventoBtn').show(); //si el boton de aceptar lo habiamos escondido ahora lo tenemos que mostrar
-    $('#textoBorrarEvento').text("Seguro que desea borrar este evento?"); //ponemos el texto
+    $('#textoBorrarEvento').text("¿Seguro que desea borrar este evento?"); //ponemos el texto
     $('#modalBorrarEvento').show();//mostramos el popup de confirmacion
 }
 
