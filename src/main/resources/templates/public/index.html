@@ -31,7 +31,7 @@
 				<!--Mascotas adoptadas-->
 				<div class="col-xs-8 col-sm-3">
 					<div class="card-puntas scroll-box" id="mascotasAdopDiv">
-						<h2 class="card-header " >Ya encontramos casita</h2>
+						<h2 class="card-header " >¡Ya nos adoptaron!</h2>
 
 					</div>
 				</div>
@@ -150,7 +150,7 @@ function cargarMascotasEnAdopcion() {
                 //creo un elemento mascota
 				var sexo= mascota.sexo=="MACHO"?'<i class="fa fa-mars"></i> ':'<i class="fa fa-venus"></i> ';
 
-                var mascotaElem= $('<div class="card-adopt"> <div class="col-sm-3"> <img src="'+mascota.foto_url+'" class=" rounded-circle img_list float-left "/>   </div>'
+                var mascotaElem= $('<div class="card-adopt"> <div class="col-sm-3"> <img src="'+mascota.foto_url+'" class=" rounded-circle img_list float-left " alt="Foto mascota en adopción de nombre '+mascota.nombre+'"/>   </div>'
                     +' <div class="offset-sm-3 col-sm-9">  <h2 class="tit_item">' +mascota.nombre+' - <span class="edad">'+mascota.edad+' años  </span>' +sexo+ '</h2>'
                     +'<p class="descripcion "> Tamaño: '+mascota.tamanio.toLowerCase()+'<br> '+mascota.descripcion+'</p>\n'
                     +' </div></div> '
@@ -187,7 +187,7 @@ function cargarMascotasAdoptadas() {
 
                 var mascotaElem= $('<div class="card-peque"> '
 									+'<div class="row " style="justify-content: center; ">'
-									+'<img src="'+mascota.foto_url+'" class="ratio"/>   '
+									+'<img src="'+mascota.foto_url+'" class="ratio" alt="Foto mascota adoptada de nombre '+mascota.nombre+'"/>   '
 									+'</div>'
 						+'<div class="row" style="justify-content: center;">'
 									+'<spam class="nom-masc">'+mascota.nombre+'</spam>'
