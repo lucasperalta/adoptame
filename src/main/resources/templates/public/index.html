@@ -66,7 +66,7 @@
 		<div class="row" style="justify-content: center">
 			<div class="col-sm-4" >
 				<h4>Contactanos</h4>
-				<a href="mailto:adoptameargapp@gmail.com" > <img class="img_contact" th:src="@{/img/contact.png}" alt="contact" /> </a>
+				<a href="javascript:sendEmailContact()" > <img class="img_contact" th:src="@{/img/contact.png}" alt="contact" /> </a>
 			</div>
 
 		</div>
@@ -204,6 +204,11 @@ function cargarMascotasAdoptadas() {
             console.log(error);
         }
     });
+}
+
+
+function sendEmailContact(){
+    window.open("mailto:adoptameargapp@gmail.com","_blank");
 }
 </script>
 </body>
