@@ -31,7 +31,7 @@ body *{
 .container-fluid h2 {
 	line-height:1em;
 	text-align:center;
-	font-size:1.7em;
+	font-size: 28px;
 	padding: 0.1em;
 }
 
@@ -146,7 +146,7 @@ h2 {
 .img_list{
 	width:6em;
 	height:6em;
-	margin: 0.5em;
+	margin: 1em;
 }
 .img_masc_adop{
 	width:8em;
@@ -167,13 +167,17 @@ h2 {
 }
 
 .descripcion{
-	font-size: 0.8em !important;
+	font-size: 15px !important;
 	text-align:left !important;
-    color: #797979;
+    color: #000000;
+	font-family: Arial;
 }
 .tit_item{
 	text-align:left !important;
 	text-transform: capitalize;
+	font-size: 18px !important;
+	margin-top: 0.5em;
+	font-weight: bold;
 }
 
 .off-border{
@@ -405,6 +409,7 @@ label{
 	max-height:250px;
 	width: auto;
 	height: auto;
+	margin: 1em;
 }
 .nom-masc{
 	font-weight:bold;
@@ -415,6 +420,8 @@ label{
 	margin-right: 2em;
 	text-align: center; !important;
 	text-transform: capitalize;
+	margin-bottom: 0.5em;
+	font-family: Arial;
 }
 
 @media screen and (max-width: 950px) {
