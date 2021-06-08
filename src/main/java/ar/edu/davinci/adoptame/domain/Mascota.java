@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name="mascotas")
@@ -59,14 +60,25 @@ public class Mascota implements Serializable {
     @JoinColumn(name="id_coordenada")
     private Coordenada coordenadas;
 
+    @Column(name="activa")
+    private Boolean activa;
 
+    @Column(name="fecha_inicio")
+    private Date fechaInicio;
+
+    @Column(name="fecha_fin")
+    private Date fechaFin;
+
+    @Column(name="id_adpotante")
+    private Integer idAdoptante;
 
 
     public Mascota() {
 
     }
 
-    public Mascota(String nombre, String sexo, String tipoMascota, String raza, Integer edad, String foto_url, String estado, String descripcion, String tamanio, Usuario rescatista, Coordenada coordenadas) {
+    public Mascota(String nombre, String sexo, String tipoMascota, String raza, Integer edad, String foto_url, String estado, String descripcion,
+                   String tamanio, Usuario rescatista, Coordenada coordenadas, Boolean activa, Date fechaInicio, Date fechaFin, Integer idAdoptante) {
         this.nombre = nombre;
         this.sexo = sexo;
         this.tipoMascota = tipoMascota;
@@ -78,6 +90,10 @@ public class Mascota implements Serializable {
         this.tamanio = tamanio;
         this.rescatista = rescatista;
         this.coordenadas = coordenadas;
+        this.activa = activa;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.idAdoptante = idAdoptante;
     }
 
 
@@ -169,6 +185,39 @@ public class Mascota implements Serializable {
 
     public void setRescatista(Usuario rescatista) {
         this.rescatista = rescatista;
+    }
+
+    public Boolean getActiva() {
+        return activa;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+
+    public Integer getIdAdoptante() {
+        return idAdoptante;
+    }
+
+    public void setIdAdoptante(Integer idAdoptante) {
+        this.idAdoptante = idAdoptante;
     }
 
     public Coordenada getCoordenadas() {

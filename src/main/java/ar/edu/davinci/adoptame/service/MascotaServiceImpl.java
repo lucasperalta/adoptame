@@ -35,7 +35,8 @@ public class MascotaServiceImpl implements MascotaService{
 		Mascota mascotaModel= new Mascota(mascota.getNombre(),mascota.getSexo(),
 				mascota.getTipoMascota(),mascota.getRaza(),
 				mascota.getEdad(),mascota.getFoto_url(),mascota.getEstado(),
-				mascota.getDescripcion(),mascota.getTamanio(),rescatista,coordenada);
+				mascota.getDescripcion(),mascota.getTamanio(),rescatista,coordenada, mascota.getActiva(), mascota.getFechaInicio(),
+				mascota.getFechaFin(), mascota.getIdAdoptante());
 		return mascotaRepository.save(mascotaModel);
 	}
 
@@ -74,6 +75,10 @@ public class MascotaServiceImpl implements MascotaService{
 	@Override
 	public List<Mascota> findAll() {
 		return mascotaRepository.findAll();
+	}
+
+	public List<Mascota> findFiltros(String estado, List<String> sexo,Integer edad, List<String> tamanio, List<String> tipoMascota){
+		return mascotaRepository.findFiltros(estado, sexo, edad, tamanio, tipoMascota);
 	}
 
 }

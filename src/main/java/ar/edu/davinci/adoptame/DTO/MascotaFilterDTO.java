@@ -23,7 +23,7 @@ public class MascotaFilterDTO {
 
     private List<String> sexo;
 
-    private String tipoMascota;
+    private List<String> tipoMascota;
 
     private String raza;
 
@@ -85,11 +85,11 @@ public class MascotaFilterDTO {
         this.sexo = sexo;
     }
 
-    public String getTipoMascota() {
+    public List<String> getTipoMascota() {
         return tipoMascota;
     }
 
-    public void setTipoMascota(String tipoMascota) {
+    public void setTipoMascota(List<String> tipoMascota) {
         this.tipoMascota = tipoMascota;
     }
 

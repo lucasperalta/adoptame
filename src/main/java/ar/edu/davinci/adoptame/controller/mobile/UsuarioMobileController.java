@@ -27,7 +27,8 @@ public class UsuarioMobileController {
 	RolService rolService;
 
 	@PostMapping(path="/modifyUser") // Map ONLY GET Requests
-	public @ResponseBody UsuarioDTO modifyPersona (@RequestBody UsuarioDTO usuarioDTO)  {
+	public @ResponseBody
+	ResponseDTO modifyPersona (@RequestBody UsuarioDTO usuarioDTO)  {
 
 	 Usuario usuario=	usuarioService.buscarUsuarioByEmail(usuarioDTO.getEmail());
 
@@ -52,15 +53,16 @@ public class UsuarioMobileController {
 
 	}
 
-	if(usuarioDTO.getPassword()!=null){
-		usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
-	}
+	//if(usuarioDTO.getPassword()!=null){
+	//	usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+	//}
 
+		usuarioService.addUsuario(usuario);
+		ResponseDTO responseDTO= new ResponseDTO();
+		responseDTO.setStatus("SUCESS");
+		responseDTO.setResult("Usuario dado de alta exitosamente");
+		return responseDTO;
 
-	usuarioService.addUsuario(usuario);
-	UsuarioDTO usuarioResponse= new UsuarioDTO(usuario);
-
-	return usuarioResponse;
 	}
 
 	@PostMapping("/signInUser")

@@ -4,6 +4,8 @@ package ar.edu.davinci.adoptame.DTO;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
+
 public class MascotaDTO {
 
     public MascotaDTO() {
@@ -63,6 +65,13 @@ public class MascotaDTO {
 
     private Double longitud;
     private Double latitud;
+
+    private Boolean activa;
+    private Integer idAdoptante;
+    private Date fechaFin;
+    private Date fechaInicio;
+
+    private Boolean cambioFoto;
 
     public Long getId() {
         return id;
@@ -168,8 +177,45 @@ public class MascotaDTO {
         this.latitud = latitud;
     }
 
+    public Boolean getActiva() {
+        return activa;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
 
 
+    public Integer getIdAdoptante() {
+        return idAdoptante;
+    }
 
+    public void setIdAdoptante(Integer idAdoptante) {
+        this.idAdoptante = idAdoptante;
+    }
+
+    public Boolean getCambioFoto() {
+        return cambioFoto;
+    }
+
+    public void setCambioFoto(Boolean cambioFoto) {
+        this.cambioFoto = cambioFoto;
+    }
 
 }
