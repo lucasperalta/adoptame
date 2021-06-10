@@ -22,10 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @RestController
 @RequestMapping(path="/mobile")
@@ -177,6 +175,19 @@ public class MascotaMobileController {
         }
 
         mascotaRespuesta.setEstado(params.getEstado());
+        switch (params.getEstado()){
+            case "ADOPCION":
+                mascotaRespuesta.setFechaFin(null);
+                mascotaRespuesta.setFechaInicio(null);
+                break;
+            case "SEGUIMIENTO":
+                mascotaRespuesta.setFechaInicio(new Date());
+                break;
+            case "ADOPTADA":
+                mascotaRespuesta.setFechaFin(new Date());
+                break;
+        }
+        
         mascotaRespuesta= mascotaService.save(mascotaRespuesta);
         MascotaDTO masDto = new MascotaDTO(mascotaRespuesta);
         return  masDto  ;
