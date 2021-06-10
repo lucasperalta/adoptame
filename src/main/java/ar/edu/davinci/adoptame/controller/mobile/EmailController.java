@@ -31,22 +31,22 @@ public class EmailController {
      * @param emailObject
      * @return
      */
-    @PostMapping(path="/enviarMailMascota")
+    /** @PostMapping(path="/enviarMailMascota")
     public @ResponseBody ResponseEntity<String> createMail(@RequestBody  MailMascotaDTO emailObject){
 
         try {
-        Mascota mascota= mascotaService.findById(emailObject.getIdMascota());
-        StringBuilder sb = new StringBuilder(Constantes.TE_CONTACTAMOS_PORQUE_ALGUIEN);
-        sb.append(Constantes.ESTA_INTERESADO_EN_TU_MASCOTA);
-        sb.append(mascota.getNombre());
-        sb.append(" ");
-        sb.append(mascota.getDescripcion());
-        sb.append(Constantes.POR_FAVOR_PONETE_EN_CONTACTO_CON_EL_A_TRAVES_DE);
-        sb.append(emailObject.getSenderName());
-        emailObject.setText(sb.toString());
-        emailObject.setTo(mascota.getRescatista().getEmail());
-        emailObject.setSubject(Constantes.ALGUIEN_QUIERE_ADOPTAR_TU_MASCOTA);
-         emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
+            Mascota mascota= mascotaService.findById(emailObject.getIdMascota());
+            StringBuilder sb = new StringBuilder(Constantes.TE_CONTACTAMOS_PORQUE_ALGUIEN);
+            sb.append(Constantes.ESTA_INTERESADO_EN_TU_MASCOTA);
+            sb.append(mascota.getNombre());
+            sb.append(" ");
+            sb.append(mascota.getDescripcion());
+            sb.append(Constantes.POR_FAVOR_PONETE_EN_CONTACTO_CON_EL_A_TRAVES_DE);
+            sb.append(emailObject.getSenderName());
+            emailObject.setText(sb.toString());
+            emailObject.setTo(mascota.getRescatista().getEmail());
+            emailObject.setSubject(Constantes.ALGUIEN_QUIERE_ADOPTAR_TU_MASCOTA);
+            emailService.sendSimpleMessage(emailObject.getTo(),emailObject.getSubject(),emailObject.getText());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Ha ocurrido un error al enviar el mail");
 
@@ -54,6 +54,7 @@ public class EmailController {
 
         return ResponseEntity.ok().body("Email Enviado");
     }
+    **/
 
 
 }
