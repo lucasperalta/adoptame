@@ -3,6 +3,7 @@ package ar.edu.davinci.adoptame.service;
 import ar.edu.davinci.adoptame.constantes.Constantes;
 import com.sendgrid.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class EmailServiceImpl implements EmailService {
 
 
-    @Value("${sendgrid.api.key}")
+    @Value("LALALA")
     private String sendGridApiKey;
 
 
@@ -35,6 +36,7 @@ public class EmailServiceImpl implements EmailService {
             Email to2 = new Email(to);
             Content content = new Content("text/plain", text);
             Mail mail = new Mail(from, subject, to2, content);
+
             System.out.println("api key sendgrid"+ sendGridApiKey);
             SendGrid sg = new SendGrid(sendGridApiKey);
             Request request = new Request();
@@ -52,6 +54,7 @@ public class EmailServiceImpl implements EmailService {
 
 
         } catch (MailException exception) {
+
             System.out.println(exception.getStackTrace());
             exception.printStackTrace();
         }

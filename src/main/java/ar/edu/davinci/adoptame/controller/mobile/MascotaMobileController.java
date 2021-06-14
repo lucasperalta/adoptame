@@ -22,10 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @RestController
 @RequestMapping(path="/mobile")
@@ -65,26 +63,25 @@ public class MascotaMobileController {
     @ResponseBody
     public  MascotaDTO uploadPet(@ModelAttribute  MascotaDTO params) throws ImageUploadException {
 
+        if(params.getCambioFoto() == true){
+            Map config = new HashMap();
+            config.put("cloud_name", cloudName);
+            config.put("api_key", apikey);
+            config.put("api_secret", apiSecret);
+            Cloudinary  cloudinary = new Cloudinary(config);
+            String fileName = fileStorageService.storeFile(params.getImage());
+            String basePath = fileStorageService.getFileStorageLocation().toString();
+            logger.info("path imagen en servidor "+basePath);
+            Map resultado;
+            try {
+               resultado=  cloudinary.uploader().upload(basePath+"/"+fileName, ObjectUtils.emptyMap());
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new ImageUploadException();
+            }
 
-        Map config = new HashMap();
-        config.put("cloud_name", cloudName);
-        config.put("api_key", apikey);
-        config.put("api_secret", apiSecret);
-        Cloudinary  cloudinary = new Cloudinary(config);
-        String fileName = fileStorageService.storeFile(params.getImage());
-        String basePath=fileStorageService.getFileStorageLocation().toString();
-        logger.info("path imagen en servidor "+basePath);
-        Map resultado;
-        try {
-           resultado=  cloudinary.uploader().upload(basePath+"/"+fileName, ObjectUtils.emptyMap());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new ImageUploadException();
+            params.setFoto_url(String.valueOf(resultado.get("secure_url")));
         }
-
-
-
-        params.setFoto_url(String.valueOf(resultado.get("secure_url")));
 
       Mascota mascotaRespuesta=  mascotaService.addMascotas(params);
 
@@ -135,7 +132,7 @@ public class MascotaMobileController {
     @GetMapping("/listaMascotasDisponible")
     public @ResponseBody Iterable<MascotaDTO> mascotasEnAdopcion(MascotaFilterDTO params ) {
 
-        List<Mascota> mascotas=mascotaService.findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(Constantes.DISPONIBLE,params.getSexo(),params.getEdad(),params.getTamanio());
+        List<Mascota> mascotas=mascotaService.findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(params.getEstado(),params.getSexo(),params.getEdad(),params.getTamanio());
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
             if(calculateDistanceInkms(params.getLatitud(),params.getLongitud(),mascota.getCoordenadas().getLatitud(),mascota.getCoordenadas().getLongitud())<params.getDistancia()){
@@ -178,6 +175,19 @@ public class MascotaMobileController {
         }
 
         mascotaRespuesta.setEstado(params.getEstado());
+        switch (params.getEstado()){
+            case "ADOPCION":
+                mascotaRespuesta.setFechaFin(null);
+                mascotaRespuesta.setFechaInicio(null);
+                break;
+            case "SEGUIMIENTO":
+                mascotaRespuesta.setFechaInicio(new Date());
+                break;
+            case "ADOPTADA":
+                mascotaRespuesta.setFechaFin(new Date());
+                break;
+        }
+
         mascotaRespuesta= mascotaService.save(mascotaRespuesta);
         MascotaDTO masDto = new MascotaDTO(mascotaRespuesta);
         return  masDto  ;
@@ -198,6 +208,26 @@ public class MascotaMobileController {
         System.out.println("kilometros de distancia:"+dist/Constantes.MIL_MTS);
         return dist/Constantes.MIL_MTS;
 
+    }
+
+    /**
+     * busca las mascotas disponibles para doptar segun los filtros pasados por parametro
+     * @param params
+     * @return
+     */
+    @GetMapping("/mascotasPorFiltro")
+    public @ResponseBody Iterable<MascotaDTO> mascotasPorFiltro(MascotaFilterDTO params ) {
+
+        List<Mascota> mascotas = mascotaService.findFiltros(params.getEstado(),params.getSexo(),params.getEdad(),params.getTamanio(), params.getTipoMascota());
+        List<MascotaDTO> mascotaDTOS= new ArrayList<>();
+        for (Mascota mascota:mascotas) {
+            if(calculateDistanceInkms(params.getLatitud(),params.getLongitud(),mascota.getCoordenadas().getLatitud(),mascota.getCoordenadas().getLongitud())<params.getDistancia()){
+                MascotaDTO mascotaDTO= new MascotaDTO(mascota);
+                mascotaDTOS.add(mascotaDTO);
+            }
+
+        }
+        return mascotaDTOS;
     }
 
 }

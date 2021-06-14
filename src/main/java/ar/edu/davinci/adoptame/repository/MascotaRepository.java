@@ -29,4 +29,13 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
                                                                        @Param("edad") Integer edad,
                                                                         @Param("tamanio") List<String> tamanio);
 
+    @Query(value="SELECT * FROM mascotas where estado=:estado and activa = true and sexo in :sexo and edad <= :edad and tamanio in :tamanio " +
+            "and tipo_mascota in :tipoMascota ORDER BY  RANDOM() LIMIT 20", nativeQuery = true)
+    List<Mascota> findFiltros(@Param("estado") String estado,
+                              @Param("sexo") List<String> sexo,
+                              @Param("edad") Integer edad,
+                              @Param("tamanio") List<String> tamanio,
+                              @Param("tipoMascota") List<String> tipoMascota);
+
+
 }

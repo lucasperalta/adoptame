@@ -2,6 +2,7 @@ package ar.edu.davinci.adoptame.constantes;
 
 public  class Constantes {
 
+
     public static String DISPONIBLE="DISPONIBLE";
     public static String ADOPTADA="ADOPTADA";
 
