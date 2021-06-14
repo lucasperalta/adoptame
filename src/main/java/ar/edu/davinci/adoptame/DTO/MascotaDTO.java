@@ -23,6 +23,10 @@ public class MascotaDTO {
         this.descripcion = mascota.getDescripcion();
         this.tamanio = mascota.getTamanio();
         this.rescatista = mascota.getRescatista().getNombre();
+        this.activa = mascota.getActiva();
+        this.fechaFin = mascota.getFechaFin();
+        this.fechaInicio = mascota.getFechaInicio();
+        this.idAdoptante = mascota.getIdAdoptante();
         this.latitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLatitud():null;
         this.longitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLongitud():null;
 
