@@ -4,9 +4,11 @@ package ar.edu.davinci.adoptame.DTO;
 import ar.edu.davinci.adoptame.domain.Mascota;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MascotaDTO {
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
     public MascotaDTO() {
     }
@@ -29,7 +31,7 @@ public class MascotaDTO {
         this.idAdoptante = mascota.getIdAdoptante();
         this.latitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLatitud():null;
         this.longitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLongitud():null;
-
+        this.fechaInicioS = format.format(mascota.getFechaInicio());
     }
 
 
@@ -57,6 +59,8 @@ public class MascotaDTO {
 
     private String rescatista;
 
+    private Boolean cambioFoto;
+
     MultipartFile image;
 
     public MultipartFile getImage() {
@@ -74,8 +78,7 @@ public class MascotaDTO {
     private Integer idAdoptante;
     private Date fechaFin;
     private Date fechaInicio;
-
-    private Boolean cambioFoto;
+    private String fechaInicioS;
 
     public Long getId() {
         return id;
