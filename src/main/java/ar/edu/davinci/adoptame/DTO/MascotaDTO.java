@@ -225,4 +225,7 @@ public class MascotaDTO {
         this.cambioFoto = cambioFoto;
     }
 
+    public String getFechaInicioS() {
+        return fechaInicioS;
+    }
 }
