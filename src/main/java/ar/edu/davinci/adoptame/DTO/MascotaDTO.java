@@ -31,7 +31,7 @@ public class MascotaDTO {
         this.idAdoptante = mascota.getIdAdoptante();
         this.latitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLatitud():null;
         this.longitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLongitud():null;
-        this.fechaInicioS = format.format(mascota.getFechaInicio());
+        this.fechaInicioS = mascota.getFechaInicio() != null?format.format(mascota.getFechaInicio()):null;
     }
 
 
