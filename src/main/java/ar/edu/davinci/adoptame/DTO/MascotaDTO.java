@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class MascotaDTO {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat inicioFormat = new SimpleDateFormat("MM/dd/yyyy");
 
     public MascotaDTO() {
     }
@@ -21,13 +22,14 @@ public class MascotaDTO {
         this.raza = mascota.getRaza();
         this.edad = mascota.getEdad();
         this.foto_url = mascota.getFoto_url();
+        this.foto_url = mascota.getFoto_url();
         this.estado = mascota.getEstado();
         this.descripcion = mascota.getDescripcion();
         this.tamanio = mascota.getTamanio();
         this.rescatista = mascota.getRescatista().getNombre();
         this.activa = mascota.getActiva();
         this.fechaFin = mascota.getFechaFin();
-        this.fechaInicio = mascota.getFechaInicio();
+        this.fechaInicio = mascota.getFechaInicio() != null?new Date(inicioFormat.format(mascota.getFechaInicio())):null;
         this.idAdoptante = mascota.getIdAdoptante();
         this.latitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLatitud():null;
         this.longitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLongitud():null;
