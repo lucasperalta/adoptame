@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class MascotaDTO {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    SimpleDateFormat inicioFormat = new SimpleDateFormat("MM/dd/yyyy");
+    SimpleDateFormat formatCal = new SimpleDateFormat("MM/dd/yyyy");
 
     public MascotaDTO() {
     }
@@ -29,11 +29,13 @@ public class MascotaDTO {
         this.rescatista = mascota.getRescatista().getNombre();
         this.activa = mascota.getActiva();
         this.fechaFin = mascota.getFechaFin();
-        this.fechaInicio = mascota.getFechaInicio() != null?new Date(inicioFormat.format(mascota.getFechaInicio())):null;
+        this.fechaInicio = mascota.getFechaInicio();
         this.idAdoptante = mascota.getIdAdoptante();
         this.latitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLatitud():null;
         this.longitud=mascota.getCoordenadas()!=null?mascota.getCoordenadas().getLongitud():null;
         this.fechaInicioS = mascota.getFechaInicio() != null?format.format(mascota.getFechaInicio()):null;
+        this.fechaCalculo = mascota.getFechaInicio() != null?formatCal.format(mascota.getFechaInicio()):null;
+
     }
 
 
@@ -81,6 +83,7 @@ public class MascotaDTO {
     private Date fechaFin;
     private Date fechaInicio;
     private String fechaInicioS;
+    private String fechaCalculo;
 
     public Long getId() {
         return id;
@@ -230,4 +233,9 @@ public class MascotaDTO {
     public String getFechaInicioS() {
         return fechaInicioS;
     }
+
+    public String getFechaCalculo() {
+        return fechaCalculo;
+    }
+
 }
