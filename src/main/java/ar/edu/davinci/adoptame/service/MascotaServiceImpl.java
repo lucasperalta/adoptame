@@ -6,7 +6,6 @@ import ar.edu.davinci.adoptame.domain.Mascota;
 import ar.edu.davinci.adoptame.domain.Usuario;
 import ar.edu.davinci.adoptame.repository.MascotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -79,6 +78,10 @@ public class MascotaServiceImpl implements MascotaService{
 
 	public List<Mascota> findFiltros(String estado, List<String> sexo,Integer edad, List<String> tamanio, List<String> tipoMascota){
 		return mascotaRepository.findFiltros(estado, sexo, edad, tamanio, tipoMascota);
+	}
+
+	public void deleteById(Long id){
+		mascotaRepository.deleteById(id);
 	}
 
 }

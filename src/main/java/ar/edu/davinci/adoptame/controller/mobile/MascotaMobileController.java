@@ -83,6 +83,10 @@ public class MascotaMobileController {
             params.setFoto_url(String.valueOf(resultado.get("secure_url")));
         }
 
+        if(params.getEstado() == "ENCONTRADO"){
+            params.setFechaInicio(new Date());
+        }
+
       Mascota mascotaRespuesta=  mascotaService.addMascotas(params);
 
        MascotaDTO masDto= new MascotaDTO(mascotaRespuesta);
@@ -179,9 +183,11 @@ public class MascotaMobileController {
             case "ADOPCION":
                 mascotaRespuesta.setFechaFin(null);
                 mascotaRespuesta.setFechaInicio(null);
+                //SACAR ADOPTANTE
                 break;
             case "SEGUIMIENTO":
                 mascotaRespuesta.setFechaInicio(new Date());
+                //agregar adoptante
                 break;
             case "ADOPTADA":
                 mascotaRespuesta.setFechaFin(new Date());
@@ -228,6 +234,17 @@ public class MascotaMobileController {
 
         }
         return mascotaDTOS;
+    }
+
+    /**
+     * Elimina mascotas por id
+     * @param id
+     * @return
+     */
+    @PostMapping("/eliminarMascota/{id}")
+    public @ResponseBody String eliminarMascota(@PathVariable Long id ) {
+        mascotaService.deleteById(id);
+        return "La mascota se eliminó con éxito";
     }
 
 }

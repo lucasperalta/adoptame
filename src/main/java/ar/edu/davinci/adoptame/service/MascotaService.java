@@ -26,6 +26,7 @@ public interface MascotaService {
 
 	 Mascota save (Mascota mascota);
 
+	void deleteById (Long id);
 
 	List<Mascota> findAll();
 
