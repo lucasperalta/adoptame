@@ -246,6 +246,7 @@ public class MascotaMobileController {
         Mascota mascotaRespuesta=  mascotaService.findById(id);
         mascotaRespuesta.setActiva(false);
         mascotaService.save(mascotaRespuesta);
+
         return "Se ha eliminado con éxito";
     }
 
