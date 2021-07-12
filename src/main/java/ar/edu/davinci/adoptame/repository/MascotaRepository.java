@@ -35,7 +35,4 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
                               @Param("tamanio") List<String> tamanio,
                               @Param("tipoMascota") List<String> tipoMascota);
 
-    void deleteById(@Param("id") Long id);
-
-
 }

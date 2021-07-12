@@ -243,7 +243,9 @@ public class MascotaMobileController {
      */
     @PostMapping("/eliminarMascota/{id}")
     public @ResponseBody String eliminarMascota(@PathVariable Long id ) {
-        mascotaService.deleteById(id);
+        Mascota mascotaRespuesta=  mascotaService.findById(id);
+        mascotaRespuesta.setActiva(false);
+        mascotaService.save(mascotaRespuesta);
         return "Se ha eliminado con éxito";
     }
 

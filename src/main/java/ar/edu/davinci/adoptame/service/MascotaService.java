@@ -26,8 +26,6 @@ public interface MascotaService {
 
 	 Mascota save (Mascota mascota);
 
-	void deleteById (Long id);
-
 	List<Mascota> findAll();
 
 	List<Mascota> findAllByEstadoAndSexoInAndEdadLessThanEqualAndTamanioIn(String estado, List<String >sexo, Integer edad, List<String> tamanio);

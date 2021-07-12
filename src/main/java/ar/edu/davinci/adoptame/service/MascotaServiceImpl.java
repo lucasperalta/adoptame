@@ -80,8 +80,4 @@ public class MascotaServiceImpl implements MascotaService{
 		return mascotaRepository.findFiltros(estado, sexo, edad, tamanio, tipoMascota);
 	}
 
-	public void deleteById(Long id){
-		mascotaRepository.deleteById(id);
-	}
-
 }
