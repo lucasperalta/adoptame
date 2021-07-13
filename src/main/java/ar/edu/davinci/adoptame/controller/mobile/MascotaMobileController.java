@@ -162,8 +162,10 @@ public class MascotaMobileController {
         List<Mascota> mascotas=mascotaService.findAllByRescatista(usuario);
         List<MascotaDTO> mascotaDTOS= new ArrayList<>();
         for (Mascota mascota:mascotas) {
-            MascotaDTO mascotaDTO= new MascotaDTO(mascota);
-            mascotaDTOS.add(mascotaDTO);
+            if(mascota.getActiva() == true) {
+                MascotaDTO mascotaDTO = new MascotaDTO(mascota);
+                mascotaDTOS.add(mascotaDTO);
+            }
         }
         return mascotaDTOS;
     }
@@ -183,15 +185,18 @@ public class MascotaMobileController {
             case "ADOPCION":
                 mascotaRespuesta.setFechaFin(null);
                 mascotaRespuesta.setFechaInicio(null);
-                //SACAR ADOPTANTE
+                mascotaRespuesta.setIdAdoptante(null); //SACO ADOPTANTE
                 break;
             case "SEGUIMIENTO":
                 mascotaRespuesta.setFechaInicio(new Date());
-                //agregar adoptante
+                mascotaRespuesta.setIdAdoptante(params.getIdAdoptante());
                 break;
             case "ADOPTADA":
+            case "ENCONTRADO":
+            case "FINBUSCADO":
                 mascotaRespuesta.setFechaFin(new Date());
                 break;
+
         }
 
         mascotaRespuesta= mascotaService.save(mascotaRespuesta);
@@ -246,7 +251,6 @@ public class MascotaMobileController {
         Mascota mascotaRespuesta=  mascotaService.findById(id);
         mascotaRespuesta.setActiva(false);
         mascotaService.save(mascotaRespuesta);
-
         return "Se ha eliminado con éxito";
     }
 
